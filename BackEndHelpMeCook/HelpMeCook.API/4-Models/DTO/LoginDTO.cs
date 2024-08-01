@@ -1,4 +1,6 @@
 
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace HelpMeCook.API.Models;
 
 public class LoginDTO

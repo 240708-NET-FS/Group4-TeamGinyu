@@ -12,5 +12,4 @@ public class AppDbContext : DbContext {
     public DbSet<Login> Login { get; set;}
     public DbSet<User> User { get; set; }
     public DbSet<Recipe> Recipe { get; set; }
-
 }
