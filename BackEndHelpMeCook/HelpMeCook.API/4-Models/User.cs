@@ -4,8 +4,8 @@ namespace HelpMeCook.API.Models;
 public class User 
 {
     public int UserID { get; set;}
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
+    public string FirstName { get; set; } = "";
+    public string LastName { get; set; } = "";
     public DateTime CratedDate { get; set; }
 
     // One-to-Many Relationship between User and Recipes

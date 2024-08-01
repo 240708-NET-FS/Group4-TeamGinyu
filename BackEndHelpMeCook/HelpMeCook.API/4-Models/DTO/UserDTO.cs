@@ -1,10 +1,10 @@
 
-namespace HelpMeCook.API.Models.DTO;
+namespace HelpMeCook.API.Models;
 
 public class UserDTO
 {
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
+    public string FirstName { get; set; } = null!;
+    public string LastName { get; set; } = null!;
     public DateTime CratedDate { get; set; }
 }
 

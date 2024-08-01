@@ -1,9 +1,9 @@
 
-namespace HelpMeCook.API.Models.DTO;
+namespace HelpMeCook.API.Models;
 
 public class RecipeDTO
 {
-    public string RecipeName { get; set; }
+    public string RecipeName { get; set; } = null!;
     public DateTime CratedDate { get; set; }
     public int RecipeNumber { get; set; }
 }
