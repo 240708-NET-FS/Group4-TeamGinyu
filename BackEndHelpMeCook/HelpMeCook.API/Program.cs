@@ -1,9 +1,22 @@
+using HelpMeCook.API.DAO;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+//Here we will register our dependencies (Services and DbContext, etc) so that we can satisfy our constructors
+//and inject dependecies where needed
+// builder.Services.AddScoped<IUserService, UserService>();
+
+builder.Services.AddScoped<UserRepo, UserRepo>();
+
+
+builder.Services.AddDbContext<AppDbContext>(options => 
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 
