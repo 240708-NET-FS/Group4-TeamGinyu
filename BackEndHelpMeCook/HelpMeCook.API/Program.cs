@@ -1,4 +1,6 @@
 using HelpMeCook.API.DAO;
+using HelpMeCook.API.DAO.Interfaces;
+using HelpMeCook.API.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,9 +12,13 @@ builder.Services.AddSwaggerGen();
 
 //Here we will register our dependencies (Services and DbContext, etc) so that we can satisfy our constructors
 //and inject dependecies where needed
-// builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ILoginService, LoginService>();
+builder.Services.AddScoped<IRecipeService, RecipeService>();
 
-builder.Services.AddScoped<UserRepo, UserRepo>();
+builder.Services.AddScoped<IUserRepo, UserRepo>();
+builder.Services.AddScoped<ILoginRepo, LoginRepo>();
+builder.Services.AddScoped<IRecipeRepo, RecipeRepo>();
 
 
 builder.Services.AddDbContext<AppDbContext>(options => 
@@ -51,13 +57,13 @@ app.UseHttpsRedirection();
 
 app.UseHttpsRedirection();
 
-// app.UseAuthorization();
+app.UseAuthorization();
 
-// app.MapControllers();
+app.MapControllers();
 
 app.Run();
 
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
+// record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
+// {
+//     public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+// }
