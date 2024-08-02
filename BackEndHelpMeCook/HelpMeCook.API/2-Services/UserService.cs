@@ -16,7 +16,7 @@ public class UserService : IUserService
     public async Task<User> CreateUser(UserDTO userToCreate)
     {
         User newUser = uUtil.DTOToUser(userToCreate);
-        return newUser; //await _userRepo.Create(newUser);
+        return await _userRepo.Create(newUser);
     }
 
     public async Task<ICollection<User>> GetAllUsers()
@@ -30,15 +30,15 @@ public class UserService : IUserService
         return await _userRepo.GetByID(userID);
     }
 
-    public async Task<User?> UpdateUser(UserDTO userToUpdate)
+    public async Task<bool> UpdateUser(UserDTO userToUpdate)
     {
         User user = uUtil.DTOToUser(userToUpdate);
-        return user; //await _userRepo.Update(user);
+        return await _userRepo.Update(user);
     }
 
     public async Task<User> DeleteUser(UserDTO userToDelete)
     {
         User user = uUtil.DTOToUser(userToDelete);
-        return user; //await _userRepo.Delete(user);
+        return await _userRepo.Delete(user);
     }
 }

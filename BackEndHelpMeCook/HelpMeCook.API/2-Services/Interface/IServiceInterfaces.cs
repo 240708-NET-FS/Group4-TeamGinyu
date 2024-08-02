@@ -13,7 +13,7 @@ namespace HelpMeCook.API.Services
         Task<ICollection<User>> GetAllUsers();
 
         // Update
-        Task<User?> UpdateUser(UserDTO userToUpdate);
+        Task<bool> UpdateUser(UserDTO userToUpdate);
 
         // Delete
         Task<User?> DeleteUser(UserDTO userToDelete);
