@@ -6,18 +6,19 @@ public interface IRecipe<T>
     public void Create(T item);
 
     // Read
-    public T GetByID(int ID);
+    public Task<T?> GetByID(int ID);
 
-    public T GetByUser(int ID);
+    public Task<T?> GetByUser(int ID);
 
-    public T GetByRecipeId(int ID);
+    public Task<T?> GetByRecipeNumber(int ID);
 
-    public T GetByRecipeName(string recipeName);
+    public Task<T?> GetByRecipeName(string recipeName);
+    public Task<T?> GetByRecipeNameAndUserID(string recipeName, int UserID);
 
-    public ICollection<T> GetAll();
+    public Task<ICollection<T>> GetAll();
 
     // Update
-    public bool Update(T newItem);
+    public Task<bool> Update(T newItem);
 
     // Delete
     public void Delete(T item);

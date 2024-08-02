@@ -26,10 +26,10 @@ public class UserRepo : IUser<User> {
 
     public async Task<ICollection<User>>? GetAll()
     {
-       return  await _context.User.Include(l => l.Login).ToListAsync();
+       return  await _context.User.ToListAsync();
     }
 
-    public async Task<User> GetByID(int ID)
+    public async Task<User?> GetByID(int ID)
     {
         return await _context.User.FirstOrDefaultAsync(p => p.UserID == ID);
     }

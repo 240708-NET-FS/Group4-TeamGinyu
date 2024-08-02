@@ -6,7 +6,7 @@ public interface IUser<T>
     public void Create(T item);
 
     // Read
-    public Task<T> GetByID(int ID);
+    public Task<T?> GetByID(int ID);
 
     public Task<ICollection<T>>? GetAll();
 

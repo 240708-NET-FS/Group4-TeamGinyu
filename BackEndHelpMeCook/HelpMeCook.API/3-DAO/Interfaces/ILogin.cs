@@ -6,13 +6,13 @@ public interface ILogin<T>
     public void Create(T item);
 
     // Read
-    public Task<T>? GetByID(int ID);
+    public Task<T?> GetByID(int ID);
 
-    public Task<T>? GetByUsername(string username);
+    public Task<T?> GetByUsername(string username);
 
-    public Task<T> GetByUsernameAndPassword(string username, string password);
+    public Task<T?> GetByUsernameAndPassword(string username, string password);
 
-    public Task<ICollection<T>>? GetAll();
+    public Task<ICollection<T>> GetAll();
 
     // Update
     public Task<bool> Update(T newItem);
