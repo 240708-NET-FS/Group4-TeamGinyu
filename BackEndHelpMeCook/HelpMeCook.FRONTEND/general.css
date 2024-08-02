@@ -1,0 +1,15 @@
+/* imports some css for us */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css');
+@import url('https://cdn.jsdelivr.net/npm/bulma@1.0.1/css/bulma.min.css');
+
+/* font style */
+* {
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+}
+
+/* centers elments of a container */
+.centered-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
