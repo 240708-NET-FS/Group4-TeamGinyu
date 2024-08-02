@@ -13,7 +13,7 @@ public class UserController
    
    public UserController(IUserService userService)
    {
-    this._userService = userService;
+        this._userService = userService;
    }
 
    [HttpPost]
