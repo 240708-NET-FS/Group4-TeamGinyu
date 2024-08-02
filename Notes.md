@@ -12,3 +12,7 @@
 
 #### Add a new .gitignore
 - dotnet new gitignore
+
+#### Update the database with the seeded data:
+- dotnet ef migrations add SeedData
+- dotnet ef database update
