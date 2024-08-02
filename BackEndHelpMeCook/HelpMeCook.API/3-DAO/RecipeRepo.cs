@@ -49,11 +49,11 @@ public class RecipeRepo : IRecipeRepo
                 .FirstOrDefaultAsync(r => r.RecipeName == recipeName);
     }
 
-    public async Task<Recipe?> GetByRecipeNameAndUserID(string recipeName, int UserID)
+    public async Task<ICollection<Recipe>> GetByRecipeNameAndUserID(string recipeName, int UserID)
     {
         return await _context.Recipe
-                .Include(r => r.User)
-                .FirstOrDefaultAsync(r => r.RecipeName == recipeName && r.UserID == UserID);
+                .Where(r => r.RecipeName == recipeName && r.UserID == UserID)
+                .ToListAsync();
     }
 
     public async Task<Recipe?> GetByRecipeNumber(int ID)

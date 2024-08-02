@@ -15,7 +15,7 @@ public interface IRecipeRepo
     public Task<Recipe?> GetByRecipeNumber(int ID);
 
     public Task<Recipe?> GetByRecipeName(string recipeName);
-    public Task<Recipe?> GetByRecipeNameAndUserID(string recipeName, int UserID);
+    public Task<ICollection<Recipe>> GetByRecipeNameAndUserID(string recipeName, int UserID);
 
     public Task<ICollection<Recipe>> GetAll();
 
