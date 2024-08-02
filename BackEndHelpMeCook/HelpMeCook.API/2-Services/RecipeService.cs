@@ -1,4 +1,5 @@
 using HelpMeCook.API.DAO;
+using HelpMeCook.API.DAO.Interfaces;
 using HelpMeCook.API.Models;
 using rUtil = HelpMeCook.API.Utilities.RecipeUtility;
 
@@ -6,9 +7,9 @@ namespace HelpMeCook.API.Services;
 
 public class RecipeService : IRecipeService
 {
-    private readonly RecipeRepo _recipeRepo;
+    private readonly IRecipeRepo _recipeRepo;
 
-    public RecipeService(RecipeRepo recipeRepo)
+    public RecipeService(IRecipeRepo recipeRepo)
     {
         _recipeRepo = recipeRepo;
     }
@@ -41,4 +42,5 @@ public class RecipeService : IRecipeService
         Recipe recipetoDelete = rUtil.DTOToRecipe(recipe);
         return await _recipeRepo.Delete(recipetoDelete);
     }
+
 }

@@ -2,7 +2,6 @@
 using HelpMeCook.API.Models;
 using HelpMeCook.API.Services;
 using Microsoft.AspNetCore.Mvc;
-using tUtil = HelpMeCook.API.Utilities;
 
 namespace HelpMeCook.API.Controller;
 
