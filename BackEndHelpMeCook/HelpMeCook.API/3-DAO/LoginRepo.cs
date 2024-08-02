@@ -42,6 +42,8 @@ public class LoginRepo : ILogin<Login>
 
     public async Task<Login> GetByUsernameAndPassword(string username, string password)
     {
+        // Strech goal 
+        // Query username and analyse hash password.
         return await _context.Login.FirstOrDefaultAsync(l => l.Username == username && l.Password == password);
     }
 
