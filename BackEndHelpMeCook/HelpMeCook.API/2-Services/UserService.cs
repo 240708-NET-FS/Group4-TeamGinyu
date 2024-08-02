@@ -1,4 +1,5 @@
 using HelpMeCook.API.DAO;
+using HelpMeCook.API.DAO.Interfaces;
 using HelpMeCook.API.Models;
 using uUtil = HelpMeCook.API.Utilities.UserUtility;
 
@@ -6,9 +7,9 @@ namespace HelpMeCook.API.Services;
 
 public class UserService : IUserService
 {
-    private readonly UserRepo _userRepo;
+    private readonly IUserRepo _userRepo;
     
-    public UserService(UserRepo userRepo)
+    public UserService(IUserRepo userRepo)
     {
         _userRepo = userRepo;
     }

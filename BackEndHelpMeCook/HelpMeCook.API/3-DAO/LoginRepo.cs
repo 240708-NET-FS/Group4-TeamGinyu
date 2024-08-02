@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HelpMeCook.API.DAO;
 
-public class LoginRepo : ILogin<Login>
+public class LoginRepo : ILoginRepo
 {
     private readonly AppDbContext _context;
 

@@ -4,68 +4,46 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using HelpMeCook.API.Models;
 using HelpMeCook.API.DAO;
+using HelpMeCook.API.DAO.Interfaces;
+using HelpMeCook.API.Exceptions;
+using HelpMeCook.API.Utilities;
 
 namespace HelpMeCook.API.Services
 {
-    public class LoginService
+    public class LoginService : ILoginService
     {
-        private readonly AppDbContext _context;
+        private readonly ILoginRepo _loginRepo;
 
-        public LoginService(AppDbContext context)
+        public LoginService (ILoginRepo loginRepo)
         {
-            _context = context;
+            this._loginRepo = loginRepo;
         }
 
-     
-        public async Task<Login?> GetLoginByUsernameAsync(string username)
+        public async Task<Login> CreateLogin(LoginDTO newLogin)
         {
-            return await _context.Login
-                .Include(l => l.User)
-                .FirstOrDefaultAsync(l => l.Username == username);
+            Login log = LoginUtility.DTOToLogin(newLogin);
+            return await _loginRepo.Create(log);
+           
         }
 
-      
-        public async Task<Login> CreateLoginAsync(Login login)
+        public Task<Login?> DeleteLogin(LoginDTO loginToDelete)
         {
-        
-            _context.Login.Add(login);
-            await _context.SaveChangesAsync();
-            return login;
+            throw new NotImplementedException();
         }
 
-       
-        public async Task<Login?> UpdateLoginAsync(int loginId, Login updatedLogin)
+        public Task<ICollection<Login>> GetAllLogins()
         {
-            var login = await _context.Login.FindAsync(loginId);
-
-            if (login == null)
-            {
-                return null;
-            }
-
-            login.Username = updatedLogin.Username;
-            login.Password = updatedLogin.Password;
-            login.UserID = updatedLogin.UserID;
-
-            _context.Login.Update(login);
-            await _context.SaveChangesAsync();
-
-            return login;
+            throw new NotImplementedException();
         }
 
-        public async Task<bool> DeleteLoginAsync(int loginId)
+        public Task<Login?> GetLoginByID(int loginID)
         {
-            var login = await _context.Login.FindAsync(loginId);
+            throw new NotImplementedException();
+        }
 
-            if (login == null)
-            {
-                return false;
-            }
-
-            _context.Login.Remove(login);
-            await _context.SaveChangesAsync();
-
-            return true;
+        public Task<Login?> UpdateLogin(LoginDTO newLogin)
+        {
+            throw new NotImplementedException();
         }
     }
 }

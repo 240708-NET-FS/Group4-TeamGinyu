@@ -22,7 +22,7 @@ namespace HelpMeCook.API.Services
     public interface ILoginService
     {
         // Create
-        Task<Login> CreateLogin(Login newLogin);
+        Task<Login> CreateLogin(LoginDTO newLogin);
 
         // Read
         Task<Login?> GetLoginByID(int loginID);
@@ -30,16 +30,16 @@ namespace HelpMeCook.API.Services
         Task<ICollection<Login>> GetAllLogins();
 
         // Update
-        Task<Login?> UpdateLogin(Login newLogin);
+        Task<Login?> UpdateLogin(LoginDTO newLogin);
 
         // Delete
-        Task<Login?> DeleteLogin(Login loginToDelete);
+        Task<Login?> DeleteLogin(LoginDTO loginToDelete);
     }
 
     public interface IRecipeService
     {
         // Create
-        Task <Recipe> CreateRecipe(Recipe newRecipe);
+        Task <Recipe> CreateRecipe(RecipeDTO newRecipe);
 
         // Read
         Task<Recipe?> GetByID(int recipeID);
@@ -47,9 +47,9 @@ namespace HelpMeCook.API.Services
         Task<ICollection<Recipe>> GetAllRecipes();
 
         // Update
-        Task<User?> Update(Recipe newRecipe);
+        Task<User?> Update(RecipeDTO newRecipe);
 
         // Delete
-        Task<User?> Delete(Recipe recipeToDelete);
+        Task<User?> Delete(RecipeDTO recipeToDelete);
     }
 }

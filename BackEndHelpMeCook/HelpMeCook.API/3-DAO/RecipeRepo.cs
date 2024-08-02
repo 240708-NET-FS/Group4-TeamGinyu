@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HelpMeCook.API.DAO;
 
-public class RecipeRepo : IRecipe<Recipe>
+public class RecipeRepo : IRecipeRepo
 {
 
     private readonly AppDbContext _context;

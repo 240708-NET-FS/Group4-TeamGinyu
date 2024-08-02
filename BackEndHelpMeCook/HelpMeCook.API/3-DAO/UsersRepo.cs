@@ -4,7 +4,7 @@ using HelpMeCook.API.DAO.Interfaces;
 
 namespace HelpMeCook.API.DAO;
 
-public class UserRepo : IUser<User> {
+public class UserRepo : IUserRepo {
 
     private readonly AppDbContext _context;
 
@@ -54,15 +54,5 @@ public class UserRepo : IUser<User> {
         await _context.SaveChangesAsync();
 
         return true;
-    }
-
-    User IUser<User>.Create(User item)
-    {
-        throw new NotImplementedException();
-    }
-
-    User IUser<User>.Delete(User item)
-    {
-        throw new NotImplementedException();
     }
 }
