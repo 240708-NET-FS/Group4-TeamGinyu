@@ -1,9 +1,4 @@
-using System;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 using HelpMeCook.API.Models;
-using HelpMeCook.API.DAO;
 using HelpMeCook.API.DAO.Interfaces;
 using HelpMeCook.API.Exceptions;
 using HelpMeCook.API.Utilities;
@@ -23,27 +18,38 @@ namespace HelpMeCook.API.Services
         {
             Login log = LoginUtility.DTOToLogin(newLogin);
             return await _loginRepo.Create(log);
-           
         }
 
-        public Task<Login?> DeleteLogin(LoginDTO loginToDelete)
+        public async Task<Login?> DeleteLogin(LoginDTO loginToDelete)
         {
-            throw new NotImplementedException();
+            Login log = LoginUtility.DTOToLogin(loginToDelete);
+            return await _loginRepo.Delete(log);
         }
 
         public Task<ICollection<Login>> GetAllLogins()
         {
-            throw new NotImplementedException();
+            return _loginRepo.GetAll();
         }
 
-        public Task<Login?> GetLoginByID(int loginID)
+        public async Task<Login?> GetLoginByID(int loginID)
         {
-            throw new NotImplementedException();
+            if (loginID < 1) throw new ArgumentException("Invalid ID");
+
+            Login? log = await _loginRepo.GetByID(loginID);
+
+            if(log == null)
+            {
+                throw new InvalidLoginException($"Could not find Login by ID {loginID}");
+            }
+
+            return log;
         }
 
-        public Task<Login?> UpdateLogin(LoginDTO newLogin)
+        public async Task<bool> UpdateLogin(LoginDTO newLogin)
         {
-            throw new NotImplementedException();
+            Login log = LoginUtility.DTOToLogin(newLogin);
+
+            return await _loginRepo.Update(log);
         }
     }
 }

@@ -30,13 +30,13 @@ public class RecipeService : IRecipeService
         return await _recipeRepo.GetAll()!;
     }
 
-    public async Task<bool> UpdateRecipe(RecipeDTO recipe)
+    public async Task<bool> Update(RecipeDTO recipe)
     {
         Recipe recipeToUpdate = rUtil.DTOToRecipe(recipe);
         return await _recipeRepo.Update(recipeToUpdate);    
     }
 
-    public async Task<Recipe?> DeleteRecipe(RecipeDTO recipe)
+    public async Task<Recipe?> Delete(RecipeDTO recipe)
     {
         Recipe recipetoDelete = rUtil.DTOToRecipe(recipe);
         return await _recipeRepo.Delete(recipetoDelete);
