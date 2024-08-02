@@ -3,7 +3,7 @@ namespace HelpMeCook.API.DAO.Interfaces;
 public interface IUser<T>
 {
     // Create
-    public void Create(T item);
+    public T Create(T item);
 
     // Read
     public Task<T?> GetByID(int ID);
@@ -14,5 +14,5 @@ public interface IUser<T>
     public Task<bool> Update(T newItem);
 
     // Delete
-    public void Delete(T item);
+    public T Delete(T item);
 }

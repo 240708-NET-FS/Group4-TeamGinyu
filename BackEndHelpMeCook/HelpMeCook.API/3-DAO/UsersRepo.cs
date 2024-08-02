@@ -12,16 +12,20 @@ public class UserRepo : IUser<User> {
         this._context = context;
     }
 
-    public async void Create(User item)
+    public async Task<User> Create(User item)
     {
         _context.User.Add(item);
         await _context.SaveChangesAsync();
+
+        return item;
     }
 
-    public async void Delete(User item)
+    public async Task<User> Delete(User item)
     {
        _context.User.Remove(item);
        await _context.SaveChangesAsync();
+
+       return item;
     }
 
     public async Task<ICollection<User>>? GetAll()
@@ -50,5 +54,15 @@ public class UserRepo : IUser<User> {
         await _context.SaveChangesAsync();
 
         return true;
+    }
+
+    User IUser<User>.Create(User item)
+    {
+        throw new NotImplementedException();
+    }
+
+    User IUser<User>.Delete(User item)
+    {
+        throw new NotImplementedException();
     }
 }

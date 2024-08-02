@@ -13,34 +13,38 @@ public class LoginRepo : ILogin<Login>
         this._context = context;
     }
 
-    public async void Create(Login item)
+    public async Task<Login> Create(Login item)
     {
         _context.Login.Add(item);
         await _context.SaveChangesAsync();
+
+        return item;
     }
 
-    public async void Delete(Login item)
+    public async Task<Login> Delete(Login item)
     {
         _context.Login.Remove(item);
         await _context.SaveChangesAsync();
+
+        return item;
     }
 
-    public async Task<ICollection<Login>>? GetAll()
+    public async Task<ICollection<Login>> GetAll()
     {
         return await _context.Login.Include(u => u.User).ToListAsync();
     }
 
-    public async Task<Login>? GetByID(int ID)
+    public async Task<Login?> GetByID(int ID)
     {
         return await _context.Login.FirstOrDefaultAsync(l => l.LoginID == ID);
     }
 
-    public async Task<Login>? GetByUsername(string username)
+    public async Task<Login?> GetByUsername(string username)
     {
         return await _context.Login.FirstOrDefaultAsync(l => l.Username == username);
     }
 
-    public async Task<Login> GetByUsernameAndPassword(string username, string password)
+    public async Task<Login?> GetByUsernameAndPassword(string username, string password)
     {
         // Strech goal 
         // Query username and analyse hash password.

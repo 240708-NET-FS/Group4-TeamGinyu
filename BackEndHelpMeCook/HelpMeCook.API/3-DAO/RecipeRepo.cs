@@ -14,16 +14,20 @@ public class RecipeRepo : IRecipe<Recipe>
         this._context = context;
     }
 
-    public async void Create(Recipe item)
+    public async Task<Recipe> Create(Recipe item)
     {
         _context.Recipe.Add(item);
         await _context.SaveChangesAsync();
+
+        return item;
     }
 
-    public async void Delete(Recipe item)
+    public async Task<Recipe> Delete(Recipe item)
     {
         _context.Recipe.Remove(item);
         await _context.SaveChangesAsync();
+
+        return item;
     }
 
     public async Task<ICollection<Recipe>> GetAll()
