@@ -2,12 +2,13 @@
 using HelpMeCook.API.Models;
 using HelpMeCook.API.Services;
 using Microsoft.AspNetCore.Mvc;
+using tUtil = HelpMeCook.API.Utilities;
 
 namespace HelpMeCook.API.Controller;
 
 [ApiController]
 [Route("api/[controller]")]
-public class UserController
+public class UserController: ControllerBase
 {
     private readonly IUserService _userService;
    
@@ -17,21 +18,24 @@ public class UserController
    }
 
    [HttpPost]
-   public async Task<IActionResult> CreateUser (UserDTO userDTO)
+   public async Task<User> CreateUser (UserDTO userDTO)
    {
-        throw new NotImplementedException();
+        return await _userService.CreateUser(userDTO);
    }
 
    [HttpGet("{id}")]
    public async Task<IActionResult> GetUserByID (int id)
    {
-        throw new NotImplementedException();
+        var user = _userService.GetUserByID(id);
+
+        if(user is null) return NotFound("User does not exist!");
+        return Ok(user); 
    }
 
     [HttpGet("/users")]
    public async Task<IActionResult> GetAllUsers ()
    {
-        throw new NotImplementedException();
+        return Ok(_userService.GetAllUsers()); 
    }
 
    [HttpPut]
