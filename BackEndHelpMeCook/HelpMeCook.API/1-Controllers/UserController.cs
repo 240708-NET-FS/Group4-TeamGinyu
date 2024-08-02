@@ -2,6 +2,7 @@
 using HelpMeCook.API.Models;
 using HelpMeCook.API.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 
 namespace HelpMeCook.API.Controller;
 
@@ -25,7 +26,7 @@ public class UserController: ControllerBase
    [HttpGet("{id}")]
    public async Task<IActionResult> GetUserByID (int id)
    {
-        var user = _userService.GetUserByID(id);
+        var user = await _userService.GetUserByID(id);
 
         if(user is null) return NotFound("User does not exist!");
         return Ok(user); 
@@ -34,7 +35,15 @@ public class UserController: ControllerBase
     [HttpGet("/users")]
    public async Task<IActionResult> GetAllUsers ()
    {
-        return Ok(_userService.GetAllUsers()); 
+        ICollection<User> users = await _userService.GetAllUsers();
+        List<User> userList = users.ToList();
+
+        if(userList.IsNullOrEmpty())
+        {
+            return NotFound("User does not exist!");
+        }
+
+        return Ok(userList); 
    }
 
    [HttpPut]
