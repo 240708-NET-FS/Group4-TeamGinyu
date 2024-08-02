@@ -40,7 +40,6 @@ namespace HelpMeCook.API.Services
     {
         // Create
         Task <Recipe> CreateRecipe(RecipeDTO newRecipe);
-        Task <Recipe> CreateRecipe(RecipeDTO newRecipe);
 
         // Read
         Task<Recipe?> GetRecipeById(int recipeID);
