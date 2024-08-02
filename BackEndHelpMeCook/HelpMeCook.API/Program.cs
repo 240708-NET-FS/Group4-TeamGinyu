@@ -20,9 +20,12 @@ builder.Services.AddScoped<IUserRepo, UserRepo>();
 builder.Services.AddScoped<ILoginRepo, LoginRepo>();
 builder.Services.AddScoped<IRecipeRepo, RecipeRepo>();
 
+builder.Services.AddControllers();
 
 builder.Services.AddDbContext<AppDbContext>(options => 
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Logging.AddConsole();
 
 var app = builder.Build();
 
