@@ -6,12 +6,12 @@ public interface IUser<T>
     public void Create(T item);
 
     // Read
-    public T GetByID(int ID);
+    public Task<T> GetByID(int ID);
 
-    public ICollection<T> GetAll();
+    public Task<ICollection<T>>? GetAll();
 
     // Update
-    public bool Update(T newItem);
+    public Task<bool> Update(T newItem);
 
     // Delete
     public void Delete(T item);

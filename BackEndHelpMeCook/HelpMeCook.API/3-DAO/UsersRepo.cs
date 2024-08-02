@@ -12,29 +12,43 @@ public class UserRepo : IUser<User> {
         this._context = context;
     }
 
-    public void Create(User item)
+    public async void Create(User item)
     {
-        throw new NotImplementedException();
+        _context.User.Add(item);
+        await _context.SaveChangesAsync();
     }
 
-    public void Delete(User item)
+    public async void Delete(User item)
     {
-        throw new NotImplementedException();
+       _context.User.Remove(item);
+       await _context.SaveChangesAsync();
     }
 
-    public ICollection<User> GetAll()
+    public async Task<ICollection<User>>? GetAll()
     {
-        throw new NotImplementedException();
+       return  await _context.User.Include(l => l.Login).ToListAsync();
     }
 
-    public User GetByID(int ID)
+    public async Task<User> GetByID(int ID)
     {
-        //return _context.User.FirstOrDefault(p => p.UserId == id);
-        throw new NotImplementedException();
+        return await _context.User.FirstOrDefaultAsync(p => p.UserID == ID);
     }
 
-    public bool Update(User newItem)
+    public async Task<bool> Update(User newItem)
     {
-        throw new NotImplementedException();
+        User? oldUser = await _context.User.FirstOrDefaultAsync(p => p.UserID == newItem.UserID);
+
+        if(oldUser == null) 
+        {
+            return false;
+        }
+       
+        oldUser.FirstName = newItem.FirstName;
+        oldUser.LastName = newItem.LastName;
+
+        _context.User.Update(oldUser);
+        await _context.SaveChangesAsync();
+
+        return true;
     }
 }
