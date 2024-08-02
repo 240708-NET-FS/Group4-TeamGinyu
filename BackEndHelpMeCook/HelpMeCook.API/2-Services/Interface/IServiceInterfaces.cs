@@ -30,7 +30,7 @@ namespace HelpMeCook.API.Services
         Task<ICollection<Login>> GetAllLogins();
 
         // Update
-        Task<Login?> UpdateLogin(Login newLogin);
+        Task<bool> UpdateLogin(Login newLogin);
 
         // Delete
         Task<Login?> DeleteLogin(Login loginToDelete);
@@ -39,7 +39,7 @@ namespace HelpMeCook.API.Services
     public interface IRecipeService
     {
         // Create
-        Task <Recipe> CreateRecipe(Recipe newRecipe);
+        Task <Recipe> CreateRecipe(RecipeDTO newRecipe);
 
         // Read
         Task<Recipe?> GetByID(int recipeID);
@@ -47,9 +47,9 @@ namespace HelpMeCook.API.Services
         Task<ICollection<Recipe>> GetAllRecipes();
 
         // Update
-        Task<User?> Update(Recipe newRecipe);
+        Task<bool> Update(RecipeDTO newRecipe);
 
         // Delete
-        Task<User?> Delete(Recipe recipeToDelete);
+        Task<Recipe?> Delete(RecipeDTO recipeToDelete);
     }
 }

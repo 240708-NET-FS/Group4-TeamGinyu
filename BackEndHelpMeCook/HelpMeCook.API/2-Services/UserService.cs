@@ -36,7 +36,7 @@ public class UserService : IUserService
         return await _userRepo.Update(user);
     }
 
-    public async Task<User> DeleteUser(UserDTO userToDelete)
+    public async Task<User?> DeleteUser(UserDTO userToDelete)
     {
         User user = uUtil.DTOToUser(userToDelete);
         return await _userRepo.Delete(user);
