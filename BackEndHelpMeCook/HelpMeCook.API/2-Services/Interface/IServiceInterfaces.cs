@@ -42,14 +42,14 @@ namespace HelpMeCook.API.Services
         Task <Recipe> CreateRecipe(RecipeDTO newRecipe);
 
         // Read
-        Task<Recipe?> GetByID(int recipeID);
+        Task<Recipe?> GetRecipeById(int recipeID);
 
         Task<ICollection<Recipe>> GetAllRecipes();
 
         // Update
-        Task<bool> Update(RecipeDTO newRecipe);
+        Task<bool> UpdateRecipe(RecipeDTO newRecipe);
 
         // Delete
-        Task<Recipe?> Delete(RecipeDTO recipeToDelete);
+        Task<Recipe?> DeleteRecipe(RecipeDTO recipeToDelete);
     }
 }

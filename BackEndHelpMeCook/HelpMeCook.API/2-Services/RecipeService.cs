@@ -19,7 +19,7 @@ public class RecipeService : IRecipeService
         return await _recipeRepo.Create(newRecipe);
     }
 
-    public async Task<Recipe?> GetByID(int id)
+    public async Task<Recipe?> GetRecipeById(int id)
     {
         if (id < 1) throw new ArgumentException("Invalid ID");
         return await _recipeRepo.GetByID(id);
@@ -30,13 +30,13 @@ public class RecipeService : IRecipeService
         return await _recipeRepo.GetAll()!;
     }
 
-    public async Task<bool> Update(RecipeDTO recipe)
+    public async Task<bool> UpdateRecipe(RecipeDTO recipe)
     {
         Recipe recipeToUpdate = rUtil.DTOToRecipe(recipe);
         return await _recipeRepo.Update(recipeToUpdate);    
     }
 
-    public async Task<Recipe?> Delete(RecipeDTO recipe)
+    public async Task<Recipe?> DeleteRecipe(RecipeDTO recipe)
     {
         Recipe recipetoDelete = rUtil.DTOToRecipe(recipe);
         return await _recipeRepo.Delete(recipetoDelete);
