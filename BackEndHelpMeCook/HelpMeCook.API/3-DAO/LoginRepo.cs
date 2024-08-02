@@ -51,9 +51,9 @@ public class LoginRepo : ILoginRepo
         return await _context.Login.FirstOrDefaultAsync(l => l.Username == username && l.Password == password);
     }
 
-    public async Task<bool> Update(Login newItem)
+    public async Task<bool> Update(int ID, Login newItem)
     {
-        Login? oldLogin = await _context.Login.FirstOrDefaultAsync(l => l.LoginID == newItem.LoginID);
+        Login? oldLogin = await _context.Login.FirstOrDefaultAsync(l => l.LoginID == ID);
 
         if(oldLogin == null)
         {

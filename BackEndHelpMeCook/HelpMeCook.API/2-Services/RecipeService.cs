@@ -1,5 +1,6 @@
 using HelpMeCook.API.DAO;
 using HelpMeCook.API.DAO.Interfaces;
+using HelpMeCook.API.Exceptions;
 using HelpMeCook.API.Models;
 using rUtil = HelpMeCook.API.Utilities.RecipeUtility;
 
@@ -31,16 +32,24 @@ public class RecipeService : IRecipeService
         return await _recipeRepo.GetAll()!;
     }
 
-    public async Task<bool> Update(RecipeDTO recipe)
+    public async Task<bool> Update(int ID, RecipeDTO recipe)
     {
         Recipe recipeToUpdate = rUtil.DTOToRecipe(recipe);
-        return await _recipeRepo.Update(recipeToUpdate);    
+
+        return await _recipeRepo.Update(ID, recipeToUpdate);    
     }
 
-    public async Task<Recipe?> Delete(RecipeDTO recipe)
+    public async Task<Recipe?> Delete(int ID)
     {
-        Recipe recipetoDelete = rUtil.DTOToRecipe(recipe);
-        return await _recipeRepo.Delete(recipetoDelete);
+
+        Recipe? recipe = await _recipeRepo.GetByID(ID);
+
+        if(recipe == null)
+        {
+            throw new InvalidRecipeException("User does not exst.");
+        }
+        
+        return await _recipeRepo.Delete(ID);
     }
 
 }

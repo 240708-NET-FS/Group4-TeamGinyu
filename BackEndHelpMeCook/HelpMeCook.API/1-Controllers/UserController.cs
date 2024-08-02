@@ -1,4 +1,5 @@
 
+using HelpMeCook.API.Exceptions;
 using HelpMeCook.API.Models;
 using HelpMeCook.API.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -18,9 +19,11 @@ public class UserController: ControllerBase
    }
 
    [HttpPost]
-   public async Task<User> CreateUser (UserDTO userDTO)
+   public async Task<IActionResult> CreateUser (UserDTO userDTO)
    {
-        return await _userService.CreateUser(userDTO);
+        User user = await _userService.CreateUser(userDTO);
+
+        return Ok(user);
    }
 
    [HttpGet("{id}")]
@@ -46,15 +49,27 @@ public class UserController: ControllerBase
         return Ok(userList); 
    }
 
-   [HttpPut]
-   public async Task<IActionResult> UpdateUser ([FromBody] UserDTO updatedUser)
+   [HttpPut("user/{id}")]
+   public async Task<IActionResult> UpdateUser (int id, [FromBody] UserDTO updatedUser)
    {
-        throw new NotImplementedException();
+        bool isUpdated = await _userService.UpdateUser(id, updatedUser);
+
+        if(!isUpdated) return NotFound("User does not exist!");
+
+        return Ok("User succesfully updated");
    }
 
-   [HttpDelete]
-   public async Task<IActionResult> DeleteUser ([FromBody] UserDTO userToDelete)
+   [HttpDelete("user/{id}")]
+   public async Task<IActionResult> DeleteUser (int id)
    {
-        throw new NotImplementedException();
+        try 
+        {
+            User? user = await _userService.DeleteUser(id);
+            return Ok(user);
+
+        } catch (InvalidUserException e)
+        {
+            return NotFound(e.Message);
+        }        
    }
 }

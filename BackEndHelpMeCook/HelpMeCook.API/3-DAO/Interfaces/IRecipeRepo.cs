@@ -20,8 +20,8 @@ public interface IRecipeRepo
     public Task<ICollection<Recipe>> GetAll();
 
     // Update
-    public Task<bool> Update(Recipe newItem);
+    public Task<bool> Update(int ID, Recipe newItem);
 
     // Delete
-    public Task<Recipe> Delete(Recipe item);
+    public Task<Recipe> Delete(int ID);
 }

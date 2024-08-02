@@ -13,8 +13,8 @@ public interface IUserRepo
     public Task<ICollection<User>>? GetAll();
 
     // Update
-    public Task<bool> Update(User newItem);
+    public Task<bool> Update(int ID, User newItem);
 
     // Delete
-    public Task<User> Delete(User item);
+    public Task<User> Delete(int ID);
 }

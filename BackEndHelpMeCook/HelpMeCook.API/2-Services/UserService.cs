@@ -1,5 +1,6 @@
 using HelpMeCook.API.DAO;
 using HelpMeCook.API.DAO.Interfaces;
+using HelpMeCook.API.Exceptions;
 using HelpMeCook.API.Models;
 using uUtil = HelpMeCook.API.Utilities.UserUtility;
 
@@ -31,15 +32,21 @@ public class UserService : IUserService
         return await _userRepo.GetByID(userID);
     }
 
-    public async Task<bool> UpdateUser(UserDTO userToUpdate)
+    public async Task<bool> UpdateUser(int ID, UserDTO userToUpdate)
     {
         User user = uUtil.DTOToUser(userToUpdate);
-        return await _userRepo.Update(user);
+        return await _userRepo.Update(ID, user);
     }
 
-    public async Task<User?> DeleteUser(UserDTO userToDelete)
+    public async Task<User?> DeleteUser(int ID)
     {
-        User user = uUtil.DTOToUser(userToDelete);
-        return await _userRepo.Delete(user);
+        User? userByID = await _userRepo.GetByID(ID);
+
+        if(userByID == null)
+        {
+            throw new InvalidUserException("User does not exst.");
+        }
+        
+        return await _userRepo.Delete(ID);
     }
 }

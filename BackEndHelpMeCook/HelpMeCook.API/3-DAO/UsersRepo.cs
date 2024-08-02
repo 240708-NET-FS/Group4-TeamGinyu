@@ -20,12 +20,13 @@ public class UserRepo : IUserRepo {
         return item;
     }
 
-    public async Task<User> Delete(User item)
+    public async Task<User> Delete(int ID)
     {
-       _context.User.Remove(item);
+       User user = _context.User.Find(ID)!;
+       _context.User.Remove(user);
        await _context.SaveChangesAsync();
 
-       return item;
+       return user;
     }
 
     public async Task<ICollection<User>>? GetAll()
@@ -38,9 +39,9 @@ public class UserRepo : IUserRepo {
         return await _context.User.FirstOrDefaultAsync(p => p.UserID == ID);
     }
 
-    public async Task<bool> Update(User newItem)
+    public async Task<bool> Update(int ID, User newItem)
     {
-        User? oldUser = await _context.User.FirstOrDefaultAsync(p => p.UserID == newItem.UserID);
+        User? oldUser = await _context.User.FirstOrDefaultAsync(p => p.UserID == ID);
 
         if(oldUser == null) 
         {
@@ -55,4 +56,5 @@ public class UserRepo : IUserRepo {
 
         return true;
     }
+
 }

@@ -17,7 +17,7 @@ public interface ILoginRepo
     public Task<ICollection<Login>> GetAll();
 
     // Update
-    public Task<bool> Update(Login newItem);
+    public Task<bool> Update(int ID, Login newItem);
 
     // Delete
     public Task<Login> Delete(Login item);

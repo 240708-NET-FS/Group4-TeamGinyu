@@ -13,10 +13,10 @@ namespace HelpMeCook.API.Services
         Task<ICollection<User>> GetAllUsers();
 
         // Update
-        Task<bool> UpdateUser(UserDTO userToUpdate);
+        Task<bool> UpdateUser(int ID, UserDTO userToUpdate);
 
         // Delete
-        Task<User?> DeleteUser(UserDTO userToDelete);
+        Task<User?> DeleteUser(int ID);
     }
 
     public interface ILoginService
@@ -30,7 +30,7 @@ namespace HelpMeCook.API.Services
         Task<ICollection<Login>> GetAllLogins();
 
         // Update
-        Task<bool> UpdateLogin(LoginDTO newLogin);
+        Task<bool> UpdateLogin(int ID, LoginDTO newLogin);
 
         // Delete
         Task<Login?> DeleteLogin(LoginDTO loginToDelete);
@@ -48,9 +48,9 @@ namespace HelpMeCook.API.Services
         Task<ICollection<Recipe>> GetAllRecipes();
 
         // Update
-        Task<bool> Update(RecipeDTO newRecipe);
+        Task<bool> Update(int ID, RecipeDTO newRecipe);
 
         // Delete
-        Task<Recipe?> Delete(RecipeDTO recipeToDelete);
+        Task<Recipe?> Delete(int ID);
     }
 }

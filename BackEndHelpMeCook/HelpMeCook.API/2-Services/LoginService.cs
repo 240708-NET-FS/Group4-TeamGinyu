@@ -45,11 +45,11 @@ namespace HelpMeCook.API.Services
             return log;
         }
 
-        public async Task<bool> UpdateLogin(LoginDTO newLogin)
+        public async Task<bool> UpdateLogin(int ID, LoginDTO newLogin)
         {
             Login log = LoginUtility.DTOToLogin(newLogin);
 
-            return await _loginRepo.Update(log);
+            return await _loginRepo.Update(ID, log);
         }
     }
 }

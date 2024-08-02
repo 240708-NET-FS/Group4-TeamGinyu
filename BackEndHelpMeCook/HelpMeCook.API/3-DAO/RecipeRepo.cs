@@ -22,12 +22,14 @@ public class RecipeRepo : IRecipeRepo
         return item;
     }
 
-    public async Task<Recipe> Delete(Recipe item)
+    public async Task<Recipe> Delete(int ID)
     {
-        _context.Recipe.Remove(item);
+        Recipe recipe = _context.Recipe.Find(ID)!;
+
+        _context.Recipe.Remove(recipe);
         await _context.SaveChangesAsync();
 
-        return item;
+        return recipe;
     }
 
     public async Task<ICollection<Recipe>> GetAll()
@@ -70,9 +72,9 @@ public class RecipeRepo : IRecipeRepo
                 .FirstOrDefaultAsync(r => r.UserID == ID);
     }
 
-    public async Task<bool> Update(Recipe newItem)
+    public async Task<bool> Update(int ID, Recipe newItem)
     {
-        Recipe? oldRecipe = await _context.Recipe.FirstOrDefaultAsync(r => r.RecipeID == newItem.RecipeID);
+        Recipe? oldRecipe = await _context.Recipe.FirstOrDefaultAsync(r => r.RecipeID == ID);
 
         if(oldRecipe == null) 
         {
