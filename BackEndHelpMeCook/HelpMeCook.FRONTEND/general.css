@@ -7,9 +7,32 @@
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
 }
 
-/* centers elments of a container */
-.centered-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+/* used on title */
+h2 {
+    font-size: 5rem;
+}
+
+/* used on sub-titles */
+h3 {
+    font-size: 3rem;
+}
+
+.inner-marging {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.outer-marging {
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+}
+
+/* Used with flex elements whos subelements
+I want to preserve all on the same line */
+.nowrap {
+    flex-wrap: nowrap;
+}
+
+.nomargin {
+    margin: 0 0 0 0 !important;
 }

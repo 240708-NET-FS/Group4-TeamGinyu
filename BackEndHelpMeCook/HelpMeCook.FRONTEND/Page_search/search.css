@@ -1,3 +1,38 @@
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.step-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.separator {
+    height: 5rem;
+}
+
+.step-title {
+    font-size: 1.4rem;
+    width: 80%;
+}
+
+.step-title > hr {
+    margin: 0;
+    background-color: gray;
+    opacity: 0.5;
+}
+
+.search-message {
+    display: none;
+}
+
 .ingredients-container {
-    
+    width: 80%;
+    margin: 3rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
 }

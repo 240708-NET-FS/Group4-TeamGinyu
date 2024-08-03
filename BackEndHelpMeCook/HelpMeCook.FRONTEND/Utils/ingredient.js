@@ -1,10 +1,10 @@
 function makeIngredient(name) {
 
     const div = document.createElement('div')
-    div.classList.add('tags', 'has-addons')
+    div.classList.add('tags', 'has-addons', 'nowrap', 'nomargin')
 
     const span = document.createElement('span')
-    span.classList.add('tag', 'is-danger')
+    span.classList.add('tag', 'is-info')
     span.textContent = name
 
     const a = document.createElement('a')
