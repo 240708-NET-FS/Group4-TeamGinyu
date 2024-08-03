@@ -21,12 +21,14 @@ public class LoginRepo : ILoginRepo
         return item;
     }
 
-    public async Task<Login> Delete(Login item)
+    public async Task<Login> Delete(int ID)
     {
-        _context.Login.Remove(item);
+        Login? login = await _context.Login.FirstOrDefaultAsync(l => l.LoginID == ID);
+
+        _context.Login.Remove(login!);
         await _context.SaveChangesAsync();
 
-        return item;
+        return login!;
     }
 
     public async Task<ICollection<Login>> GetAll()

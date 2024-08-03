@@ -33,7 +33,7 @@ namespace HelpMeCook.API.Services
         Task<bool> UpdateLogin(int ID, LoginDTO newLogin);
 
         // Delete
-        Task<Login?> DeleteLogin(LoginDTO loginToDelete);
+        Task<Login?> DeleteLogin(int ID);
     }
 
     public interface IRecipeService

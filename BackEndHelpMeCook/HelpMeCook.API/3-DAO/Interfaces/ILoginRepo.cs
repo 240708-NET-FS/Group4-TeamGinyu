@@ -20,5 +20,5 @@ public interface ILoginRepo
     public Task<bool> Update(int ID, Login newItem);
 
     // Delete
-    public Task<Login> Delete(Login item);
+    public Task<Login> Delete(int ID);
 }

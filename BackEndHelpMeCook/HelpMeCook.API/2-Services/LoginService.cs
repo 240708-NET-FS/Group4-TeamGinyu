@@ -20,10 +20,16 @@ namespace HelpMeCook.API.Services
             return await _loginRepo.Create(log);
         }
 
-        public async Task<Login?> DeleteLogin(LoginDTO loginToDelete)
+        public async Task<Login?> DeleteLogin(int ID)
         {
-            Login log = LoginUtility.DTOToLogin(loginToDelete);
-            return await _loginRepo.Delete(log);
+            Login? login = await _loginRepo.GetByID(ID);
+
+            if(login == null)
+            {
+                throw new InvalidLoginException("User does not exst.");
+            }
+            
+            return await _loginRepo.Delete(ID);
         }
 
         public Task<ICollection<Login>> GetAllLogins()
