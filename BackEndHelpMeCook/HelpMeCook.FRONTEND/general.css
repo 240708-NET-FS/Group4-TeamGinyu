@@ -36,3 +36,21 @@ I want to preserve all on the same line */
 .nomargin {
     margin: 0 0 0 0 !important;
 }
+
+footer {
+    margin-top: 10rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 7rem;
+    background-color: lightgoldenrodyellow;
+}
+
+.footer-text {
+    width: auto;
+}
+
+.footer-logo {
+    height: 1.5rem;
+    width: auto;
+}
