@@ -2,6 +2,7 @@ using HelpMeCook.API.Models;
 using HelpMeCook.API.DAO.Interfaces;
 using HelpMeCook.API.Exceptions;
 using HelpMeCook.API.Utilities;
+using Microsoft.IdentityModel.Tokens;
 
 namespace HelpMeCook.API.Services
 {
@@ -9,7 +10,7 @@ namespace HelpMeCook.API.Services
     {
         private readonly ILoginRepo _loginRepo;
 
-        public LoginService (ILoginRepo loginRepo)
+        public LoginService(ILoginRepo loginRepo)
         {
             this._loginRepo = loginRepo;
         }
@@ -24,11 +25,11 @@ namespace HelpMeCook.API.Services
         {
             Login? login = await _loginRepo.GetByID(ID);
 
-            if(login == null)
+            if (login == null)
             {
                 throw new InvalidLoginException("User does not exst.");
             }
-            
+
             return await _loginRepo.Delete(ID);
         }
 
@@ -37,13 +38,47 @@ namespace HelpMeCook.API.Services
             return _loginRepo.GetAll();
         }
 
+        public async Task<Login?> GetByUsername(string username)
+        {
+            if (username.IsNullOrEmpty())
+            {
+                throw new InvalidLoginException("No username provided.");
+            }
+
+            Login? login = await _loginRepo.GetByUsername(username);
+
+            if (login == null)
+            {
+                throw new InvalidLoginException("Username not found");
+            }
+
+            return login;
+        }
+
+        public async Task<Login?> GetByUsernameAndPassword(string username, string password)
+        {
+            if (username.IsNullOrEmpty() || password.IsNullOrEmpty())
+            {
+                throw new InvalidLoginException("No username and/or password provided.");
+            }
+
+            Login? login = await _loginRepo.GetByUsernameAndPassword(username, password);
+
+            if (login == null)
+            {
+                throw new InvalidLoginException("Username not found");
+            }
+
+            return login;
+        }
+
         public async Task<Login?> GetLoginByID(int loginID)
         {
             if (loginID < 1) throw new ArgumentException("Invalid ID");
 
             Login? log = await _loginRepo.GetByID(loginID);
 
-            if(log == null)
+            if (log == null)
             {
                 throw new InvalidLoginException($"Could not find Login by ID {loginID}");
             }

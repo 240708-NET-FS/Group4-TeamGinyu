@@ -48,6 +48,37 @@ public class LoginController : ControllerBase
           return Ok(_loginService.GetAllLogins());
      }
 
+     [HttpGet("/logins/{username}")]
+     public async Task<IActionResult> GetLoginByUsername(string username)
+     {
+
+          try
+          {
+               Login? login = await _loginService.GetByUsername(username);
+
+               return Ok(login);
+          }
+          catch (InvalidLoginException e)
+          {
+               return NotFound(e.Message);
+          }
+     }
+
+     [HttpGet("/logins/userpassword")]
+     public async Task<IActionResult> GetLoginByUsernameAndPassword([FromQuery] string username, [FromQuery] string password)
+     {
+          try
+          {
+               Login? login = await _loginService.GetByUsernameAndPassword(username, password);
+               return Ok(login);
+
+          }
+          catch (InvalidLoginException e)
+          {
+               return NotFound(e.Message);
+          }
+     }
+
      [HttpPut("/login/update/{id}")]
      public async Task<IActionResult> UpdateLogin(int ID, [FromBody] LoginDTO updatedUser)
      {

@@ -54,7 +54,7 @@ public class RecipeRepo : IRecipeRepo
     public async Task<ICollection<Recipe>> GetByRecipeNameAndUserID(string recipeName, int UserID)
     {
         return await _context.Recipe
-                .Where(r => r.RecipeName == recipeName && r.UserID == UserID)
+                .Where(r => r.RecipeName == recipeName && r.UserID == UserID).Include(r => r.User)
                 .ToListAsync();
     }
 
