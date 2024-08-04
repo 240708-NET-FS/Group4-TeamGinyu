@@ -49,17 +49,17 @@ public class UserController: ControllerBase
         return Ok(userList); 
    }
 
-   [HttpPut("user/{id}")]
+   [HttpPut("user/update/{id}")]
    public async Task<IActionResult> UpdateUser (int id, [FromBody] UserDTO updatedUser)
    {
         bool isUpdated = await _userService.UpdateUser(id, updatedUser);
 
-        if(!isUpdated) return NotFound("User does not exist!");
+        if(!isUpdated) return NotFound($"An error has occurred when updating user with ID {id}");
 
         return Ok("User succesfully updated");
    }
 
-   [HttpDelete("user/{id}")]
+   [HttpDelete("user/delete/{id}")]
    public async Task<IActionResult> DeleteUser (int id)
    {
         try 

@@ -44,7 +44,6 @@ namespace HelpMeCook.API.Services
         // Read
         Task<Recipe?> GetRecipeById(int recipeID);
 
-
         Task<ICollection<Recipe>> GetAllRecipes();
 
         // Update
