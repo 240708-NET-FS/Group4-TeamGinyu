@@ -21,9 +21,15 @@ public class LoginController : ControllerBase
      [HttpPost("login/signup")]
      public async Task<IActionResult> CreateLogin(LoginDTO loginDTO)
      {
-          Login login = await _loginService.CreateLogin(loginDTO);
-
-          return Ok(login);
+          try
+          {
+               Login login = await _loginService.CreateLogin(loginDTO);
+               return Ok(login);
+               
+          } catch (InvalidLoginException e)
+          {
+               return NotFound(e.Message);
+          }
      }
 
      [HttpGet("login/{id}")]

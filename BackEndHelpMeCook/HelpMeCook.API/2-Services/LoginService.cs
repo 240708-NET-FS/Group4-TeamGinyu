@@ -17,7 +17,13 @@ namespace HelpMeCook.API.Services
 
         public async Task<Login> CreateLogin(LoginDTO newLogin)
         {
+            if (newLogin.Username.IsNullOrEmpty() || newLogin.Password.IsNullOrEmpty())
+            {
+                throw new InvalidLoginException("Username and password must be provided.");
+
+            }
             Login log = LoginUtility.DTOToLogin(newLogin);
+
             return await _loginRepo.Create(log);
         }
 
