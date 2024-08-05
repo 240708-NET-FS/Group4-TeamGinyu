@@ -1,3 +1,7 @@
+/* //////////////////////////////////////////////////////////////////////////////// */
+/* general settings */
+/* //////////////////////////////////////////////////////////////////////////////// */
+
 /* imports some css for us */
 @import url('https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css');
 @import url('https://cdn.jsdelivr.net/npm/bulma@1.0.1/css/bulma.min.css');
@@ -17,24 +21,25 @@ h3 {
     font-size: 3rem;
 }
 
-.inner-marging {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+/* //////////////////////////////////////////////////////////////////////////////// */
+/* footer set up */
+/* //////////////////////////////////////////////////////////////////////////////// */
+
+/* these lines make it possible for the footer to alway be at the bottomn of
+the page even if the window content doesnt take the whole space of the window. */
+html, body {
+    height: 100%;
 }
 
-.outer-marging {
-    margin-top: 4rem;
-    margin-bottom: 4rem;
+body {
+    display: flex;
+    flex-direction: column;
 }
 
-/* Used with flex elements whos subelements
-I want to preserve all on the same line */
-.nowrap {
-    flex-wrap: nowrap;
-}
-
-.nomargin {
-    margin: 0 0 0 0 !important;
+/* all the code that goes in the body should go inside a div with this class. */
+/* but make sure you leave the footer tag out of the .main div */
+.main {
+    flex-grow: 1;
 }
 
 footer {
@@ -53,4 +58,37 @@ footer {
 .footer-logo {
     height: 1.5rem;
     width: auto;
+}
+
+/* //////////////////////////////////////////////////////////////////////////////// */
+/* utility */
+/* //////////////////////////////////////////////////////////////////////////////// */
+
+/* add to an element you want to hide. */
+.is-hidden {
+    display: none;
+}
+
+/* a standard marging between two related sections. */
+.inner-marging {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+/* a standard marging between two unrelated sections. */
+.outer-marging {
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+}
+
+/* add to get rid of the defaul wrap property of some elements. */
+/* Used with flex elements whos subelements
+I want to preserve all on the same line */
+.nowrap {
+    flex-wrap: nowrap;
+}
+
+/* add to get rid of any marging. */
+.nomargin {
+    margin: 0 0 0 0 !important;
 }
