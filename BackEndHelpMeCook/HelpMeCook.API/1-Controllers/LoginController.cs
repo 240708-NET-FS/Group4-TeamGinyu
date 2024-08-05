@@ -83,7 +83,7 @@ public class LoginController : ControllerBase
           }
      }
 
-     [HttpPut("login/{id}")]
+     [HttpPut("login/{ID}")]
      public async Task<IActionResult> UpdateLogin(int ID, [FromBody] LoginDTO updatedUser)
      {
           bool updatedLogin = await _loginService.UpdateLogin(ID, updatedUser);

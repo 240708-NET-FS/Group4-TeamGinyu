@@ -23,7 +23,7 @@ public class LoginRepo : ILoginRepo
 
     public async Task<Login> Delete(int ID)
     {
-        Login? login = await _context.Login.FirstOrDefaultAsync(l => l.LoginID == ID);
+        Login? login = await _context.Login.Include(l => l.User).FirstOrDefaultAsync(l => l.LoginID == ID);
 
         _context.Login.Remove(login!);
         await _context.SaveChangesAsync();
@@ -38,19 +38,19 @@ public class LoginRepo : ILoginRepo
 
     public async Task<Login?> GetByID(int ID)
     {
-        return await _context.Login.FirstOrDefaultAsync(l => l.LoginID == ID);
+        return await _context.Login.Include(l => l.User).FirstOrDefaultAsync(l => l.LoginID == ID);
     }
 
     public async Task<Login?> GetByUsername(string username)
     {
-        return await _context.Login.FirstOrDefaultAsync(l => l.Username == username);
+        return await _context.Login.Include(l => l.User).FirstOrDefaultAsync(l => l.Username == username);
     }
 
     public async Task<Login?> GetByUsernameAndPassword(string username, string password)
     {
         // Strech goal 
         // Query username and analyse hash password.
-        return await _context.Login.FirstOrDefaultAsync(l => l.Username == username && l.Password == password);
+        return await _context.Login.Include(l => l.User).FirstOrDefaultAsync(l => l.Username == username && l.Password == password);
     }
 
     public async Task<bool> Update(int ID, Login newItem)

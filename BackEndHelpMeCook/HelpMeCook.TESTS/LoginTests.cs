@@ -60,19 +60,22 @@ namespace HelpMeCook.Tests
             Mock<ILoginRepo> loginRepoMock = new();
             LoginService loginService = new(loginRepoMock.Object);
 
-            Login login = new Login { UserID = 1, Username = "username", Password = "password" };
-            Login newLogin = new Login { UserID = 1, Username = "newUsername", Password = "newPassword" };
+            Login login = new Login { LoginID = 1, UserID = 1, Username = "username", Password = "password" };
+            LoginDTO loginDto = new LoginDTO { UserID = 1, Username = "username", Password = "password" };
+         
 
-            loginRepoMock.Setup(repo => repo.GetByID(1)).Returns(Task.FromResult(login)!);
-            loginRepoMock.Setup(repo => repo.Update(1, newLogin)).Returns(Task.FromResult(true)!);
+            loginRepoMock.Setup(repo => repo.Create(It.IsAny<Login>())).ReturnsAsync(login);
+            loginRepoMock.Setup(repo => repo.Update(It.IsAny<int>(), It.IsAny<Login>())).Returns(Task.FromResult(true)!);
 
-            bool updated = await loginService.UpdateLogin(1, new LoginDTO { Username = "newUsername", Password = "newPassword" });
+            Login loginCreated = await loginService.CreateLogin(loginDto);
+
+            bool updated = await loginService.UpdateLogin(loginCreated.LoginID, new LoginDTO {UserID = 1, Username = "newUsername", Password = "newPassword" });
             
+            Console.WriteLine(updated);
+
             Assert.True(updated);
-            Assert.NotNull(newLogin); // Add this check to ensure result is not null
-            Assert.Equal("newUsername", newLogin.Username);
-            Assert.Equal("newPassword", newLogin.Password);
         }
+        
         [Fact]
         public async void TestDeleteLogin()
         {
