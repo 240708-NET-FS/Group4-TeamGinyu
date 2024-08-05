@@ -53,7 +53,7 @@ public class UserTest
             new User {FirstName = "Siya" ,LastName = "Smith"}
         };
 
-        _userRepoMock.Setup(repo => repo.GetAll()).ReturnsAsync(users);
+        _userRepoMock.Setup(repo => repo.GetAll()!).ReturnsAsync(users);
 
       
         var result = await _userService.GetAllUsers();
