@@ -16,3 +16,7 @@
 #### Update the database with the seeded data:
 - dotnet ef migrations add SeedData
 - dotnet ef database update
+
+### Steps to run unittest report:
+- dotnet test --collect:"XPlat Code Coverage" (This will generate a TestResult folder along with a guid.)
+- reportgenerator -reports:".\TestResults\{guid}\coverage.cobertura.xml" -targetdir:"coveragereport" -reporttypes:Html -classfilters:"+SERVICES_NAMESPACE.*;"  (The -classfilters:"+SERVICES_NAMESPACE.*;" is optional, this is to generate a report only for the services.)
