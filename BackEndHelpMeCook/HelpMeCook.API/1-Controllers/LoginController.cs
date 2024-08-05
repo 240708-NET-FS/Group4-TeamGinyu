@@ -70,11 +70,11 @@ public class LoginController : ControllerBase
      {
           try
           {
-               Login? login = await _loginService.GetByUsername(loginDTO.Username);
+               Login? loginUsername = await _loginService.GetByUsername(loginDTO.Username);
 
-               Login? login2 = await _loginService.GetByUsernameAndPassword(login!.Username, loginDTO.Password);
+               Login? login = await _loginService.GetByUsernameAndPassword(loginUsername!.Username, loginDTO.Password);
 
-               return Ok(login);
+               return Ok(login.UserID);
 
           }
           catch (InvalidLoginException e)

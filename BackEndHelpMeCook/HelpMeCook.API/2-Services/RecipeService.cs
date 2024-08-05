@@ -26,6 +26,11 @@ public class RecipeService : IRecipeService
             throw new InvalidRecipeException($"Recipe Name {recipe.RecipeName} already taken");
         }
 
+        if(await RecipeNumberRegistered(newRecipe))
+        {
+            throw new InvalidRecipeException($"Recipe Number {recipe.RecipeNumber} already registered.");
+        }
+
         return await _recipeRepo.Create(newRecipe);
     }
 
@@ -121,6 +126,13 @@ public class RecipeService : IRecipeService
     private async Task<bool> RecipeNameTaken(Recipe recipe) 
     {
         Recipe? dbRecipe =  await _recipeRepo.GetByRecipeName(recipe.RecipeName!);
+        
+        return dbRecipe != null;
+    }
+
+     private async Task<bool> RecipeNumberRegistered(Recipe recipe) 
+    {
+        Recipe? dbRecipe =  await _recipeRepo.GetByRecipeNumber(recipe.RecipeNumber!);
         
         return dbRecipe != null;
     }

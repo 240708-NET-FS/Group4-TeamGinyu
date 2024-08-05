@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HelpMeCook.API.Controller;
 
+[ApiController]
+[Route("api/[controller]")]
 public class RecipeController : ControllerBase
 {
     private readonly IRecipeService _recipeService;
@@ -17,9 +19,18 @@ public class RecipeController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> CreateRecipe(RecipeDTO recipeDTO)
     {
-        Recipe recipe = await _recipeService.CreateRecipe(recipeDTO);
+        try 
+        {
+            Recipe recipe = await _recipeService.CreateRecipe(recipeDTO);
+            return Ok(recipe);
 
-        return Ok(recipe);
+        } catch (InvalidRecipeException e)
+        {
+            return NotFound(e.Message);
+        }
+       
+
+        
     }
 
     [HttpGet("recipe/{ID}")]
@@ -119,7 +130,7 @@ public class RecipeController : ControllerBase
     }
 
     [HttpPut("recipe/{ID}")]
-    public async Task<IActionResult> UpdateRecipe(int ID, RecipeDTO recipeDTO)
+    public async Task<IActionResult> UpdateRecipe(int ID,  [FromBody] RecipeDTO recipeDTO)
     {
         bool updatedRecipe = await _recipeService.Update(ID, recipeDTO);
 
