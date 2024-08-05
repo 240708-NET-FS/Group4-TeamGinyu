@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- css -->
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/login.css">
+
+    <title>Login</title>
+</head>
+<body>
+
+  <div class="login-header">
+    <h2>HelpMeCook</h2>
+  </div>
+
+  <div class="login-container centered-container">
+    <form id="submition-form" class="box">
+        <div class="field">
+          <label class="label">Username</label>
+          <div class="control">
+            <input class="input" type="text" placeholder="username" />
+          </div>
+        </div>
+      
+        <div class="field">
+          <label class="label">Password</label>
+          <div class="control">
+            <input class="input" type="password" placeholder="********" />
+          </div>
+        </div>
+      
+        <div class="centered-container" style="justify-content: space-around;">
+            <button id="login-button" class="button is-primary login-button">Login</button>
+        </div>
+        <div class="centered-container" style="justify-content: space-around;">
+          <button onclick="window.location.href='./pages/register.html';" class="button is-primary is-outlined login-button">Create an account</button>
+      </div>
+    </form>
+  </div>
+
+</body>
+
+    <!-- js -->
+    <script defer src="./js/login.js"></script>
+
+</html>

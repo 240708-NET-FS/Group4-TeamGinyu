@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- css -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/login.css">
+
+    <title>Login</title>
+</head>
+<body>
+
+  <div class="login-header">
+    <h2>HelpMeCook</h2>
+  </div>
+
+  <div class="login-container centered-container">
+    <form id="submition-form" class="box">
+      <div class="field">
+        <label class="label">Firstname</label>
+        <div class="control">
+          <input class="input" type="text" name="firstname" placeholder="First name" />
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Lastname</label>
+        <div class="control">
+          <input class="input" type="text" name="lastname" placeholder="Last name" />
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Username</label>
+        <div class="control">
+          <input class="input" type="text" name="username" placeholder="username" />
+        </div>
+      </div>
+
+        <div class="field">
+          <label class="label">Password</label>
+          <div class="control">
+            <input class="input" type="password" name="password" placeholder="" />
+          </div>
+        </div>
+      
+        <div class="centered-container" style="justify-content: space-around;">
+            <button id="register-button" class="button is-primary login-button">Sign up</button>
+        </div>
+        <div class="centered-container" style="justify-content: space-around;">
+          <button onclick="window.location.href='../index.html';" class="button is-primary is-outlined login-button">Already have an account</button>
+      </div>
+    </form>
+  </div>
+
+</body>
+
+<!-- js -->
+<script defer src="../js/login.js"></script>
+
+</html>

@@ -1,0 +1,20 @@
+.login-container {
+    /* height: calc(100vh - 20rem); */
+    margin-top: 50px;
+}
+
+.login-button {
+    padding: 7px 20px;
+    margin: 5px auto;
+}
+
+.login-header {
+    display: flex;
+    justify-content: center;
+}
+
+.centered-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
