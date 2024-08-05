@@ -22,7 +22,7 @@ public class RecipeController : ControllerBase
         return Ok(recipe);
     }
 
-    [HttpGet("{ID}")]
+    [HttpGet("recipe/{ID}")]
     public async Task<IActionResult> GetRecipeByRecipeID(int ID)
     {
         try
@@ -38,7 +38,7 @@ public class RecipeController : ControllerBase
         }
     }
 
-    [HttpGet("/recipes")]
+    [HttpGet("recipes")]
     public async Task<IActionResult> GetAllRecipes()
     {
         try
@@ -54,7 +54,7 @@ public class RecipeController : ControllerBase
         }
     }
 
-    [HttpGet("user/{ID}")]
+    [HttpGet("recipe/user/{ID}")]
     public async Task<IActionResult> GetRecipeByUserID(int ID)
     {
         try
@@ -102,7 +102,7 @@ public class RecipeController : ControllerBase
 
     }
 
-    [HttpGet("recipes")]
+    [HttpGet("recipes/recipe")]
     public async Task<IActionResult> GetByRecipeNameAndUserID([FromQuery] string recipeName, [FromQuery] int UserID)
     {
         try 
@@ -118,7 +118,7 @@ public class RecipeController : ControllerBase
         
     }
 
-    [HttpPut("update/{ID}")]
+    [HttpPut("recipe/{ID}")]
     public async Task<IActionResult> UpdateRecipe(int ID, RecipeDTO recipeDTO)
     {
         bool updatedRecipe = await _recipeService.Update(ID, recipeDTO);
@@ -126,7 +126,7 @@ public class RecipeController : ControllerBase
         return updatedRecipe ? Ok("Recipe succesfully updated.") : NotFound($"Error when updating recipe with ID {ID}");
     }
 
-    [HttpPut("delete/{ID}")]
+    [HttpDelete("recipe/{ID}")]
     public async Task<IActionResult> DeleteRecipe(int ID)
     {
         try

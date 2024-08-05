@@ -25,7 +25,7 @@ public class UserController: ControllerBase
         return Ok(user);
    }
 
-   [HttpGet("{id}")]
+   [HttpGet("user/{id}")]
    public async Task<IActionResult> GetUserByID (int id)
    {
         var user = await _userService.GetUserByID(id);
@@ -48,7 +48,7 @@ public class UserController: ControllerBase
         return Ok(userList); 
    }
 
-   [HttpPut("user/update/{id}")]
+   [HttpPut("user/{id}")]
    public async Task<IActionResult> UpdateUser (int id, [FromBody] UserDTO updatedUser)
    {
         bool isUpdated = await _userService.UpdateUser(id, updatedUser);
@@ -58,7 +58,7 @@ public class UserController: ControllerBase
         return Ok("User succesfully updated");
    }
 
-   [HttpDelete("user/delete/{id}")]
+   [HttpDelete("user/{id}")]
    public async Task<IActionResult> DeleteUser (int id)
    {
         try 

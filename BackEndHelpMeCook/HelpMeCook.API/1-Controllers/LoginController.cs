@@ -26,7 +26,7 @@ public class LoginController : ControllerBase
           return Ok(login);
      }
 
-     [HttpGet("{id}")]
+     [HttpGet("login/{id}")]
      public async Task<IActionResult> GetLoginByID(int id)
      {
           var login = await _loginService.GetLoginByID(id);
@@ -36,7 +36,7 @@ public class LoginController : ControllerBase
           return Ok(login);
      }
 
-     [HttpGet("/logins")]
+     [HttpGet("logins")]
      public async Task<IActionResult> GetAllLogins()
      {
           ICollection<Login> logins = await _loginService.GetAllLogins();
@@ -65,8 +65,8 @@ public class LoginController : ControllerBase
      
      // This is good for now but it is a bad practice, we are exposing the password resource through the URI
      // Maybe JWT(?) or a POST request to get password from the body (not a restful best practice).
-     [HttpGet("/logins/userpassword")]
-     public async Task<IActionResult> GetLoginByUsernameAndPassword([FromQuery] string username, [FromQuery] string password)
+     [HttpPost("login")]
+     public async Task<IActionResult> GetLoginByUsernameAndPassword([FromBody] string username, [FromBody] string password)
      {
           try
           {
@@ -80,7 +80,7 @@ public class LoginController : ControllerBase
           }
      }
 
-     [HttpPut("/login/update/{id}")]
+     [HttpPut("login/{id}")]
      public async Task<IActionResult> UpdateLogin(int ID, [FromBody] LoginDTO updatedUser)
      {
           bool updatedLogin = await _loginService.UpdateLogin(ID, updatedUser);
@@ -90,7 +90,7 @@ public class LoginController : ControllerBase
           return Ok("User succesfully updated");
      }
 
-     [HttpDelete("/login/delete/{id}")]
+     [HttpDelete("login/{id}")]
      public async Task<IActionResult> DeleteLogin(int id)
      {
           try
