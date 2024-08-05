@@ -4,6 +4,11 @@ const container_ingredients = document.querySelector('.ingredients-container')
 const btn_search_ingredient = document.querySelector('.search-ingredient-button')
 const input_search_ingredient = document.querySelector('.search-ingredient-input')
 
+const btn_search_by_ingredient = document.querySelector('.search-by-ingredient-button')
+const btn_search_by_name = document.querySelector('.search-by-name-button')
+const content_search_by_ingredient = document.querySelector('.search-by-ingredient-content')
+const content_search_by_name = document.querySelector('.search-by-name-content')
+
 
 
 document.addEventListener('DOMContentLoaded', (event) => {
@@ -14,8 +19,42 @@ document.addEventListener('DOMContentLoaded', (event) => {
 })
 
 
-btn_search_ingredient.addEventListener('click', searchIngredient)
+btn_search_by_ingredient.addEventListener('click', () => {
+    console.log('BY INGREDIENT')
+    btn_search_by_ingredient.classList.add('is-active')
+    btn_search_by_name.classList.remove('is-active')
 
+    content_search_by_name.classList.add('is-hidden')
+    content_search_by_ingredient.classList.remove('is-hidden')
+})
+
+btn_search_by_name.addEventListener('click', () => {
+    console.log('BY NAME')
+
+    btn_search_by_ingredient.classList.remove('is-active')
+    btn_search_by_name.classList.add('is-active')
+
+    content_search_by_ingredient.classList.add('is-hidden')
+    content_search_by_name.classList.remove('is-hidden')
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+btn_search_ingredient.addEventListener('click', searchIngredient)
 
 // fetches ingredients from the spoonacular api
 function searchIngredient() {

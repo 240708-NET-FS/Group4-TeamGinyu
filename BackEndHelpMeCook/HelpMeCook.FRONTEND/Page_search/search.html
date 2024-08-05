@@ -16,49 +16,76 @@
     <title>Search</title>
 </head>
 <body>
-    <div class="main-container">
-
-        <!-- Header -->
+    <div class="main">
+        <!-- page header -->
         <div class="outer-marging" style="display: flex; justify-content: center;">
             <h3>Recipe searcher</h3>
         </div>
 
-        <!-- 1. -->
-        <div class="step-title outer-marging">
-            <p>1. Select some ingredients</p>
-            <hr>
+        <!-- tabs -->
+        <div class="tabs">
+            <ul style="display: flex; justify-content: center;">
+            <li class="search-by-ingredient-button is-active" style="width: 100%;"><a>Search by ingredient</a></li>
+            <li class="search-by-name-button" style="width: 100%;"><a>Search by recipe name</a></li>
+            </ul>
         </div>
-        
-        <div class="step-container">
-            <!-- search bar -->
-            <div class="field has-addons inner-marging">
-                <div class="control">
-                    <input class="search-ingredient-input input" type="text" placeholder="Ingredient to add">
+
+        <!-- tab content: search by ingredient -->
+        <div class="main-container search-by-ingredient-content">
+
+            <!-- 1. -->
+            <div class="step-title outer-marging">
+                <p>1. Select some ingredients</p>
+                <hr>
+            </div>
+            
+            <div class="step-container">
+                <!-- search bar -->
+                <div class="field has-addons inner-marging">
+                    <div class="control">
+                        <input class="search-ingredient-input input" type="text" placeholder="Ingredient to add">
+                    </div>
+                    <div class="control">
+                        <button class="search-ingredient-button button is-primary">
+                        Search
+                        </button>
+                    </div>
                 </div>
-                <div class="control">
-                    <button class="search-ingredient-button button is-primary">
-                    Search
-                    </button>
+
+                <!-- ingredients -->
+                <div class="ingredients-container">
                 </div>
             </div>
 
-            <!-- ingredients -->
-             <div class="ingredients-container">
-             </div>
+            <!-- 2. -->
+            <div class="step-title outer-marging">
+                <p>2. Search for recipes</p>
+                <hr>
+            </div>
+
+            <!-- search receipes button -->
+            <button class="button is-primary">Get me those delicatessen</button>
+
         </div>
 
-
-
-        <!-- 2. -->
-        <div class="step-title outer-marging">
-            <p>2. Search for recipes</p>
-            <hr>
+        <!-- tab content: search by recipe name -->
+        <div class="main-container search-by-name-content">
+            <div class="step-container">
+                <!-- search bar -->
+                <div class="field has-addons inner-marging">
+                    <div class="control">
+                        <input class="search-ingredient-input input" type="text" placeholder="Recipe name">
+                    </div>
+                    <div class="control">
+                        <button class="search-ingredient-button button is-primary">
+                        Search
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <!-- search receipes button -->
-        <button class="button is-primary">Get me those delicatessen</button>
-
     </div>
+    
     <footer>
         <p class="footer-text">Made by <a href="https://github.com/240708-NET-FS/Group4-TeamGinyu">Team Ginyu </a></p>
         <img class="footer-logo" src="https://static.wikia.nocookie.net/villains/images/f/f5/Ginyu_Force.png" alt=".">
