@@ -34,7 +34,7 @@ public class UserController: ControllerBase
         return Ok(user); 
    }
 
-    [HttpGet("/users")]
+    [HttpGet("users")]
    public async Task<IActionResult> GetAllUsers ()
    {
         ICollection<User> users = await _userService.GetAllUsers();
