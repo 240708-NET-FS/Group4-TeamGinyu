@@ -42,14 +42,14 @@ namespace HelpMeCook.API.Services
         {
             if (username.IsNullOrEmpty())
             {
-                throw new InvalidLoginException("No username provided.");
+                throw new InvalidLoginException("Wrong username and/or password provided.");
             }
 
             Login? login = await _loginRepo.GetByUsername(username);
 
             if (login == null)
             {
-                throw new InvalidLoginException("Username not found");
+                throw new InvalidLoginException("Wrong username and/or password provided.");
             }
 
             return login;
@@ -59,14 +59,14 @@ namespace HelpMeCook.API.Services
         {
             if (username.IsNullOrEmpty() || password.IsNullOrEmpty())
             {
-                throw new InvalidLoginException("No username and/or password provided.");
+                throw new InvalidLoginException("Wrong username and/or password provided.");
             }
 
             Login? login = await _loginRepo.GetByUsernameAndPassword(username, password);
 
             if (login == null)
             {
-                throw new InvalidLoginException("Username not found");
+                throw new InvalidLoginException("Wrong username and/or password provided.");
             }
 
             return login;

@@ -18,7 +18,7 @@ public class LoginController : ControllerBase
           this._loginService = loginService;
      }
 
-     [HttpPost]
+     [HttpPost("login/signup")]
      public async Task<IActionResult> CreateLogin(LoginDTO loginDTO)
      {
           Login login = await _loginService.CreateLogin(loginDTO);
@@ -44,33 +44,36 @@ public class LoginController : ControllerBase
 
           if (loginsList.IsNullOrEmpty()) return NotFound("Not users have been created");
 
-          return Ok(_loginService.GetAllLogins());
+          return Ok(loginsList);
      }
 
-     [HttpGet("/logins/{username}")]
-     public async Task<IActionResult> GetLoginByUsername(string username)
-     {
+     // [HttpGet("logins/{username}")]
+     // public async Task<IActionResult> GetLoginByUsername(string username)
+     // {
 
-          try
-          {
-               Login? login = await _loginService.GetByUsername(username);
+     //      try
+     //      {
+     //           Login? login = await _loginService.GetByUsername(username);
 
-               return Ok(login);
-          }
-          catch (InvalidLoginException e)
-          {
-               return NotFound(e.Message);
-          }
-     }
+     //           return Ok(login);
+     //      }
+     //      catch (InvalidLoginException e)
+     //      {
+     //           return NotFound(e.Message);
+     //      }
+     // }
      
      // This is good for now but it is a bad practice, we are exposing the password resource through the URI
      // Maybe JWT(?) or a POST request to get password from the body (not a restful best practice).
      [HttpPost("login")]
-     public async Task<IActionResult> GetLoginByUsernameAndPassword([FromBody] string username, [FromBody] string password)
+     public async Task<IActionResult> GetLoginByUsernameAndPassword([FromBody] LoginDTO loginDTO)
      {
           try
           {
-               Login? login = await _loginService.GetByUsernameAndPassword(username, password);
+               Login? login = await _loginService.GetByUsername(loginDTO.Username);
+
+               Login? login2 = await _loginService.GetByUsernameAndPassword(login!.Username, loginDTO.Password);
+
                return Ok(login);
 
           }
