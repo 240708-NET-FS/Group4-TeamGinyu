@@ -20,6 +20,7 @@ namespace HelpMeCook.Tests
             Assert.Equal("username", login?.Username);
             Assert.Equal("password", login?.Password);
         }
+
         [Fact]
         public async void TestGetAllLogins()
         {
@@ -54,6 +55,7 @@ namespace HelpMeCook.Tests
             Assert.Equal("username", result.Username);
             Assert.Equal("password", result.Password);
         }
+
         [Fact]
         public async void TestUpdateLogin()
         {
@@ -75,7 +77,7 @@ namespace HelpMeCook.Tests
 
             Assert.True(updated);
         }
-        
+
         [Fact]
         public async void TestDeleteLogin()
         {
