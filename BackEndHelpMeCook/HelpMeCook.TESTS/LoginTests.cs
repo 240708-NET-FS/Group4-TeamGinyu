@@ -38,5 +38,53 @@ namespace HelpMeCook.Tests
             ICollection<Login> result = await loginService.GetAllLogins();
             Assert.Equal(logins, result);
         }
+        [Fact]
+        public async void TestCreateLogin()
+        {
+            Mock<ILoginRepo> loginRepoMock = new();
+            LoginService loginService = new(loginRepoMock.Object);
+
+            Login login = new Login { Username = "username", Password = "password" };
+
+            loginRepoMock.Setup(repo => repo.Create(It.IsAny<Login>())).ReturnsAsync(login);
+
+            Login result = await loginService.CreateLogin(new LoginDTO { Username = "username", Password = "password" });
+
+            Assert.NotNull(result); // Add this check to ensure result is not null
+            Assert.Equal("username", result.Username);
+            Assert.Equal("password", result.Password);
+        }
+        [Fact]
+        public async void TestUpdateLogin()
+        {
+            Mock<ILoginRepo> loginRepoMock = new();
+            LoginService loginService = new(loginRepoMock.Object);
+
+            Login login = new Login { UserID = 1, Username = "username", Password = "password" };
+            Login newLogin = new Login { UserID = 1, Username = "newUsername", Password = "newPassword" };
+
+            loginRepoMock.Setup(repo => repo.GetByID(1)).Returns(Task.FromResult(login)!);
+            loginRepoMock.Setup(repo => repo.Update(1, newLogin)).Returns(Task.FromResult(true)!);
+
+            bool updated = await loginService.UpdateLogin(1, new LoginDTO { Username = "newUsername", Password = "newPassword" });
+            
+            Assert.True(updated);
+            Assert.NotNull(newLogin); // Add this check to ensure result is not null
+            Assert.Equal("newUsername", newLogin.Username);
+            Assert.Equal("newPassword", newLogin.Password);
+        }
+        [Fact]
+        public async void TestDeleteLogin()
+        {
+            Mock<ILoginRepo> loginRepoMock = new();
+            LoginService loginService = new(loginRepoMock.Object);
+
+            Login login = new Login { Username = "username", Password = "password" };
+
+            loginRepoMock.Setup(repo => repo.GetByID(1)).Returns(Task.FromResult(login)!);
+            loginRepoMock.Setup(repo => repo.Delete(1)).Returns(Task.FromResult(login)!);
+
+            Login? result = await loginService.DeleteLogin(1);
+        }
     }
 }
