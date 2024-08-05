@@ -63,7 +63,9 @@ public class LoginController : ControllerBase
                return NotFound(e.Message);
           }
      }
-
+     
+     // This is good for now but it is a bad practice, we are exposing the password resource through the URI
+     // Maybe JWT(?) or a POST request to get password from the body (not a restful best practice).
      [HttpGet("/logins/userpassword")]
      public async Task<IActionResult> GetLoginByUsernameAndPassword([FromQuery] string username, [FromQuery] string password)
      {
