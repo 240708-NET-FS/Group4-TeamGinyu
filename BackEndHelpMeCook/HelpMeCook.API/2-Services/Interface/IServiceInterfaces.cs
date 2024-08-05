@@ -29,6 +29,10 @@ namespace HelpMeCook.API.Services
 
         Task<ICollection<Login>> GetAllLogins();
 
+        Task<Login?> GetByUsername(string username);
+
+        Task<Login?> GetByUsernameAndPassword(string username, string password);
+
         // Update
         Task<bool> UpdateLogin(int ID, LoginDTO newLogin);
 
