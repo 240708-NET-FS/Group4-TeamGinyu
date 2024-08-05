@@ -10,7 +10,8 @@ public class RecipeRepo : IRecipeRepo
 
     private readonly AppDbContext _context;
 
-    public RecipeRepo (AppDbContext context) {
+    public RecipeRepo(AppDbContext context)
+    {
         this._context = context;
     }
 
@@ -20,16 +21,6 @@ public class RecipeRepo : IRecipeRepo
         await _context.SaveChangesAsync();
 
         return item;
-    }
-
-    public async Task<Recipe> Delete(int ID)
-    {
-        Recipe recipe = _context.Recipe.Find(ID)!;
-
-        _context.Recipe.Remove(recipe);
-        await _context.SaveChangesAsync();
-
-        return recipe;
     }
 
     public async Task<ICollection<Recipe>> GetAll()
@@ -51,32 +42,35 @@ public class RecipeRepo : IRecipeRepo
                 .FirstOrDefaultAsync(r => r.RecipeName == recipeName);
     }
 
-    public async Task<ICollection<Recipe>> GetByRecipeNameAndUserID(string recipeName, int UserID)
+    public async Task<Recipe?> GetByRecipeNameAndUserID(string recipeName, int UserID)
     {
         return await _context.Recipe
-                .Where(r => r.RecipeName == recipeName && r.UserID == UserID).Include(r => r.User)
-                .ToListAsync();
+                .Include(r => r.User)
+                .FirstOrDefaultAsync(r => r.RecipeName == recipeName && r.UserID == UserID);
     }
 
     public async Task<Recipe?> GetByRecipeNumber(int ID)
     {
-       return await _context.Recipe
-                .Include(r => r.User)
-                .FirstOrDefaultAsync(r => r.RecipeNumber == ID);
+        return await _context.Recipe
+                 .Include(r => r.User)
+                 .FirstOrDefaultAsync(r => r.RecipeNumber == ID);
     }
 
-    public async Task<Recipe?> GetByUser(int ID)
+    public async Task<ICollection<Recipe>> GetByUser(int ID)
     {
+
         return await _context.Recipe
+                .Where(r => r.UserID == ID)
                 .Include(r => r.User)
-                .FirstOrDefaultAsync(r => r.UserID == ID);
+                .ToListAsync();
+
     }
 
     public async Task<bool> Update(int ID, Recipe newItem)
     {
         Recipe? oldRecipe = await _context.Recipe.FirstOrDefaultAsync(r => r.RecipeID == ID);
 
-        if(oldRecipe == null) 
+        if (oldRecipe == null)
         {
             return false;
         }
@@ -85,7 +79,18 @@ public class RecipeRepo : IRecipeRepo
         oldRecipe.RecipeNumber = newItem.RecipeNumber;
 
         await _context.SaveChangesAsync();
-        
+
         return true;
     }
+
+    public async Task<Recipe> Delete(int ID)
+    {
+        Recipe recipe = _context.Recipe.Find(ID)!;
+
+        _context.Recipe.Remove(recipe);
+        await _context.SaveChangesAsync();
+
+        return recipe;
+    }
+
 }

@@ -10,12 +10,13 @@ public interface IRecipeRepo
     // Read
     public Task<Recipe?> GetByID(int ID);
 
-    public Task<Recipe?> GetByUser(int ID);
+    public Task<ICollection<Recipe>> GetByUser(int ID);
 
     public Task<Recipe?> GetByRecipeNumber(int ID);
 
     public Task<Recipe?> GetByRecipeName(string recipeName);
-    public Task<ICollection<Recipe>> GetByRecipeNameAndUserID(string recipeName, int UserID);
+    
+    public Task<Recipe?> GetByRecipeNameAndUserID(string recipeName, int UserID);
 
     public Task<ICollection<Recipe>> GetAll();
 

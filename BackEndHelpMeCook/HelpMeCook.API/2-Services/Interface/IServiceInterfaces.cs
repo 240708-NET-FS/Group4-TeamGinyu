@@ -29,9 +29,9 @@ namespace HelpMeCook.API.Services
 
         Task<ICollection<Login>> GetAllLogins();
 
-        Task<Login?> GetByUsername(string username);
+        public Task<Login?> GetByUsername(string username);
 
-        Task<Login?> GetByUsernameAndPassword(string username, string password);
+        public Task<Login?> GetByUsernameAndPassword(string username, string password);
 
         // Update
         Task<bool> UpdateLogin(int ID, LoginDTO newLogin);
@@ -43,10 +43,18 @@ namespace HelpMeCook.API.Services
     public interface IRecipeService
     {
         // Create
-        Task <Recipe> CreateRecipe(RecipeDTO newRecipe);
+        Task<Recipe> CreateRecipe(RecipeDTO newRecipe);
 
         // Read
         Task<Recipe?> GetRecipeById(int recipeID);
+
+        public Task<ICollection<Recipe>> GetByUser(int ID);
+
+        public Task<Recipe?> GetByRecipeNumber(int ID);
+
+        public Task<Recipe?> GetByRecipeName(string recipeName);
+
+        public Task<Recipe?> GetByRecipeNameAndUserID(string recipeName, int UserID);
 
         Task<ICollection<Recipe>> GetAllRecipes();
 
