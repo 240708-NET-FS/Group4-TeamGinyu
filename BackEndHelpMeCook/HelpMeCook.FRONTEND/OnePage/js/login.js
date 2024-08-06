@@ -1,3 +1,5 @@
+import { api } from "./apisettings.js";
+
 const btn_login = document.querySelector('#login-button');
 const btn_register = document.querySelector('#register-button');
 const form_element = document.querySelector('#submition-form')
@@ -18,7 +20,7 @@ form_element.addEventListener('click', (event) => {
 });
 
 function sendForm(url, method) {
-    fetch(url, {
+    fetch(api.url + url, {
         method:method
     })
     .then(response => {
