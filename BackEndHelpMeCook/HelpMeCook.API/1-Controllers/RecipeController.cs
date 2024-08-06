@@ -1,6 +1,8 @@
+using System.Security.Claims;
 using HelpMeCook.API.Exceptions;
 using HelpMeCook.API.Models;
 using HelpMeCook.API.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HelpMeCook.API.Controller;
@@ -17,10 +19,13 @@ public class RecipeController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize]
     public async Task<IActionResult> CreateRecipe(RecipeDTO recipeDTO)
     {
         try 
         {
+            var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            recipeDTO.UserID = userID!;
             Recipe recipe = await _recipeService.CreateRecipe(recipeDTO);
             return Ok(recipe);
 
@@ -33,7 +38,7 @@ public class RecipeController : ControllerBase
         
     }
 
-    [HttpGet("recipe/{ID}")]
+    [HttpGet("recipe/{ID}"), Authorize]
     public async Task<IActionResult> GetRecipeByRecipeID(int ID)
     {
         try
@@ -49,7 +54,7 @@ public class RecipeController : ControllerBase
         }
     }
 
-    [HttpGet("recipes")]
+    [HttpGet("recipes"), Authorize]
     public async Task<IActionResult> GetAllRecipes()
     {
         try
@@ -65,7 +70,7 @@ public class RecipeController : ControllerBase
         }
     }
 
-    [HttpGet("recipe/user/{ID}")]
+    [HttpGet("recipe/user/{ID}"), Authorize]
     public async Task<IActionResult> GetRecipeByUserID(string ID)
     {
         try
@@ -81,7 +86,7 @@ public class RecipeController : ControllerBase
         }
     }
 
-    [HttpGet("recipeNumber/{recipeNumber}")]
+    [HttpGet("recipeNumber/{recipeNumber}"), Authorize]
     public async Task<IActionResult> GetByRecipeNumber(int recipeNumber)
     {
         try
@@ -97,7 +102,7 @@ public class RecipeController : ControllerBase
 
     }
 
-    [HttpGet("recipeName/{recipeName}")]
+    [HttpGet("recipeName/{recipeName}"), Authorize]
     public async Task<IActionResult> GetByRecipeNumber(string recipeName)
     {
         try
@@ -113,7 +118,7 @@ public class RecipeController : ControllerBase
 
     }
 
-    [HttpGet("recipes/recipe")]
+    [HttpGet("recipes/recipe"), Authorize]
     public async Task<IActionResult> GetByRecipeNameAndUserID([FromQuery] string recipeName, [FromQuery] string UserID)
     {
         try 
@@ -129,7 +134,7 @@ public class RecipeController : ControllerBase
         
     }
 
-    [HttpPut("recipe/{ID}")]
+    [HttpPut("recipe/{ID}"), Authorize]
     public async Task<IActionResult> UpdateRecipe(int ID,  [FromBody] RecipeDTO recipeDTO)
     {
         bool updatedRecipe = await _recipeService.Update(ID, recipeDTO);
@@ -137,7 +142,7 @@ public class RecipeController : ControllerBase
         return updatedRecipe ? Ok("Recipe succesfully updated.") : NotFound($"Error when updating recipe with ID {ID}");
     }
 
-    [HttpDelete("recipe/{ID}")]
+    [HttpDelete("recipe/{ID}"), Authorize]
     public async Task<IActionResult> DeleteRecipe(int ID)
     {
         try

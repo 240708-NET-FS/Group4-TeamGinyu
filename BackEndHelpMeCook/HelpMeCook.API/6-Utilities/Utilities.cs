@@ -40,7 +40,7 @@ public static class RecipeUtility
             RecipeName = recipeDTO.RecipeName, 
             CreatedDate = recipeDTO.CreatedDate,
             RecipeNumber = recipeDTO.RecipeNumber,
-            UserID = recipeDTO.UserID
+            UserID = recipeDTO.UserID!
         };
         return newRecipe;
     }
