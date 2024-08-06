@@ -1,8 +1,8 @@
 function makeIngredientResult(name) {
-    const p = document.createElement('p')
-    p.innerHTML = name
-
-    return p
+    const button = document.createElement('button')
+    button.classList.add('button', 'is-info', 'is-light')
+    button.innerHTML = name
+    return button
 }
 
 

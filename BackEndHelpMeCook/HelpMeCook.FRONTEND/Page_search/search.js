@@ -1,43 +1,28 @@
 import { makeIngredientTag, makeIngredientResult } from "../Utils/ingredient.js"
 
-let ingredients = []
+let ingredientTags = []
+let ingredientSelection = []
 
-const ingredients_tag_container = document.querySelector('.ingredients-tag-container')
+const tags_container = document.querySelector('.ingredients-tag-container')
 const search_ingredient_button = document.querySelector('.search-ingredient-button')
 const input_search_ingredient = document.querySelector('.search-ingredient-input')
-const ingredients_modal = document.querySelector('.ingredients-modal')
+const modal = document.querySelector('.ingredients-modal')
 
-const ingredients_result_container = document.querySelector('.ingredients-result-container')
+const modal_container_ingredients = document.querySelector('.ingredients-result-container')
 
 
 const seach_type_selector = document.querySelector('.search-type')
 const type_ingredient_container = document.querySelector('.type-ingredient-container')
 const type_name_container = document.querySelector('.type-name-container')
 const type_ingredient_submenu = document.querySelector('.type-ingredient-submenu')
+const modal_button = document.querySelector('.modal-button-done')
+
 
 
 
 
 document.addEventListener('DOMContentLoaded', (event) => {
     console.log('Login page loaded')
-
-    ingredients.push('some ing')
-    ingredients.push('some ing')
-    ingredients.push('some ing')
-    ingredients.push('some ing')
-    ingredients.push('some ing')
-    ingredients.push('some ing')
-    ingredients.push('some ing')
-    ingredients.push('some ing')
-    ingredients.push('some ing')
-
-
-    ingredients.forEach(i => {
-        //ingredients_tag_container.appendChild(makeIngredientTag(i))
-    });
-
-    //for(let i = 0; i < 40; i++)
-    //    container_ingredients.appendChild(makeIngredientTag('Some ingredient'))
 })
 
 
@@ -63,12 +48,63 @@ seach_type_selector.addEventListener('change', (event) => {
 })
 
 
+// When modal button clicked: take selected ingredients and add them to tags array
+modal_button.addEventListener('click', () => {
+
+    // close modal
+    modal.classList.remove('is-active')
+    
+    // for each selected ingredient, add it to tags if not included already
+    ingredientSelection.forEach(element => {
+
+        // if the element is not selected, return
+        if(!element.classList.contains('is-selected')) return
+
+        console.log('passing: ' + element.textContent)
+
+        let alreadyIncluded = false
+
+        // check if that ingredient is already added to the list
+        for(let i = 0; i < ingredientTags.length; i++) {
+
+            console.log(element.textContent)
+
+            if(ingredientTags[i].querySelector('span').textContent === element.textContent) {
+
+                alreadyIncluded = true
+                break
+            }
+        }
+
+
+        // if not added, add to the ingredientTags
+        if(alreadyIncluded === false)
+            addIngredientTag(element.textContent)
+    });
+})
+
+// adds an ingredient to the tags
+function addIngredientTag(name) {
+    const newTag = makeIngredientTag(name)
+    const newTagButton = newTag.querySelector('a')
+    ingredientTags.push(newTag)
+    tags_container.appendChild(newTag)
+
+    newTagButton.addEventListener('click', () => {
+        removeIngredientTag(newTag)
+    })
+
+}
+
+function removeIngredientTag(tagElement) {
+    ingredientTags = ingredientTags.filter((item) => item !== tagElement)
+    tags_container.removeChild(tagElement)
+}
 
 
 
 // when we click on search ingredient, call searchIngredient
 search_ingredient_button.addEventListener('click', searchIngredient)
-
 
 // fetch spoonacular API for ingredients that match the input and return best X matches
 async function searchIngredient() {
@@ -78,12 +114,12 @@ async function searchIngredient() {
     let ingredients
 
     // remove all ingredient results from the modal
-    while(ingredients_result_container.firstChild) {
-        ingredients_result_container.removeChild(ingredients_result_container.firstChild)
+    while(modal_container_ingredients.firstChild) {
+        modal_container_ingredients.removeChild(modal_container_ingredients.firstChild)
     }
 
     // open the modal
-    ingredients_modal.classList.add('is-active')
+    modal.classList.add('is-active')
 
     // fetch the ingredients
     await fetch(fetchString, {method:"GET"})
@@ -96,10 +132,22 @@ async function searchIngredient() {
         ingredients = data.results;
     })
 
-
-    console.log(ingredients)
+    ingredientSelection = []
 
     ingredients.forEach(i => {
-        ingredients_result_container.appendChild(makeIngredientResult(i.name))
+        ingredientSelection.push(makeIngredientResult(i.name))
+        modal_container_ingredients.appendChild(ingredientSelection[ingredientSelection.length - 1])
+    });
+
+    ingredientSelection.forEach(element => {
+        element.addEventListener('click', ()=> {
+            if(element.classList.contains('is-light')) {
+                element.classList.remove('is-light')
+                element.classList.add('is-selected')
+            }
+            else {
+                element.classList.add('is-light')
+            }
+        })
     });
 }
