@@ -1,4 +1,4 @@
-function makeIngredientResult(name) {
+function makeIngredientSelection(name) {
     const button = document.createElement('button')
     button.classList.add('button', 'is-info', 'is-light')
     button.innerHTML = name
@@ -25,4 +25,4 @@ function makeIngredientTag(name) {
     return div
 }
 
-export { makeIngredientTag, makeIngredientResult }
+export { makeIngredientTag, makeIngredientSelection }

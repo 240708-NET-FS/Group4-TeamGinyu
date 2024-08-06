@@ -17,12 +17,16 @@
 </head>
 <body>
     <div class="main">
+        <!-- ///////////////////////////////////////////// -->
         <!-- page header -->
+        <!-- ///////////////////////////////////////////// -->
         <div class="outer-margin" style="display: flex; justify-content: center;">
             <h3>Recipe searcher</h3>
         </div>
 
+        <!-- ///////////////////////////////////////////// -->
         <!-- search-bar container -->
+        <!-- ///////////////////////////////////////////// -->
         <div class="search-bar-container">
 
             <!-- type -->
@@ -33,7 +37,7 @@
                 </select>
             </div>
 
-            <!-- type: ingredient -->
+            <!-- by ingredient -->
             <div class="type-ingredient-container is-hidden">
                 <!-- bar container -->
                 <div class="field has-addons m-0">
@@ -48,17 +52,17 @@
                 </div>
             </div>
 
-            <!-- type: name -->
+            <!-- by name -->
             <div class="type-name-container">
                 <!-- bar container -->
                 <div class="field has-addons m-0">
                     <!-- input -->
                     <div class="control">
-                        <input class="search-ingredient-input input" type="text" placeholder="Type a recipe name">
+                        <input class="search-name-input input" type="text" placeholder="Type a recipe name">
                     </div>
                     <!-- button -->
                     <div class="control">
-                        <button class="search-ingredient-button button is-primary">
+                        <button class="search-name-button button is-primary">
                             Search
                         </button>
                     </div>
@@ -66,25 +70,28 @@
             </div>
         </div>
 
-        <!-- type: ingredient, a submenu for that search type -->
+        <!-- ingredient tags and search recipe button -->
         <div class="type-ingredient-submenu is-hidden">
             <!-- ingredient tags -->
             <div class="ingredients-tag-container inner-margin"></div>
             <!-- Search recipes button -->
              <div style="flex-grow: 0;">
-                 <button class="button is-primary">Search recipes with selected ingredients</button>
+                 <button class="search-recipes-ingredients-button button is-primary">Search recipes with selected ingredients</button>
              </div>
         </div>
     </div>
     
+    <!-- ///////////////////////////////////////////// -->
     <!-- footer -->
+    <!-- ///////////////////////////////////////////// -->
     <footer>
         <p class="footer-text">Made by <a href="https://github.com/240708-NET-FS/Group4-TeamGinyu">Team Ginyu </a></p>
         <img class="footer-logo" src="https://static.wikia.nocookie.net/villains/images/f/f5/Ginyu_Force.png" alt=".">
     </footer>
 
-    
-    <!-- modals -->
+    <!-- ///////////////////////////////////////////// -->
+    <!-- modal -->
+    <!-- ///////////////////////////////////////////// -->
     <div class="modal ingredients-modal">
         <div class="modal-background" style="opacity: 0.2;"></div>
         <div class="modal-content modal-container-ingredients">
