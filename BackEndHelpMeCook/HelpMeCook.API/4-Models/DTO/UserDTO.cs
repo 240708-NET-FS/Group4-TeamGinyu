@@ -3,9 +3,10 @@ namespace HelpMeCook.API.Models;
 
 public class UserDTO
 {
-    public string FirstName { get; set; } = null!;
-    public string LastName { get; set; } = null!;
-    public DateTime CratedDate { get; set; }
+    public string Username { get; set; }
+    public string Password { get; set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
 }
 
 

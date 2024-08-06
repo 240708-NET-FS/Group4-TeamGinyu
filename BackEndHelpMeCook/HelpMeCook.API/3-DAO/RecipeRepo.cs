@@ -42,7 +42,7 @@ public class RecipeRepo : IRecipeRepo
                 .FirstOrDefaultAsync(r => r.RecipeName == recipeName);
     }
 
-    public async Task<Recipe?> GetByRecipeNameAndUserID(string recipeName, int UserID)
+    public async Task<Recipe?> GetByRecipeNameAndUserID(string recipeName, string UserID)
     {
         return await _context.Recipe
                 .Include(r => r.User)
@@ -56,7 +56,7 @@ public class RecipeRepo : IRecipeRepo
                  .FirstOrDefaultAsync(r => r.RecipeNumber == ID);
     }
 
-    public async Task<ICollection<Recipe>> GetByUser(int ID)
+    public async Task<ICollection<Recipe>> GetByUser(string ID)
     {
 
         return await _context.Recipe

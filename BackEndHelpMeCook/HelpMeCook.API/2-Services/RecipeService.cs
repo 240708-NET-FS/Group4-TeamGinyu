@@ -61,7 +61,7 @@ public class RecipeService : IRecipeService
         return recipesList;
     }
 
-    public async Task<ICollection<Recipe>> GetByUser(int UserID)
+    public async Task<ICollection<Recipe>> GetByUser(string UserID)
     {
         ICollection<Recipe> recipes = await _recipeRepo.GetByUser(UserID);
         List<Recipe> recipesList = recipes.ToList();
@@ -98,7 +98,7 @@ public class RecipeService : IRecipeService
         return recipe;
     }
 
-    public async Task<Recipe?> GetByRecipeNameAndUserID(string recipeName, int UserID)
+    public async Task<Recipe?> GetByRecipeNameAndUserID(string recipeName, string UserID)
     {
         Recipe? recipe = await _recipeRepo.GetByRecipeNameAndUserID(recipeName, UserID);
         

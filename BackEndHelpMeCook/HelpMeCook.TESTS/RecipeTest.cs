@@ -15,8 +15,8 @@ public class RecipeTest
         Mock<IRecipeRepo> recipeRepo = new();
         RecipeService _recipeService = new RecipeService(recipeRepo.Object);
 
-        Recipe recipe = new Recipe { UserID = 1, RecipeID = 1, RecipeName = "MyRecipe", CratedDate = DateTime.Parse("07-06-1998") };
-        RecipeDTO recipeDTO = new RecipeDTO { UserID = 1, RecipeName = "MyRecipe", CratedDate = DateTime.Parse("07-06-1998") };
+        Recipe recipe = new Recipe { UserID = "1", RecipeID = 1, RecipeName = "MyRecipe", CreatedDate = DateTime.Parse("07-06-1998") };
+        RecipeDTO recipeDTO = new RecipeDTO { UserID = "1", RecipeName = "MyRecipe", CreatedDate = DateTime.Parse("07-06-1998") };
 
         recipeRepo.Setup(r => r.Create(It.IsAny<Recipe>())).ReturnsAsync(recipe);
 
@@ -26,7 +26,7 @@ public class RecipeTest
         // Assert
         Assert.Equal(recipe.RecipeID, recipeResult.RecipeID);
         Assert.Equal(recipe.RecipeName, recipeResult.RecipeName);
-        Assert.Equal(recipe.CratedDate, recipeResult.CratedDate);
+        Assert.Equal(recipe.CreatedDate, recipeResult.CreatedDate);
         Assert.Equal(recipe.UserID, recipeResult.UserID);
     }
 
@@ -37,8 +37,8 @@ public class RecipeTest
         Mock<IRecipeRepo> recipeRepo = new();
         RecipeService _recipeService = new RecipeService(recipeRepo.Object);
 
-        Recipe recipe = new Recipe { UserID = 1, RecipeID = 1, RecipeName = "MyRecipe", RecipeNumber = 1, CratedDate = DateTime.Parse("07-06-1998") };
-        RecipeDTO recipeDTO = new RecipeDTO { UserID = 1, RecipeName = "MyRecipe", RecipeNumber = 2, CratedDate = DateTime.Parse("07-06-1998") };
+        Recipe recipe = new Recipe { UserID = "1", RecipeID = 1, RecipeName = "MyRecipe", RecipeNumber = 1, CreatedDate = DateTime.Parse("07-06-1998") };
+        RecipeDTO recipeDTO = new RecipeDTO { UserID = "1", RecipeName = "MyRecipe", RecipeNumber = 2, CreatedDate = DateTime.Parse("07-06-1998") };
 
         recipeRepo.Setup(r => r.GetByRecipeName(It.IsAny<string>())).ReturnsAsync(recipe);
 
@@ -53,8 +53,8 @@ public class RecipeTest
         Mock<IRecipeRepo> recipeRepo = new();
         RecipeService _recipeService = new RecipeService(recipeRepo.Object);
 
-        Recipe recipe = new Recipe { UserID = 1, RecipeID = 1, RecipeName = "MyRecipe", RecipeNumber = 1, CratedDate = DateTime.Parse("07-06-1998") };
-        RecipeDTO recipeDTO = new RecipeDTO { UserID = 1, RecipeName = "MyRecipe222", RecipeNumber = 1, CratedDate = DateTime.Parse("07-06-1998") };
+        Recipe recipe = new Recipe { UserID = "1", RecipeID = 1, RecipeName = "MyRecipe", RecipeNumber = 1, CreatedDate = DateTime.Parse("07-06-1998") };
+        RecipeDTO recipeDTO = new RecipeDTO { UserID = "1", RecipeName = "MyRecipe222", RecipeNumber = 1, CreatedDate = DateTime.Parse("07-06-1998") };
 
         recipeRepo.Setup(r => r.GetByRecipeNumber(It.IsAny<int>())).ReturnsAsync(recipe);
 
@@ -82,7 +82,7 @@ public class RecipeTest
         RecipeService _recipeService = new RecipeService(recipeRepo.Object);
 
 
-        Recipe recipe = new Recipe { UserID = 1, RecipeID = 1, RecipeName = "MyRecipe", RecipeNumber = 1, CratedDate = DateTime.Parse("07-06-1998") };
+        Recipe recipe = new Recipe { UserID = "1", RecipeID = 1, RecipeName = "MyRecipe", RecipeNumber = 1, CreatedDate = DateTime.Parse("07-06-1998") };
 
         recipeRepo.Setup(r => r.GetByID(It.IsAny<int>())).ReturnsAsync(recipe);
 
@@ -95,7 +95,7 @@ public class RecipeTest
         Assert.Equal(recipe.UserID, res.UserID);
         Assert.Equal(recipe.RecipeName, res.RecipeName);
         Assert.Equal(recipe.RecipeNumber, res.RecipeNumber);
-        Assert.Equal(recipe.CratedDate, res.CratedDate);
+        Assert.Equal(recipe.CreatedDate, res.CreatedDate);
     }
 
     [Fact]
@@ -117,9 +117,9 @@ public class RecipeTest
     {
         // Arrange
         List<Recipe> recipes = new List<Recipe>{
-            new Recipe { UserID = 1, RecipeID = 1, RecipeName = "MyRecipe1", RecipeNumber = 1, CratedDate = DateTime.Parse("07-06-1998") },
-            new Recipe { UserID = 2, RecipeID = 2, RecipeName = "MyRecipe2", RecipeNumber = 2, CratedDate = DateTime.Parse("07-06-1998") },
-            new Recipe { UserID = 3, RecipeID = 3, RecipeName = "MyRecipe3", RecipeNumber = 3, CratedDate = DateTime.Parse("07-06-1998") }
+            new Recipe { UserID = "1", RecipeID = 1, RecipeName = "MyRecipe1", RecipeNumber = 1, CreatedDate = DateTime.Parse("07-06-1998") },
+            new Recipe { UserID = "2", RecipeID = 2, RecipeName = "MyRecipe2", RecipeNumber = 2, CreatedDate = DateTime.Parse("07-06-1998") },
+            new Recipe { UserID = "3", RecipeID = 3, RecipeName = "MyRecipe3", RecipeNumber = 3, CreatedDate = DateTime.Parse("07-06-1998") }
         };
         Mock<IRecipeRepo> recipeRepo = new();
         RecipeService _recipeService = new RecipeService(recipeRepo.Object);
@@ -141,10 +141,10 @@ public class RecipeTest
         Mock<IRecipeRepo> recipeRepo = new();
         RecipeService _recipeService = new RecipeService(recipeRepo.Object);
 
-        recipeRepo.Setup(r => r.GetByUser(It.IsAny<int>())).ReturnsAsync(new List<Recipe>());
+        recipeRepo.Setup(r => r.GetByUser(It.IsAny<string>())).ReturnsAsync(new List<Recipe>());
 
         // Act & Assert
-        await Assert.ThrowsAsync<InvalidRecipeException>(async () => await _recipeService.GetByUser(1));
+        await Assert.ThrowsAsync<InvalidRecipeException>(async () => await _recipeService.GetByUser("1"));
 
     }
 
@@ -153,17 +153,17 @@ public class RecipeTest
     {
         // Arrange
         List<Recipe> recipes = new List<Recipe>{
-            new Recipe { UserID = 1, RecipeID = 1, RecipeName = "MyRecipe1", RecipeNumber = 1, CratedDate = DateTime.Parse("07-06-1998") },
-            new Recipe { UserID = 2, RecipeID = 2, RecipeName = "MyRecipe2", RecipeNumber = 2, CratedDate = DateTime.Parse("07-06-1998") },
-            new Recipe { UserID = 3, RecipeID = 3, RecipeName = "MyRecipe3", RecipeNumber = 3, CratedDate = DateTime.Parse("07-06-1998") }
+            new Recipe { UserID = "1", RecipeID = 1, RecipeName = "MyRecipe1", RecipeNumber = 1, CreatedDate = DateTime.Parse("07-06-1998") },
+            new Recipe { UserID = "2", RecipeID = 2, RecipeName = "MyRecipe2", RecipeNumber = 2, CreatedDate = DateTime.Parse("07-06-1998") },
+            new Recipe { UserID = "3", RecipeID = 3, RecipeName = "MyRecipe3", RecipeNumber = 3, CreatedDate = DateTime.Parse("07-06-1998") }
         };
         Mock<IRecipeRepo> recipeRepo = new();
         RecipeService _recipeService = new RecipeService(recipeRepo.Object);
 
-        recipeRepo.Setup(r => r.GetByUser(It.IsAny<int>())).ReturnsAsync(recipes);
+        recipeRepo.Setup(r => r.GetByUser(It.IsAny<string>())).ReturnsAsync(recipes);
 
         // Act
-        ICollection<Recipe> res = await _recipeService.GetByUser(1);
+        ICollection<Recipe> res = await _recipeService.GetByUser("1");
 
         // Assert
         Assert.NotNull(res);
@@ -186,7 +186,7 @@ public class RecipeTest
     public async void GetByRecipeNumber_ShouldSuccesfullyReturnRecipe()
     {
         // Arrange
-        Recipe recipe = new Recipe { UserID = 3, RecipeID = 3, RecipeName = "MyRecipe3", RecipeNumber = 3, CratedDate = DateTime.Parse("07-06-1998") };
+        Recipe recipe = new Recipe { UserID = "3", RecipeID = 3, RecipeName = "MyRecipe3", RecipeNumber = 3, CreatedDate = DateTime.Parse("07-06-1998") };
 
         Mock<IRecipeRepo> recipeRepo = new();
         RecipeService _recipeService = new RecipeService(recipeRepo.Object);
@@ -222,7 +222,7 @@ public class RecipeTest
     public async void GetByRecipeName_ShouldSuccesfullyReturnRecipe()
     {
         // Arrange
-        Recipe recipe = new Recipe { UserID = 3, RecipeID = 3, RecipeName = "MyRecipe3", RecipeNumber = 3, CratedDate = DateTime.Parse("07-06-1998") };
+        Recipe recipe = new Recipe { UserID = "3", RecipeID = 3, RecipeName = "MyRecipe3", RecipeNumber = 3, CreatedDate = DateTime.Parse("07-06-1998") };
 
         Mock<IRecipeRepo> recipeRepo = new();
         RecipeService _recipeService = new RecipeService(recipeRepo.Object);
@@ -248,7 +248,7 @@ public class RecipeTest
         RecipeService _recipeService = new RecipeService(recipeRepo.Object);
 
         // Act & Assert
-        await Assert.ThrowsAsync<InvalidRecipeException>(async () => await _recipeService.GetByRecipeNameAndUserID("Recipe", 1));
+        await Assert.ThrowsAsync<InvalidRecipeException>(async () => await _recipeService.GetByRecipeNameAndUserID("Recipe", "1"));
 
     }
 
@@ -256,15 +256,15 @@ public class RecipeTest
     public async void GetByRecipeNameAndUserID_ShouldReturnExceptionWhenInvalidUserIDGiven()
     {
         // Arrange
-        Recipe recipe = new Recipe { UserID = 3, RecipeID = 3, RecipeName = "MyRecipe3", RecipeNumber = 3, CratedDate = DateTime.Parse("07-06-1998") };
+        Recipe recipe = new Recipe { UserID = "3", RecipeID = 3, RecipeName = "MyRecipe3", RecipeNumber = 3, CreatedDate = DateTime.Parse("07-06-1998") };
 
         Mock<IRecipeRepo> recipeRepo = new();
         RecipeService _recipeService = new RecipeService(recipeRepo.Object);
 
-        recipeRepo.Setup(r => r.GetByRecipeNameAndUserID(recipe.RecipeName, 3)).ReturnsAsync(recipe);
+        recipeRepo.Setup(r => r.GetByRecipeNameAndUserID(recipe.RecipeName, "3")).ReturnsAsync(recipe);
 
         // Act & Assert
-        await Assert.ThrowsAsync<InvalidRecipeException>(async () => await _recipeService.GetByRecipeNameAndUserID(recipe.RecipeName, 1));
+        await Assert.ThrowsAsync<InvalidRecipeException>(async () => await _recipeService.GetByRecipeNameAndUserID(recipe.RecipeName, "1"));
 
 
     }
@@ -273,15 +273,15 @@ public class RecipeTest
     public async void GetByRecipeNameAndUserID_ShouldSuccesfullyReturnRecipe()
     {
         // Arrange
-        Recipe recipe = new Recipe { UserID = 3, RecipeID = 3, RecipeName = "MyRecipe3", RecipeNumber = 3, CratedDate = DateTime.Parse("07-06-1998") };
+        Recipe recipe = new Recipe { UserID = "3", RecipeID = 3, RecipeName = "MyRecipe3", RecipeNumber = 3, CreatedDate = DateTime.Parse("07-06-1998") };
 
         Mock<IRecipeRepo> recipeRepo = new();
         RecipeService _recipeService = new RecipeService(recipeRepo.Object);
 
-        recipeRepo.Setup(r => r.GetByRecipeNameAndUserID(recipe.RecipeName, 3)).ReturnsAsync(recipe);
+        recipeRepo.Setup(r => r.GetByRecipeNameAndUserID(recipe.RecipeName, "3")).ReturnsAsync(recipe);
 
         // Act & Assert
-        Recipe? res = await _recipeService.GetByRecipeNameAndUserID(recipe.RecipeName, 3);
+        Recipe? res = await _recipeService.GetByRecipeNameAndUserID(recipe.RecipeName, "3");
 
         // Assert
         Assert.NotNull(res);
@@ -295,8 +295,8 @@ public class RecipeTest
     public async void Update_ShouldReturnFalseWhenInexistentRecipe()
     {
         // Arrange
-        Recipe recipe = new Recipe { UserID = 3, RecipeID = 3, RecipeName = "MyRecipe3", RecipeNumber = 3, CratedDate = DateTime.Parse("07-06-1998") };
-        RecipeDTO recipeDTO = new RecipeDTO { UserID = 3, RecipeName = "MyRecipe3", RecipeNumber = 3, CratedDate = DateTime.Parse("07-06-1998") };
+        Recipe recipe = new Recipe { UserID = "3", RecipeID = 3, RecipeName = "MyRecipe3", RecipeNumber = 3, CreatedDate = DateTime.Parse("07-06-1998") };
+        RecipeDTO recipeDTO = new RecipeDTO { UserID = "3", RecipeName = "MyRecipe3", RecipeNumber = 3, CreatedDate = DateTime.Parse("07-06-1998") };
 
         Mock<IRecipeRepo> recipeRepo = new();
         RecipeService _recipeService = new RecipeService(recipeRepo.Object);
@@ -304,7 +304,7 @@ public class RecipeTest
         await _recipeService.CreateRecipe(recipeDTO);
 
         // Act & Assert
-        bool res = await _recipeService.Update(recipe.RecipeID, new RecipeDTO { UserID = 3, RecipeName = "newRecipe", RecipeNumber = 5, CratedDate = DateTime.Parse("07-06-1998") });
+        bool res = await _recipeService.Update(recipe.RecipeID, new RecipeDTO { UserID = "3", RecipeName = "newRecipe", RecipeNumber = 5, CreatedDate = DateTime.Parse("07-06-1998") });
 
         // Assert
         Assert.False(res);
@@ -314,8 +314,8 @@ public class RecipeTest
     public async void Update_ShouldSuccesfullyUpdateRecipe()
     {
         // Arrange
-        Recipe recipe = new Recipe { UserID = 3, RecipeID = 3, RecipeName = "MyRecipe3", RecipeNumber = 3, CratedDate = DateTime.Parse("07-06-1998") };
-        RecipeDTO recipeDTO = new RecipeDTO { UserID = 3, RecipeName = "MyRecipe3", RecipeNumber = 3, CratedDate = DateTime.Parse("07-06-1998") };
+        Recipe recipe = new Recipe { UserID = "3", RecipeID = 3, RecipeName = "MyRecipe3", RecipeNumber = 3, CreatedDate = DateTime.Parse("07-06-1998") };
+        RecipeDTO recipeDTO = new RecipeDTO { UserID = "3", RecipeName = "MyRecipe3", RecipeNumber = 3, CreatedDate = DateTime.Parse("07-06-1998") };
 
         Mock<IRecipeRepo> recipeRepo = new();
         RecipeService _recipeService = new RecipeService(recipeRepo.Object);
@@ -325,7 +325,7 @@ public class RecipeTest
 
 
         // Act
-        bool res = await _recipeService.Update(recipe.RecipeID, new RecipeDTO { UserID = 3, RecipeName = "newRecipe", RecipeNumber = 5, CratedDate = DateTime.Parse("07-06-1998") });
+        bool res = await _recipeService.Update(recipe.RecipeID, new RecipeDTO { UserID = "3", RecipeName = "newRecipe", RecipeNumber = 5, CreatedDate = DateTime.Parse("07-06-1998") });
 
         // Assert
         Assert.True(res);
@@ -346,8 +346,8 @@ public class RecipeTest
     public async void Delete_ShouldSuccesfullyDeleteUser()
     {
         // Arrange
-        Recipe recipe = new Recipe { UserID = 3, RecipeID = 3, RecipeName = "MyRecipe3", RecipeNumber = 3, CratedDate = DateTime.Parse("07-06-1998") };
-        RecipeDTO recipeDTO = new RecipeDTO { UserID = 3, RecipeName = "MyRecipe3", RecipeNumber = 3, CratedDate = DateTime.Parse("07-06-1998") };
+        Recipe recipe = new Recipe { UserID = "3", RecipeID = 3, RecipeName = "MyRecipe3", RecipeNumber = 3, CreatedDate = DateTime.Parse("07-06-1998") };
+        RecipeDTO recipeDTO = new RecipeDTO { UserID = "3", RecipeName = "MyRecipe3", RecipeNumber = 3, CreatedDate = DateTime.Parse("07-06-1998") };
 
         Mock<IRecipeRepo> recipeRepo = new();
         RecipeService _recipeService = new RecipeService(recipeRepo.Object);

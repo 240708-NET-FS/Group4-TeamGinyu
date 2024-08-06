@@ -66,7 +66,7 @@ public class RecipeController : ControllerBase
     }
 
     [HttpGet("recipe/user/{ID}")]
-    public async Task<IActionResult> GetRecipeByUserID(int ID)
+    public async Task<IActionResult> GetRecipeByUserID(string ID)
     {
         try
         {
@@ -114,7 +114,7 @@ public class RecipeController : ControllerBase
     }
 
     [HttpGet("recipes/recipe")]
-    public async Task<IActionResult> GetByRecipeNameAndUserID([FromQuery] string recipeName, [FromQuery] int UserID)
+    public async Task<IActionResult> GetByRecipeNameAndUserID([FromQuery] string recipeName, [FromQuery] string UserID)
     {
         try 
         {

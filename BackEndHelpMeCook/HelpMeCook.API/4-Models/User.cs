@@ -1,17 +1,22 @@
 
+using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity;
+
 namespace HelpMeCook.API.Models;
 
-public class User 
+public class User : IdentityUser
 {
-    public int UserID { get; set;}
+    
+    [Required]
     public string FirstName { get; set; } = "";
+
+    [Required]
     public string LastName { get; set; } = "";
+    
     public DateTime CratedDate { get; set; }
 
     // One-to-Many Relationship between User and Recipes
     // Initializing the list so that we can store returned Recipes later
     public ICollection<Recipe>? Recipes  { get; set; }
-    // One-to-One Relationship between User and Login
-    // Initializing the list so that we can store returned Login later
-    public Login? Login { get; set; }
+   
 }

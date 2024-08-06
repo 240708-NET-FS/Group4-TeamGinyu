@@ -1,43 +1,27 @@
 using HelpMeCook.API.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace HelpMeCook.API.Services
 {
     public interface IUserService
     {
         // Create
-        Task<User> CreateUser(UserDTO newUser);
+        Task<IdentityResult> CreateUser(UserDTO newUser);
 
         // Read
-        Task<User?> GetUserByID(int userID);
+        Task<User?> GetUserByID(string userID);
+
+        public Task<SignInResult> LoginUser(UserDTO loginDto);
+
+        public Task LogoutUser();
 
         Task<ICollection<User>> GetAllUsers();
 
         // Update
-        Task<bool> UpdateUser(int ID, UserDTO userToUpdate);
+        Task<bool> UpdateUser(string ID, UserDTO userToUpdate);
 
         // Delete
-        Task<User?> DeleteUser(int ID);
-    }
-
-    public interface ILoginService
-    {
-        // Create
-        Task<Login> CreateLogin(LoginDTO newLogin);
-
-        // Read
-        Task<Login?> GetLoginByID(int loginID);
-
-        Task<ICollection<Login>> GetAllLogins();
-
-        public Task<Login?> GetByUsername(string username);
-
-        public Task<Login?> GetByUsernameAndPassword(string username, string password);
-
-        // Update
-        Task<bool> UpdateLogin(int ID, LoginDTO newLogin);
-
-        // Delete
-        Task<Login?> DeleteLogin(int ID);
+        Task<User?> DeleteUser(string ID);
     }
 
     public interface IRecipeService
@@ -48,13 +32,13 @@ namespace HelpMeCook.API.Services
         // Read
         Task<Recipe?> GetRecipeById(int recipeID);
 
-        public Task<ICollection<Recipe>> GetByUser(int ID);
+        public Task<ICollection<Recipe>> GetByUser(string ID);
 
         public Task<Recipe?> GetByRecipeNumber(int ID);
 
         public Task<Recipe?> GetByRecipeName(string recipeName);
 
-        public Task<Recipe?> GetByRecipeNameAndUserID(string recipeName, int UserID);
+        public Task<Recipe?> GetByRecipeNameAndUserID(string recipeName, string UserID);
 
         Task<ICollection<Recipe>> GetAllRecipes();
 
