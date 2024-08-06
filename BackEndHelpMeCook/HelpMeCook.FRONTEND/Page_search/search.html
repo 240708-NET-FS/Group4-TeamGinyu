@@ -17,12 +17,24 @@
 </head>
 <body>
     <div class="main">
+
+        <div class="tabs is-centered">
+            <ul>
+              <li><a>Home</a></li>
+              <li><a>My Recipes</a></li>
+            </ul>
+        </div>
+
+        <!-- ///////////////////////////////////////////// -->
         <!-- page header -->
+        <!-- ///////////////////////////////////////////// -->
         <div class="outer-margin" style="display: flex; justify-content: center;">
             <h3>Recipe searcher</h3>
         </div>
 
+        <!-- ///////////////////////////////////////////// -->
         <!-- search-bar container -->
+        <!-- ///////////////////////////////////////////// -->
         <div class="search-bar-container">
 
             <!-- type -->
@@ -33,9 +45,8 @@
                 </select>
             </div>
 
-            <!-- type: ingredient -->
+            <!-- by ingredient -->
             <div class="type-ingredient-container is-hidden">
-
                 <!-- bar container -->
                 <div class="field has-addons m-0">
                     <!-- input -->
@@ -47,20 +58,19 @@
                         <button class="search-ingredient-button button is-primary">Add</button>
                     </div>
                 </div>
-
             </div>
 
-            <!-- type: name -->
+            <!-- by name -->
             <div class="type-name-container">
                 <!-- bar container -->
                 <div class="field has-addons m-0">
                     <!-- input -->
                     <div class="control">
-                        <input class="search-ingredient-input input" type="text" placeholder="Type a recipe name">
+                        <input class="search-name-input input" type="text" placeholder="Type a recipe name">
                     </div>
                     <!-- button -->
                     <div class="control">
-                        <button class="search-ingredient-button button is-primary">
+                        <button class="search-name-button button is-primary">
                             Search
                         </button>
                     </div>
@@ -68,32 +78,51 @@
             </div>
         </div>
 
-        <!-- type: ingredient, a submenu for that search type -->
+        <!-- ingredient tags and search recipe button -->
         <div class="type-ingredient-submenu is-hidden">
             <!-- ingredient tags -->
             <div class="ingredients-tag-container inner-margin"></div>
             <!-- Search recipes button -->
              <div style="flex-grow: 0;">
-                 <button class="button is-primary">Search recipes with selected ingredients</button>
+                 <button class="search-recipes-ingredients-button button is-primary">Search recipes with selected ingredients</button>
              </div>
         </div>
     </div>
+
+    <div class="recipe-container">
+        <div class="box recipe-box">
+            <p class="recipe-title">
+                Ingredient Title bla sdsdsds sd sdsdsdsdsd
+            </p>
+            <div class="recipe-tags">
+
+            </div>
+            <div>
+                <button class="button">Save</button>
+                <button class="button">Check out</button>
+            </div>
+        </div>
+    </div>
     
+    <!-- ///////////////////////////////////////////// -->
     <!-- footer -->
+    <!-- ///////////////////////////////////////////// -->
     <footer>
         <p class="footer-text">Made by <a href="https://github.com/240708-NET-FS/Group4-TeamGinyu">Team Ginyu </a></p>
         <img class="footer-logo" src="https://static.wikia.nocookie.net/villains/images/f/f5/Ginyu_Force.png" alt=".">
     </footer>
 
-    
-    <!-- modals -->
+    <!-- ///////////////////////////////////////////// -->
+    <!-- modal -->
+    <!-- ///////////////////////////////////////////// -->
     <div class="modal ingredients-modal">
         <div class="modal-background" style="opacity: 0.2;"></div>
-        <div class="modal-content ingredients-result-modal-space">
-            <div class="box ingredients-result-box">
+        <div class="modal-content modal-container-ingredients">
+            <div class="box modal-container-content">
                 <p class="my-3">Select ingredients to add</p>
+                <img src="https://api.iconify.design/eos-icons:loading.svg?color=%23241f31" alt="loading...">
                 <div class="ingredients-result-container"></div>
-                <button class="button is-primary my-3">Done</button>
+                <button class="modal-button-done button is-primary my-3">Done</button>
             </div>
         </div>
         <button class="modal-close is-large" aria-label="close"></button>

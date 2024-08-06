@@ -32,12 +32,12 @@
 /* //////////////////////////////////////////////////////////////////////////////// */
 /* search by ingredient: ingredients result modal */
 /* //////////////////////////////////////////////////////////////////////////////// */
-.ingredients-result-modal-space {
+.modal-container-ingredients {
     height: 50rem;
 }
 
 /* contains the ingredient result modal's content */
-.ingredients-result-box {
+.modal-container-content {
     max-height: 80%;
     display: flex;
     flex-direction: column;
@@ -48,4 +48,29 @@
 /* contains all the ingredients */
 .ingredients-result-container {
     overflow: auto;
+}
+
+.recipe-box {
+    background-color: var(--bulma-primary-light);
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    gap: 0.5rem
+}
+
+.recipe-box:hover {
+    background-color: var(--bulma-primary);
+    /*opacity: 0.75;*/
+    cursor: pointer;
+}
+
+.recipe-box > p {
+    min-width: 50%;
+    font-size: 1.25rem;
+}
+
+.recipe-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
 }

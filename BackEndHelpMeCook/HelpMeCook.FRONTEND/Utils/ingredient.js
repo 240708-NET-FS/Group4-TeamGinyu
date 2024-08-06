@@ -1,10 +1,9 @@
-function makeIngredientResult(name) {
-    const p = document.createElement('p')
-    p.innerHTML = name
-
-    return p
+function makeIngredientSelection(name) {
+    const button = document.createElement('button')
+    button.classList.add('button', 'is-info', 'is-light')
+    button.innerHTML = name
+    return button
 }
-
 
 // returns an ingredient tag
 function makeIngredientTag(name) {
@@ -25,4 +24,63 @@ function makeIngredientTag(name) {
     return div
 }
 
-export { makeIngredientTag, makeIngredientResult }
+/* 
+    <div class="recipe-container">
+        <div class="box recipe-box">
+            <p class="recipe-title">
+                Ingredient Title bla sdsdsds sd sdsdsdsdsd
+            </p>
+            <div class="recipe-tags">
+
+            </div>
+        </div>
+    </div>
+*/
+
+function makeRecipeBox(recipeName, ingredientNames, recipeId) {
+    
+    const recipe_box = document.createElement('div')
+    recipe_box.id = recipeId
+    recipe_box.classList.add('box', 'recipe-box')
+    const recipe_title = document.createElement('p')
+    recipe_title.classList.add('recipe-title')
+    const recipe_tags = document.createElement('div')
+    recipe_tags.classList.add('recipe-tags')
+    const buttons_div = document.createElement('div')
+    const button_checkout = document.createElement('a')
+    button_checkout.innerText = 'See recipe'
+    button_checkout.classList.add('button')
+    const button_save = document.createElement('btn')
+    button_save.innerText = 'Save recipe'
+    button_save.classList.add('button')
+
+    // Recipe page
+    button_checkout.href = 'https://www.google.com'
+
+    
+    ingredientNames.forEach(n => {
+        recipe_tags.appendChild(makeIngredientTagNonClosable(n))
+    });
+
+    recipe_title.textContent = recipeName
+    buttons_div.appendChild(button_checkout)
+    buttons_div.appendChild(button_save)
+
+    recipe_box.appendChild(recipe_title)
+    recipe_box.appendChild(recipe_tags)
+    recipe_box.appendChild(buttons_div)
+
+    return recipe_box
+}
+
+// returns an ingredient tag (without a closing button)
+function makeIngredientTagNonClosable(name) {
+    //<span class="tag is-info">Info</span>
+    const span = document.createElement('span')
+    span.classList.add('tag', 'is-info')
+    span.textContent = name
+
+    return span
+}
+
+export { makeIngredientTag, makeIngredientSelection, makeRecipeBox }
