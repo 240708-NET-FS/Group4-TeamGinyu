@@ -1,8 +1,8 @@
-function makeIngredientResult(name) {
-    const p = document.createElement('p')
-    p.innerHTML = name
-
-    return p
+function makeIngredientSelection(name) {
+    const button = document.createElement('button')
+    button.classList.add('button', 'is-info', 'is-light')
+    button.innerHTML = name
+    return button
 }
 
 
@@ -25,4 +25,4 @@ function makeIngredientTag(name) {
     return div
 }
 
-export { makeIngredientTag, makeIngredientResult }
+export { makeIngredientTag, makeIngredientSelection }
