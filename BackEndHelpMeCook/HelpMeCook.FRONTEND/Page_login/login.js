@@ -6,22 +6,50 @@ document.addEventListener('DOMContentLoaded', (event) => {
     console.log('Login page loaded')
 })
 
-form_element.addEventListener('click', (event) => {
+btn_register.addEventListener('click', (event) => {
     event.preventDefault()
 
-    const clicked_element = event.target
+    const email = form_element.querySelector('.input-email').value
+    const password = form_element.querySelector('.input-password').value
 
-    if(clicked_element === btn_login)
-        sendForm('login_endpoint', 'GET?')
-    else if (clicked_element === btn_register)
-        sendForm('register_endpoint', 'POST')
-})
+    const data = {
+        email: email,
+        password: password
+    }
 
-function sendForm(url, method) {
-    fetch(url, {
-        method:method
+    fetch('http://localhost:5224/register', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify(data)
     })
     .then(response => {
-        //if(response.ok) return response.json()
+        return response.json()
     })
-}
+    .then(data => {
+        console.log(data)
+    })
+})
+
+btn_login.addEventListener('click', (event) => {
+    event.preventDefault()
+
+    const email = form_element.querySelector('.input-email').value
+    const password = form_element.querySelector('.input-password').value
+
+    const data = {
+        email: email,
+        password: password
+    }
+
+    fetch('http://localhost:5224/login', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify(data)
+    })
+    .then(response => {
+        return response.json()
+    })
+    .then(data => {
+        console.log(data)
+    })
+})

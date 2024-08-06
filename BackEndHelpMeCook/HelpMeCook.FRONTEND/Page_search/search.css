@@ -60,8 +60,8 @@
 
 .recipe-box:hover {
     background-color: var(--bulma-primary);
-    /*opacity: 0.75;*/
-    cursor: pointer;
+    opacity: 0.75;
+    /*cursor: pointer;*/
 }
 
 .recipe-box > p {
