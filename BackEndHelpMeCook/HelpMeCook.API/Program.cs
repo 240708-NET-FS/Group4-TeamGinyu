@@ -62,6 +62,14 @@ builder.Logging.AddConsole();
 builder.Services.AddIdentityApiEndpoints<User>()
         .AddEntityFrameworkStores<AppDbContext>();
 
+//CORS CORS CORS CORS CORS CORS CORS CORS CORS CORS CORS CORS CORS CORS CORS
+builder.Services.AddCors(co => {
+    co.AddPolicy("CORS" , pb =>{
+        pb.WithOrigins("*"); //<- your localhost port here!!!
+    });
+});
+//CORS CORS CORS CORS CORS CORS CORS CORS CORS CORS CORS CORS CORS CORS CORS        
+
 builder.Services.AddAuthorization();
 
 var app = builder.Build();
