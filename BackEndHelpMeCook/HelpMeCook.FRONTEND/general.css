@@ -70,13 +70,13 @@ footer {
 }
 
 /* a standard marging between two related sections. */
-.inner-marging {
+.inner-margin {
     margin-top: 2rem;
     margin-bottom: 2rem;
 }
 
 /* a standard marging between two unrelated sections. */
-.outer-marging {
+.outer-margin {
     margin-top: 4rem;
     margin-bottom: 4rem;
 }

@@ -18,77 +18,85 @@
 <body>
     <div class="main">
         <!-- page header -->
-        <div class="outer-marging" style="display: flex; justify-content: center;">
+        <div class="outer-margin" style="display: flex; justify-content: center;">
             <h3>Recipe searcher</h3>
         </div>
 
-        <!-- tabs -->
-        <div class="tabs">
-            <ul style="display: flex; justify-content: center;">
-            <li class="search-by-ingredient-button is-active" style="width: 100%;"><a>Search by ingredient</a></li>
-            <li class="search-by-name-button" style="width: 100%;"><a>Search by recipe name</a></li>
-            </ul>
-        </div>
+        <!-- search-bar container -->
+        <div class="search-bar-container">
 
-        <!-- tab content: search by ingredient -->
-        <div class="main-container search-by-ingredient-content">
-
-            <!-- 1. -->
-            <div class="step-title outer-marging">
-                <p>1. Select some ingredients</p>
-                <hr>
+            <!-- type -->
+            <div class="select">
+                <select class="search-type">
+                    <option selected>By Name</option>
+                    <option>By Ingredient</option>
+                </select>
             </div>
-            
-            <div class="step-container">
-                <!-- search bar -->
-                <div class="field has-addons inner-marging">
+
+            <!-- type: ingredient -->
+            <div class="type-ingredient-container is-hidden">
+
+                <!-- bar container -->
+                <div class="field has-addons m-0">
+                    <!-- input -->
                     <div class="control">
-                        <input class="search-ingredient-input input" type="text" placeholder="Ingredient to add">
+                        <input class="search-ingredient-input input" type="text" placeholder="Type an ingredient name">
                     </div>
+                    <!-- button -->
                     <div class="control">
-                        <button class="search-ingredient-button button is-primary">
-                        Search
-                        </button>
+                        <button class="search-ingredient-button button is-primary">Add</button>
                     </div>
                 </div>
 
-                <!-- ingredients -->
-                <div class="ingredients-container">
-                </div>
             </div>
 
-            <!-- 2. -->
-            <div class="step-title outer-marging">
-                <p>2. Search for recipes</p>
-                <hr>
-            </div>
-
-            <!-- search receipes button -->
-            <button class="button is-primary">Get me those delicatessen</button>
-
-        </div>
-
-        <!-- tab content: search by recipe name -->
-        <div class="main-container search-by-name-content">
-            <div class="step-container">
-                <!-- search bar -->
-                <div class="field has-addons inner-marging">
+            <!-- type: name -->
+            <div class="type-name-container">
+                <!-- bar container -->
+                <div class="field has-addons m-0">
+                    <!-- input -->
                     <div class="control">
-                        <input class="search-ingredient-input input" type="text" placeholder="Recipe name">
+                        <input class="search-ingredient-input input" type="text" placeholder="Type a recipe name">
                     </div>
+                    <!-- button -->
                     <div class="control">
                         <button class="search-ingredient-button button is-primary">
-                        Search
+                            Search
                         </button>
                     </div>
                 </div>
             </div>
+        </div>
+
+        <!-- type: ingredient, a submenu for that search type -->
+        <div class="type-ingredient-submenu is-hidden">
+            <!-- ingredient tags -->
+            <div class="ingredients-tag-container inner-margin"></div>
+            <!-- Search recipes button -->
+             <div style="flex-grow: 0;">
+                 <button class="button is-primary">Search recipes with selected ingredients</button>
+             </div>
         </div>
     </div>
     
+    <!-- footer -->
     <footer>
         <p class="footer-text">Made by <a href="https://github.com/240708-NET-FS/Group4-TeamGinyu">Team Ginyu </a></p>
         <img class="footer-logo" src="https://static.wikia.nocookie.net/villains/images/f/f5/Ginyu_Force.png" alt=".">
     </footer>
+
+    
+    <!-- modals -->
+    <div class="modal ingredients-modal">
+        <div class="modal-background" style="opacity: 0.2;"></div>
+        <div class="modal-content ingredients-result-modal-space">
+            <div class="box ingredients-result-box">
+                <p class="my-3">Select ingredients to add</p>
+                <div class="ingredients-result-container"></div>
+                <button class="button is-primary my-3">Done</button>
+            </div>
+        </div>
+        <button class="modal-close is-large" aria-label="close"></button>
+    </div>
 </body>
 </html>

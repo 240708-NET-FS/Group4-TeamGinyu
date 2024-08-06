@@ -1,38 +1,51 @@
-.main-container {
+.search-bar-container {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
 }
-
-.step-container {
+.type-ingredient-container, .type-name-container {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.separator {
-    height: 5rem;
-}
-
-.step-title {
-    font-size: 1.4rem;
-    width: 80%;
-}
-
-.step-title > hr {
-    margin: 0;
-    background-color: gray;
-    opacity: 0.5;
+    gap: 0.5rem;
 }
 
 .search-message {
     display: none;
 }
 
-.ingredients-container {
-    width: 80%;
-    margin: 3rem 0;
+
+.type-ingredient-submenu {
+    margin-top: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.ingredients-tag-container {
+    margin-bottom: 3rem;
+    justify-content: center;
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
+}
+
+/* //////////////////////////////////////////////////////////////////////////////// */
+/* search by ingredient: ingredients result modal */
+/* //////////////////////////////////////////////////////////////////////////////// */
+.ingredients-result-modal-space {
+    height: 50rem;
+}
+
+/* contains the ingredient result modal's content */
+.ingredients-result-box {
+    max-height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* contains all the ingredients */
+.ingredients-result-container {
+    overflow: auto;
 }
