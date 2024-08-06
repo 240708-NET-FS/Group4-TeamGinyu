@@ -1,4 +1,4 @@
-import { makeIngredientTag, makeIngredientSelection } from "../Utils/ingredient.js"
+import { makeIngredientTag, makeIngredientSelection, makeRecipeBox } from "../Utils/ingredient.js"
 
 // contains ingredient tag elements
 let ingredientTags = []
@@ -20,9 +20,17 @@ const type_ingredient_submenu = document.querySelector('.type-ingredient-submenu
 const modal_button = document.querySelector('.modal-button-done')
 
 
+const recipe_container = document.querySelector('.recipe-container')
+
+// test
+const test = document.querySelector('.recipe-tags')
+
 
 document.addEventListener('DOMContentLoaded', (event) => {
     console.log('Login page loaded')
+
+    //recipe_container.appendChild(makeRecipeBox('some recipe name', ['rep1', 'rep3', 'rep454']))
+
 })
 
 
@@ -51,12 +59,9 @@ seach_type_selector.addEventListener('change', (event) => {
 modal_button.addEventListener('click', () => {
 
     // close modal
-    modal.classList.remove('is-active')
+    closeModal()
 
-    // clear modal contents
-    while(modal_container_ingredients.firstChild) {
-        modal_container_ingredients.removeChild(modal_container_ingredients.firstChild)
-    }
+
     
     // for each selected ingredient, add it to tags if not included already
     ingredientSelection.forEach(element => {
@@ -102,6 +107,20 @@ function removeIngredientTag(tagElement) {
     tags_container.removeChild(tagElement)
 }
 
+function openModal() {
+    modal.classList.add('is-active')
+    modal.querySelector('img').classList.remove('is-hidden')
+}
+
+function closeModal() {
+    modal.classList.remove('is-active')
+
+    // clear modal contents
+    while(modal_container_ingredients.firstChild) {
+        modal_container_ingredients.removeChild(modal_container_ingredients.firstChild)
+    }
+}
+
 
 // search ingredient BUTTON event
 // triggers an ingredient search to the spoonacular API
@@ -115,7 +134,7 @@ async function searchIngredient() {
     let ingredientsFoundData
 
     // open the modal
-    modal.classList.add('is-active')
+    openModal()
 
     // fetch the ingredients
     await fetch(fetchString, {method:"GET"})
@@ -130,6 +149,9 @@ async function searchIngredient() {
 
     // clear the ingredientSelection array
     ingredientSelection = []
+
+    // hide the modal's loading icon
+    modal.querySelector('img').classList.add('is-hidden')
 
     // for each ingredient data, create an ingredient selection element and add it to the
     // ingredientSelection array
@@ -166,6 +188,7 @@ function addIngredientSelection(name) {
 search_recipes_ingredients_button.addEventListener('click', async () => {
 
     let ingredients = []
+    let recipes = []
 
     // add each ingredient to the ingredients array
     // (spoonacular API doesnt allow white spaces on ingredient name searches, they
@@ -176,13 +199,34 @@ search_recipes_ingredients_button.addEventListener('click', async () => {
         ingredients.push(parsedString)
     });
 
-    let fetchString = `https://api.spoonacular.com/recipes/complexSearch?number=2&includeIngredients=${ingredients.join(',')}&apiKey=bb8c79c0e34d4dca8fd0ef169d1426a4`;
+    let fetchString = `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredients.join(',+')}&apiKey=bb8c79c0e34d4dca8fd0ef169d1426a4`
 
     await fetch(fetchString, {method: "GET"})
     .then(result => {
         if(result.ok) return result.json()
     })
     .then(data => {
+        recipes = data;
         console.log(data)
     })
+
+    UpdateRecipeResults(recipes)
 })
+
+function UpdateRecipeResults(recipes) {
+    while(recipe_container.firstChild) {
+        recipe_container.removeChild(recipe_container.firstChild)
+    }
+
+    recipes.forEach(r => {
+        let ingredientNames = []
+
+        r.usedIngredients.forEach(i => {
+            ingredientNames.push(i.name)
+        });
+        r.missedIngredients.forEach(i => {
+            ingredientNames.push(i.name)
+        });
+        recipe_container.appendChild(makeRecipeBox(r.title, ingredientNames))
+    });
+}
