@@ -37,7 +37,15 @@ public class RecipeService : IRecipeService
     public async Task<Recipe?> GetRecipeById(int id)
     {
         if (id < 1) throw new ArgumentException("Invalid ID");
-        return await _recipeRepo.GetByID(id);
+
+        Recipe? recipe = await _recipeRepo.GetByID(id);
+
+        if(recipe == null)
+        {
+            throw new InvalidRecipeException($"Recipe with ID {id} could not be found.");
+        }
+
+        return recipe;
     }
 
     public async Task<ICollection<Recipe>> GetAllRecipes()

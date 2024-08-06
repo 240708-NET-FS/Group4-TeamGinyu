@@ -221,9 +221,9 @@ var assemblies = [
   {
     "name": "HelpMeCook.API",
     "classes": [
-      { "name": "HelpMeCook.API.Services.LoginService", "rp": "HelpMeCook.API_LoginService.html", "cl": 26, "ucl": 24, "cal": 50, "tl": 96, "cb": 4, "tb": 16, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "HelpMeCook.API.Services.RecipeService", "rp": "HelpMeCook.API_RecipeService.html", "cl": 0, "ucl": 74, "cal": 74, "tl": 139, "cb": 0, "tb": 18, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
-      { "name": "HelpMeCook.API.Services.UserService", "rp": "HelpMeCook.API_UserService.html", "cl": 0, "ucl": 26, "cal": 26, "tl": 52, "cb": 0, "tb": 4, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "HelpMeCook.API.Services.LoginService", "rp": "HelpMeCook.API_LoginService.html", "cl": 47, "ucl": 6, "cal": 53, "tl": 102, "cb": 17, "tb": 20, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "HelpMeCook.API.Services.RecipeService", "rp": "HelpMeCook.API_RecipeService.html", "cl": 78, "ucl": 0, "cal": 78, "tl": 147, "cb": 20, "tb": 20, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "HelpMeCook.API.Services.UserService", "rp": "HelpMeCook.API_UserService.html", "cl": 26, "ucl": 0, "cal": 26, "tl": 51, "cb": 4, "tb": 4, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
     ]},
 ];
 

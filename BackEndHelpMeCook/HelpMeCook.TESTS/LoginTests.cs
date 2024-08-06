@@ -130,8 +130,6 @@ namespace HelpMeCook.Tests
             Mock<ILoginRepo> loginRepoMock = new();
             LoginService loginService = new(loginRepoMock.Object);
 
-            Login result = await loginService.CreateLogin(new LoginDTO { Username = "", Password = "" });
-
             await Assert.ThrowsAsync<InvalidLoginException>(async () => await loginService.CreateLogin(new LoginDTO { Username = "", Password = "" }));
         }
         
@@ -151,8 +149,6 @@ namespace HelpMeCook.Tests
             Login loginCreated = await loginService.CreateLogin(loginDto);
 
             bool updated = await loginService.UpdateLogin(loginCreated.LoginID, new LoginDTO {UserID = 1, Username = "newUsername", Password = "newPassword" });
-            
-            Console.WriteLine(updated);
 
             Assert.True(updated);
         }
