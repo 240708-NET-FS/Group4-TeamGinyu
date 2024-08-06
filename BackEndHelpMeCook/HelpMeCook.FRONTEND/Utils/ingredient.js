@@ -1,4 +1,13 @@
-function makeIngredient(name) {
+function makeIngredientResult(name) {
+    const p = document.createElement('p')
+    p.innerHTML = name
+
+    return p
+}
+
+
+// returns an ingredient tag
+function makeIngredientTag(name) {
 
     const div = document.createElement('div')
     div.classList.add('tags', 'has-addons', 'nowrap', 'nomargin')
@@ -16,4 +25,4 @@ function makeIngredient(name) {
     return div
 }
 
-export { makeIngredient }
+export { makeIngredientTag, makeIngredientResult }

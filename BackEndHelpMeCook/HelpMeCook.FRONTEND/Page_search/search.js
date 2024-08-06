@@ -1,74 +1,105 @@
-import { makeIngredient } from "../Utils/ingredient.js"
+import { makeIngredientTag, makeIngredientResult } from "../Utils/ingredient.js"
 
-const container_ingredients = document.querySelector('.ingredients-container')
-const btn_search_ingredient = document.querySelector('.search-ingredient-button')
+let ingredients = []
+
+const ingredients_tag_container = document.querySelector('.ingredients-tag-container')
+const search_ingredient_button = document.querySelector('.search-ingredient-button')
 const input_search_ingredient = document.querySelector('.search-ingredient-input')
+const ingredients_modal = document.querySelector('.ingredients-modal')
 
-const btn_search_by_ingredient = document.querySelector('.search-by-ingredient-button')
-const btn_search_by_name = document.querySelector('.search-by-name-button')
-const content_search_by_ingredient = document.querySelector('.search-by-ingredient-content')
-const content_search_by_name = document.querySelector('.search-by-name-content')
+const ingredients_result_container = document.querySelector('.ingredients-result-container')
+
+
+const seach_type_selector = document.querySelector('.search-type')
+const type_ingredient_container = document.querySelector('.type-ingredient-container')
+const type_name_container = document.querySelector('.type-name-container')
+const type_ingredient_submenu = document.querySelector('.type-ingredient-submenu')
+
 
 
 
 document.addEventListener('DOMContentLoaded', (event) => {
     console.log('Login page loaded')
 
-    for(let i = 0; i < 40; i++)
-        container_ingredients.appendChild(makeIngredient('Some ingredient'))
-})
+    ingredients.push('some ing')
+    ingredients.push('some ing')
+    ingredients.push('some ing')
+    ingredients.push('some ing')
+    ingredients.push('some ing')
+    ingredients.push('some ing')
+    ingredients.push('some ing')
+    ingredients.push('some ing')
+    ingredients.push('some ing')
 
 
-btn_search_by_ingredient.addEventListener('click', () => {
-    console.log('BY INGREDIENT')
-    btn_search_by_ingredient.classList.add('is-active')
-    btn_search_by_name.classList.remove('is-active')
-
-    content_search_by_name.classList.add('is-hidden')
-    content_search_by_ingredient.classList.remove('is-hidden')
-})
-
-btn_search_by_name.addEventListener('click', () => {
-    console.log('BY NAME')
-
-    btn_search_by_ingredient.classList.remove('is-active')
-    btn_search_by_name.classList.add('is-active')
-
-    content_search_by_ingredient.classList.add('is-hidden')
-    content_search_by_name.classList.remove('is-hidden')
-})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-btn_search_ingredient.addEventListener('click', searchIngredient)
-
-// fetches ingredients from the spoonacular api
-function searchIngredient() {
-    // get whats on the input
-    const input = input_search_ingredient.value;
-    const words = input.split(' ')
-    let fetchString = 'https://api.spoonacular.com/food/ingredients/search?query=';
-
-    words.forEach(w => {
-        // if the word contains less than two characters, return (spoonacular API min is 3 chars per ingredient name)
-        if(w.length < 2) return;
-
-        
+    ingredients.forEach(i => {
+        //ingredients_tag_container.appendChild(makeIngredientTag(i))
     });
 
-    console.log(`searching for: ` + words.length)
+    //for(let i = 0; i < 40; i++)
+    //    container_ingredients.appendChild(makeIngredientTag('Some ingredient'))
+})
+
+
+
+
+// handles the update in UI when selecting a search type
+seach_type_selector.addEventListener('change', (event) => {
+
+    let searchType = event.target.value
+
+    console.log(searchType)
+
+    if(searchType === 'By Ingredient') {
+        type_name_container.classList.add('is-hidden')
+        type_ingredient_container.classList.remove('is-hidden')
+        type_ingredient_submenu.classList.remove('is-hidden')
+    }
+    else {
+        type_ingredient_container.classList.add('is-hidden')
+        type_ingredient_submenu.classList.add('is-hidden')
+        type_name_container.classList.remove('is-hidden')
+    }
+})
+
+
+
+
+
+// when we click on search ingredient, call searchIngredient
+search_ingredient_button.addEventListener('click', searchIngredient)
+
+
+// fetch spoonacular API for ingredients that match the input and return best X matches
+async function searchIngredient() {
+
+    const ingredient = input_search_ingredient.value;
+    let fetchString = `https://api.spoonacular.com/food/ingredients/search?query=${ingredient}&number=5&sort=calories&sortDirection=desc&apiKey=bb8c79c0e34d4dca8fd0ef169d1426a4`;
+    let ingredients
+
+    // remove all ingredient results from the modal
+    while(ingredients_result_container.firstChild) {
+        ingredients_result_container.removeChild(ingredients_result_container.firstChild)
+    }
+
+    // open the modal
+    ingredients_modal.classList.add('is-active')
+
+    // fetch the ingredients
+    await fetch(fetchString, {method:"GET"})
+    .then(response => {
+
+        if(response.ok)
+            return response.json()
+    })
+    .then(data => {
+        ingredients = data.results;
+    })
+
+
+    console.log(ingredients)
+
+    ingredients.forEach(i => {
+        ingredients_result_container.appendChild(makeIngredientResult(i.name))
+    });
 }
