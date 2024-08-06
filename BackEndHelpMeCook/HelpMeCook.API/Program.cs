@@ -68,7 +68,8 @@ builder.Services.AddCors(co => {
         pb.WithOrigins("*"); //<- your localhost port here!!!
     });
 });
-//CORS CORS CORS CORS CORS CORS CORS CORS CORS CORS CORS CORS CORS CORS CORS        
+//CORS CORS CORS CORS CORS CORS CORS CORS CORS CORS CORS CORS CORS CORS CORS  
+     
 
 builder.Services.AddAuthorization();
 
@@ -80,6 +81,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+//CORS CORS CORS CORS CORS CORS CORS CORS CORS CORS CORS CORS CORS CORS CORS
+app.UseCors("CORS"); //<-USE CORS with your policy name
+//CORS CORS CORS CORS CORS CORS CORS CORS CORS CORS CORS CORS CORS CORS CORS 
 
 app.UseHttpsRedirection();
 
