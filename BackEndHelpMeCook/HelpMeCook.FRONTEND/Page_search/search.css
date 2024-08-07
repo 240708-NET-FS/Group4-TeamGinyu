@@ -59,8 +59,8 @@
 }
 
 .recipe-box:hover {
-    background-color: var(--bulma-primary);
-    opacity: 0.75;
+    /*background-color: var(--bulma-primary);*/
+    /*opacity: 0.8;*/
     /*cursor: pointer;*/
 }
 

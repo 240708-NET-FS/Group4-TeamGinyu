@@ -1,4 +1,5 @@
 import { makeIngredientTag, makeIngredientSelection, makeRecipeBox } from "../Utils/ingredient.js"
+import { api } from "../apisettings.js";
 
 // contains ingredient tag elements
 let ingredientTags = []
@@ -129,6 +130,25 @@ function closeModal() {
 // search ingredient BUTTON event
 // triggers an ingredient search to the spoonacular API
 search_ingredient_button.addEventListener('click', searchIngredient)
+search_name_button.addEventListener('click', searchName)
+
+async function searchName() {
+    const query = search_name_input.value
+    let recipes = []
+
+    let fetchString = `https://api.spoonacular.com/recipes/complexSearch?query=${query.replace(/ /g, '%20')}&maxFat=25&number=2&apiKey=bb8c79c0e34d4dca8fd0ef169d1426a4`
+
+    await fetch(fetchString, {method: "GET"})
+    .then(result => {
+        if(result.ok) return result.json()
+    })
+    .then(data => {
+        recipes = data.results;
+        console.log(data)
+    })
+
+    UpdateRecipeResults(recipes)
+}
 
 // fetch spoonacular API for ingredients that match the input and return best X matches
 async function searchIngredient() {
@@ -225,12 +245,43 @@ function UpdateRecipeResults(recipes) {
     recipes.forEach(r => {
         let ingredientNames = []
 
-        r.usedIngredients.forEach(i => {
+        r.usedIngredients?.forEach(i => {
             ingredientNames.push(i.name)
         });
-        r.missedIngredients.forEach(i => {
+        r.missedIngredients?.forEach(i => {
             ingredientNames.push(i.name)
         });
-        recipe_container.appendChild(makeRecipeBox(r.title, ingredientNames, r.id))
+        r.ingredients?.forEach(i => {
+            ingredientNames.push(i.name)
+        });
+
+        const recipeBox = makeRecipeBox(r.title, ingredientNames, r.id)
+        recipeBox.querySelector('.button-checkout').addEventListener('click', () => {recipeBoxCheckout(recipeBox.id)})
+        recipeBox.querySelector('.button-save').addEventListener('click', () => {recipeBoxSave(recipeBox)})
+
+        recipe_container.appendChild(recipeBox)
     });
+}
+
+function recipeBoxSave(recipeBox) {
+
+    const fetchString = `${api.url}/api/Recipe`
+    const body = {
+        recipeName: recipeBox.querySelector('.recipe-title').textContent,
+        recipeNumber: recipeBox.id
+    }
+
+    console.log('Sending a POST with:' + body)
+    return
+
+    fetch(fetchString, {
+        method: 'POST',
+        body: JSON.stringify(body)
+    })
+}
+
+function recipeBoxCheckout(recipeId) {
+    console.log('recking out recipe ' + recipeId)
+    return
+    window.location.href = `./../OnePage/recipe.html/?recipeId=${recipeId}`
 }
