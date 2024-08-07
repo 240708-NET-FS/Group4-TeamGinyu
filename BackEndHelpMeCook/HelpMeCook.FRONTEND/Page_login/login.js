@@ -35,7 +35,7 @@ btn_login.addEventListener('click', (event) => {
     //     sendForm('register_endpoint', 'POST')
 })
 
-function sendForm(url, method, register_data) {
+export function sendForm(url, method, register_data) {
     fetch(url, {
         method: method,
         headers: {
@@ -48,9 +48,6 @@ function sendForm(url, method, register_data) {
     })
     .then(async res => {
         if (!res.ok) {
-            console.log(res);
-            console.log(res);
-            console.log(res['status'] +" == " +res['statusText']);
             const reader = res.body.getReader();
             const decoder = new TextDecoder("utf-8");
             let data = "";
@@ -62,11 +59,6 @@ function sendForm(url, method, register_data) {
                 data += decoder.decode(value, { stream: true });
             }
             
-            //
-            console.log("^^^^^");
-            console.log(data);
-            console.log(JSON.stringify(data));
-            console.log("^^^^^^");
             if(data.length>0 && Array.isArray(data)){
                 resJson = JSON.parse(data);
                 var dataAlert = "";
