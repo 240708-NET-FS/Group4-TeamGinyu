@@ -24,19 +24,6 @@ function makeIngredientTag(name) {
     return div
 }
 
-/* 
-    <div class="recipe-container">
-        <div class="box recipe-box">
-            <p class="recipe-title">
-                Ingredient Title bla sdsdsds sd sdsdsdsdsd
-            </p>
-            <div class="recipe-tags">
-
-            </div>
-        </div>
-    </div>
-*/
-
 function makeRecipeBox(recipeName, ingredientNames, recipeId) {
     
     const recipe_box = document.createElement('div')
@@ -49,15 +36,11 @@ function makeRecipeBox(recipeName, ingredientNames, recipeId) {
     const buttons_div = document.createElement('div')
     const button_checkout = document.createElement('a')
     button_checkout.innerText = 'See recipe'
-    button_checkout.classList.add('button')
+    button_checkout.classList.add('button', 'button-checkout')
     const button_save = document.createElement('btn')
     button_save.innerText = 'Save recipe'
-    button_save.classList.add('button')
+    button_save.classList.add('button', 'button-save')
 
-    // Recipe page
-    //button_checkout.href = `./../OnePage/recipe.html?recipeId=${recipeId}`
-
-    
     ingredientNames.forEach(n => {
         recipe_tags.appendChild(makeIngredientTagNonClosable(n))
     });
