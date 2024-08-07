@@ -55,7 +55,7 @@ function makeRecipeBox(recipeName, ingredientNames, recipeId) {
     button_save.classList.add('button')
 
     // Recipe page
-    button_checkout.href = 'https://www.google.com'
+    //button_checkout.href = `./../OnePage/recipe.html?recipeId=${recipeId}`
 
     
     ingredientNames.forEach(n => {
