@@ -104,7 +104,7 @@ export function sendForm(url, method, register_data) {
             console.log(JSON.parse(data));
 
             // Redirect
-            window.location.href = "../Page_search/search.html";
+            window.location.href = "../Page_home/home.html";
             //alert(JSON.parse(data));
         }
         // console.log(JSON.stringify(data, null, 2));

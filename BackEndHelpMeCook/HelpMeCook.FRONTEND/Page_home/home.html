@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- css -->
+    <link rel="stylesheet" href="./../general.css">
+    <link rel="stylesheet" href="search.css">
+
+    <!-- js -->
+    <script defer type="module" src="./../Utils/elements.js"></script>
+    <script defer type="module" src="search.js"></script>
+    <script defer type="module" src="./../Utils/client_security.js"></script>
+
+
+    <title>Search</title>
+</head>
+<body>
+    <div class="main">
+
+        <nav class="navbar" role="navigation" aria-label="main navigation"> 
+            <div class="navbar-brand"> 
+                <!-- navbar items and navbar burger... -->
+                <a class="navbar-item" href="../Home_page/home.html"> 
+                    <img src="../image/team_ginyu.png" width="112" height="28" alt="Team Ginyu Force"> 
+                </a>           
+            </div> 
+            <!--  show content in mobile devices using is-active class-->
+            <div class="navbar-menu is-active">   
+                <!-- navbar start, navbar end -->
+                <div class="navbar-start"> 
+                    <a class="navbar-item is-active" href="../Page_home/home.html">Home</a> 
+                    <a class="navbar-item" >Recipe</a>
+                    <a class="navbar-item is-active" href="../Page_search/search.html">Search</a>
+                </div> 
+                <div class="navbar-end">
+                    <div class="navbar-item">
+                        <div class="field is-grouped">
+                        <p class="control">
+                            <a class="button is-danger" href="">
+                                <span class="icon">
+                                    <i class="fas fa-download"></i>
+                                </span>
+                                <span>Log Out</span>
+                            </a>
+                        </p>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </nav> 
+
+        <section class="hero is-hero-bar">
+            <div class="hero-body">
+              <div class="level">
+                <div class="level-left">
+                  <div class="level-item"><h1 class="title">
+                    Dashboard
+                  </h1></div>
+                </div>
+                <div class="level-right" style="display: none;">
+                  <div class="level-item"></div>
+                </div>
+              </div>
+            </div>
+        </section>
+
+        <!-- ///////////////////////////////////////////// -->
+        <!-- Dashboard content -->
+        <!-- ///////////////////////////////////////////// -->
+        <section class="section is-main-section">
+            <div class="tile is-ancestor">
+              <div class="tile is-parent">
+                <div class="card tile is-child">
+                  <div class="card-content">
+                    <div class="level is-mobile">
+                      <div class="level-item">
+                        <div class="is-widget-label"><h3 class="subtitle is-spaced">
+                          Clients
+                        </h3>
+                          <h1 class="title">
+                            512
+                          </h1>
+                        </div>
+                      </div>
+                      <div class="level-item has-widget-icon">
+                        <div class="is-widget-icon"><span class="icon has-text-primary is-large"><i class="mdi mdi-account-multiple mdi-48px"></i></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tile is-parent">
+                <div class="card tile is-child">
+                  <div class="card-content">
+                    <div class="level is-mobile">
+                      <div class="level-item">
+                        <div class="is-widget-label"><h3 class="subtitle is-spaced">
+                          Sales
+                        </h3>
+                          <h1 class="title">
+                            $7,770
+                          </h1>
+                        </div>
+                      </div>
+                      <div class="level-item has-widget-icon">
+                        <div class="is-widget-icon"><span class="icon has-text-info is-large"><i class="mdi mdi-cart-outline mdi-48px"></i></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tile is-parent">
+                <div class="card tile is-child">
+                  <div class="card-content">
+                    <div class="level is-mobile">
+                      <div class="level-item">
+                        <div class="is-widget-label"><h3 class="subtitle is-spaced">
+                          Performance
+                        </h3>
+                          <h1 class="title">
+                            256%
+                          </h1>
+                        </div>
+                      </div>
+                      <div class="level-item has-widget-icon">
+                        <div class="is-widget-icon"><span class="icon has-text-success is-large"><i class="mdi mdi-finance mdi-48px"></i></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </section>
+    </div>
+    
+    <!-- ///////////////////////////////////////////// -->
+    <!-- footer -->
+    <!-- ///////////////////////////////////////////// -->
+    <footer>
+        <p class="footer-text">Made by <a href="https://github.com/240708-NET-FS/Group4-TeamGinyu">Team Ginyu </a></p>
+        <img class="footer-logo" src="https://static.wikia.nocookie.net/villains/images/f/f5/Ginyu_Force.png" alt=".">
+    </footer>
+</body>
+</html>
