@@ -1,4 +1,4 @@
-import { makeIngredientTag, makeIngredientSelection, makeRecipeBox } from "../Utils/ingredient.js"
+import { makeIngredientTag, makeIngredientSelection, makeRecipeBox } from "../Utils/elements.js"
 import { api } from "../apisettings.js";
 
 // contains ingredient tag elements
