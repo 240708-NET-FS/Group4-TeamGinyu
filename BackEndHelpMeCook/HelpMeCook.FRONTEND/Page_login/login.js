@@ -46,12 +46,43 @@ function sendForm(url, method, register_data) {
         },
         body: JSON.stringify(register_data),
     })
-    .then(response => {
-        if (!response.ok) {
-            console.log(response);
-            throw new Error('Network response was not ok');
+    .then(async res => {
+        if (!res.ok) {
+            console.log(res);
+            console.log(res);
+            console.log(res['status'] +" == " +res['statusText']);
+            const reader = res.body.getReader();
+            const decoder = new TextDecoder("utf-8");
+            let data = "";
+            while (true) {
+                const { done, value } = await reader.read();
+                if (done) {
+                    break;
+                }
+                data += decoder.decode(value, { stream: true });
+            }
+            
+            //
+            console.log("^^^^^");
+            console.log(data);
+            console.log(JSON.stringify(data));
+            console.log("^^^^^^");
+            if(data.length>0 && Array.isArray(data)){
+                resJson = JSON.parse(data);
+                var dataAlert = "";
+                for (i in resJson) {
+                    //console.log("***" +resJson[i]['code'] +" = " +resJson[i]['description']);
+                    dataAlert += resJson[i]['description'] +"\n";
+                }
+                if(dataAlert.length>0)
+                    alert(dataAlert);
+            }else{
+                alert("Incorrect email/password."); // data['title']
+            }
+
+            // throw new Error('Network response was not ok');
         }
-        return response;
+        return res;
     })
     .then(async res => {
         console.log(res);
@@ -81,16 +112,18 @@ function sendForm(url, method, register_data) {
             console.log(JSON.parse(data));
 
             // Redirect
-            // window.location.href = "../Page_login/login.html";
-            alert(JSON.parse(data));
+            window.location.href = "../Page_search/search.html";
+            //alert(JSON.parse(data));
         }
         // console.log(JSON.stringify(data, null, 2));
     })
     .catch(error => {
-        console.error('Error:', error);
+        console.log('Error:');
+        console.log(error);
     });
 }
 
+/*
 async function fetchData(url) {
     try {
         const response = await fetch(url);
@@ -118,3 +151,4 @@ async function fetchData(url) {
         console.error('Error fetching data:', error);
     }
 }
+*/
