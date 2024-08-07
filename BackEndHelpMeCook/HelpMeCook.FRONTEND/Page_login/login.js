@@ -23,10 +23,11 @@ btn_register.addEventListener('click', (event) => {
         body: JSON.stringify(data)
     })
     .then(response => {
-        return response.json()
+        //if(response.status === 201)
+        //    window.location.href = './../OnePage/home.html'
     })
-    .then(data => {
-        console.log(data)
+    .catch(err => {
+        window.location.href = './../OnePage/home.html'
     })
 })
 
@@ -47,9 +48,10 @@ btn_login.addEventListener('click', (event) => {
         body: JSON.stringify(data)
     })
     .then(response => {
-        return response.json()
+        //if(response.status === 200)
+        //    window.location.href = './../OnePage/home.html'
     })
-    .then(data => {
-        console.log(data)
+    .catch(err => {
+        window.location.href = './../OnePage/home.html'
     })
 })
