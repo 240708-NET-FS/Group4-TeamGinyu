@@ -1,9 +1,10 @@
-// import { api, spoonacular } from "./appsettings.js";
-const api = {
-    url: "http://localhost:5224",
-    token: ""
-  };
-// console.log(api.url);
+import { api, spoonacular } from "../apisettings.js";
+// const api = {
+//     url: "http://localhost:5224",
+//     token: ""
+//   };
+console.log(api.url); // Should output: http://localhost:5224/api
+console.log(spoonacular.key); // Should output: ""
 
 const btn_login = document.querySelector('#login-button');
 const btn_register = document.querySelector('#register-button');

@@ -124,7 +124,7 @@ namespace HelpMeCook.Tests
         public async Task UpdateUser_ShouldReturnFalse_WhenUserDoesNotExist()
         {
             // Arrange
-            _userManagerMock.Setup(x => x.FindByIdAsync(It.IsAny<string>())).ReturnsAsync((User)null);
+            _userManagerMock.Setup(x => x.FindByIdAsync(It.IsAny<string>())).ReturnsAsync((User)null!);
 
             // Act
             var result = await _userService.UpdateUser("1", new UserDTO());
@@ -147,7 +147,7 @@ namespace HelpMeCook.Tests
 
             var result = await _userService.DeleteUser(userID);
 
-            Assert.Equal(user.FirstName, result.FirstName);
+            Assert.Equal(user.FirstName, result!.FirstName);
             Assert.Equal(user.LastName, result.LastName);
         }
 
