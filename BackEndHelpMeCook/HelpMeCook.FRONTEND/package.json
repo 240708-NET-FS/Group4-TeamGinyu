@@ -1,8 +1,26 @@
 {
   "devDependencies": {
-    "jest": "^29.7.0"
+    "@babel/core": "^7.25.2",
+    "@babel/preset-env": "^7.25.3",
+    "babel-jest": "^29.7.0",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0"
   },
-    "scripts": {
-      "test": "jest"
+  "scripts": {
+    "test": "jest"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
+  },
+  "jest": {
+    "testEnvironment": "jsdom",
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
     }
+  },
+  "dependencies": {
+    "util": "^0.12.5"
+  }
 }

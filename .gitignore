@@ -490,3 +490,5 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
+
+BackEndHelpMeCook/HelpMeCook.FRONTEND/package-lock.json
