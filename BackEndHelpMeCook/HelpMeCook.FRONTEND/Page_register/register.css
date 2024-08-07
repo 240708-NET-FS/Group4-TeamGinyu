@@ -19,3 +19,13 @@
     justify-content: center;
     align-items: center;
 }
+
+.invisible-error{
+    display: none;
+}
+
+.visible-error{
+    display: inline;
+    color: red;
+    font-weight: 600;
+}

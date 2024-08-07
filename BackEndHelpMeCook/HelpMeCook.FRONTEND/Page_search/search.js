@@ -27,10 +27,11 @@ const test = document.querySelector('.recipe-tags')
 
 
 document.addEventListener('DOMContentLoaded', (event) => {
-    console.log('Login page loaded')
+    updateType(seach_type_selector.value)
 
-    //recipe_container.appendChild(makeRecipeBox('some recipe name', ['rep1', 'rep3', 'rep454']))
-
+    //const url = new URL(window.location.href)
+    //const params = new URLSearchParams(url.search)
+    //console.log(params)
 })
 
 
@@ -38,8 +39,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
 // change TYPE event.
 // updates the UI to show the by ingredient or by name search options
 seach_type_selector.addEventListener('change', (event) => {
+    updateType(event.target.value)
+})
 
-    let searchType = event.target.value
+function updateType(val) {
+    let searchType = val
 
     if(searchType === 'By Ingredient') {
         type_name_container.classList.add('is-hidden')
@@ -51,7 +55,7 @@ seach_type_selector.addEventListener('change', (event) => {
         type_ingredient_submenu.classList.add('is-hidden')
         type_name_container.classList.remove('is-hidden')
     }
-})
+}
 
 
 // modal BUTTON click event
@@ -227,6 +231,6 @@ function UpdateRecipeResults(recipes) {
         r.missedIngredients.forEach(i => {
             ingredientNames.push(i.name)
         });
-        recipe_container.appendChild(makeRecipeBox(r.title, ingredientNames))
+        recipe_container.appendChild(makeRecipeBox(r.title, ingredientNames, r.id))
     });
 }

@@ -60,11 +60,24 @@ builder.Services.AddIdentityApiEndpoints<User>()
         .AddEntityFrameworkStores<AppDbContext>();
 
 //CORS CORS CORS CORS CORS CORS CORS CORS CORS CORS CORS CORS CORS CORS CORS
+/*
 builder.Services.AddCors(co => {
     co.AddPolicy("CORS" , pb =>{
-        pb.WithOrigins("*"); //<- your localhost port here!!!
+        pb.WithOrigins("http://localhost:5500"); //<- your localhost port here!!!
     });
 });
+*/
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CORS", policy =>
+    {
+        policy.AllowAnyOrigin()  // Allow all origins (for development, specify exact origins for production)
+              .AllowAnyMethod()  // Allow any HTTP method
+              .AllowAnyHeader(); // Allow any header
+    });
+});
+
 //CORS CORS CORS CORS CORS CORS CORS CORS CORS CORS CORS CORS CORS CORS CORS  
      
 
