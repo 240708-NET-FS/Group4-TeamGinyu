@@ -28,11 +28,8 @@ builder.Services.AddSwaggerGen(options => {
 //Here we will register our dependencies (Services and DbContext, etc) so that we can satisfy our constructors
 //and inject dependecies where needed
 builder.Services.AddScoped<IUserService, UserService>();
-// builder.Services.AddScoped<ILoginService, LoginService>();
 builder.Services.AddScoped<IRecipeService, RecipeService>();
-
 builder.Services.AddScoped<IUserRepo, UserRepo>();
-// builder.Services.AddScoped<ILoginRepo, LoginRepo>();
 builder.Services.AddScoped<IRecipeRepo, RecipeRepo>();
 
 // builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -87,26 +84,6 @@ app.UseCors("CORS"); //<-USE CORS with your policy name
 //CORS CORS CORS CORS CORS CORS CORS CORS CORS CORS CORS CORS CORS CORS CORS 
 
 app.UseHttpsRedirection();
-
-// var summaries = new[]
-// {
-//     "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-// };
-
-// app.MapGet("/weatherforecast", () =>
-// {
-//     var forecast =  Enumerable.Range(1, 5).Select(index =>
-//         new WeatherForecast
-//         (
-//             DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-//             Random.Shared.Next(-20, 55),
-//             summaries[Random.Shared.Next(summaries.Length)]
-//         ))
-//         .ToArray();
-//     return forecast;
-// })
-// .WithName("GetWeatherForecast")
-// .WithOpenApi();
 
 app.UseHttpsRedirection();
 
