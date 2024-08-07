@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- css -->
+    <link rel="stylesheet" href="./../general.css">
+    <link rel="stylesheet" href="register.css">
+
+    <!-- js -->
+    <script defer src="register.js"></script>
+
+    <title>Register</title>
+</head>
+<body>
+
+    <div class="login-header">
+        <h2>HelpMeCook</h2>
+    </div>
+
+    <div class="login-container centered-container">
+        <form id="submition-form" class="box">
+          <div class="field">
+            <label class="label">Firstname</label>
+            <div class="control">
+              <input id="firstname_form" class="input" type="text" name="firstname" placeholder="First name" />
+              <span id="error_firstname" class="invisible-error">This field is required</span>
+            </div>
+          </div>
+    
+          <div class="field">
+            <label class="label">Lastname</label>
+            <div class="control">
+              <input id="lastname_form" class="input" type="text" name="lastname" placeholder="Last name" />
+              <span id="error_lastname" class="invisible-error">This field is required</span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Email</label>
+            <div class="control">
+              <input id="email_form" class="input" type="email" name="email" placeholder="test@email.com" />
+              <span id="error_email" class="invisible-error">This field is required</span>
+            </div>
+          </div>
+    
+            <div class="field">
+              <label class="label">Password</label>
+              <div class="control">
+                <input id="password_form" class="input" type="password" name="password" placeholder="" />
+                <span id="error_password" class="invisible-error">This field is required</span>
+              </div>
+            </div>
+          
+            <div class="centered-container" style="justify-content: space-around;">
+                <button id="register-button" class="button is-primary login-button">Sign up</button>
+            </div>
+            <div class="centered-container" style="justify-content: space-around;">
+              <button onclick="window.location.href='../Page_login/login.html'; return false;" class="button is-primary is-outlined login-button">Already have an account</button>
+          </div>
+        </form>
+    </div>
+</body>
+</html>

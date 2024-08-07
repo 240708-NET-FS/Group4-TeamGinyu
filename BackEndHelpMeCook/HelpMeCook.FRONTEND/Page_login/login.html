@@ -24,22 +24,24 @@
             <div class="field">
               <label class="label">Username</label>
               <div class="control">
-                <input class="input" type="text" placeholder="username" />
+                <input id="email_form" class="input" type="email" placeholder="email@email.com" />
               </div>
             </div>
           
             <div class="field">
               <label class="label">Password</label>
               <div class="control">
-                <input class="input" type="password" placeholder="********" />
+                <input id="password_form" class="input" type="password" placeholder="********" />
               </div>
             </div>
           
             <div class="centered-container" style="justify-content: space-around;">
-                <button id="login-button" class="button is-primary login-button">Login</button>
-                <button id="register-button" class="button is-primary login-button">Register</button>
+              <button id="login-button" class="button is-primary login-button">Login</button>
             </div>
-          </form>
+            <div class="centered-container" style="justify-content: space-around;">
+              <button onclick="window.location.href='../Page_register/register.html'; return false;" class="button is-primary is-outlined login-button">Create an account</button>
+          </div>
+        </form>
     </div>
 </body>
 </html>
