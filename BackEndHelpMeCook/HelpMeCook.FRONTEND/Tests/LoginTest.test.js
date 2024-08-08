@@ -3,31 +3,23 @@ import { TextEncoder, TextDecoder } from 'util';
 
 describe('Login Test', () => {
     let localStorageSpy;
-    // let consoleErrorSpy;
-    let consoleSpy;
 
     beforeEach(() => {
-        // global.localStorage = {
-        //     setItem: jest.fn(),
-        //     getItem: jest.fn(),
-        //     removeItem: jest.fn(),
-        //     clear: jest.fn(),
-        // };
 
-        // consoleErrorSpy = jest.spyOn(global.console, 'error').mockImplementation(() => {});
+        localStorageSpy = jest.spyOn(Storage.prototype, 'setItem').mockImplementation(() => { });
 
-        consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+        consoleErrorSpy = jest.spyOn(global.console, 'error').mockImplementation(() => { });
+     
 
         // Polyfill TextEncoder and TextDecoder
         global.TextEncoder = TextEncoder;
-        global.TextDecoder = TextDecoder;
 
         // Mock fetch
         global.fetch = jest.fn(() =>
             Promise.resolve({
                 ok: true,
                 status: 200,
-                statusText: 'ok',
+                statusText: "OK",
                 body: {
                     getReader: () => ({
                         read: () => Promise.resolve({
@@ -38,10 +30,10 @@ describe('Login Test', () => {
                 }
             })
         );
-        
-       // Reset all mocks before each test
-    //    jest.resetAllMocks();
-        
+
+        // Reset all mocks before each test
+        //    jest.resetAllMocks();
+
     });
 
     afterEach(() => {
@@ -55,10 +47,8 @@ describe('Login Test', () => {
         const method = 'POST';
         const data = { email: 'test@example.com', password: 'password123' };
 
-        // Spy on localStorage.setItem
-        localStorageSpy = jest.spyOn(global.localStorage, 'setItem');
-
         await sendForm(url, method, data);
+
 
         // Check if fetch was called with the correct arguments
         expect(fetch).toHaveBeenCalledWith(url, {
@@ -73,11 +63,8 @@ describe('Login Test', () => {
         });
 
         // Check if localStorage.setItem was called
-        // expect(localStorageSpy).toHaveBeenCalled();
-        // expect(localStorageSpy).toHaveBeenCalledWith('userObject', JSON.stringify({ key: 'value' }));
+        expect(localStorageSpy).toHaveBeenCalledTimes(1);
 
-        // Restore localStorage.setItem
-        // localStorageSpy.mockRestore();
     });
 
     it('should handle error form submission', async () => {
@@ -85,35 +72,10 @@ describe('Login Test', () => {
         const url = '/login';
         const method = 'POST';
         const data = { email: 'test@example.com', password: 'password123' };
-        // const consoleLogSpy = jest.spyOn(global.console, 'error');
 
-        let res = await sendForm(url, method, data);
+        await sendForm(url, method, data);
 
-        console.log(res);
-        
-        expect(consoleSpy).toHaveBeenCalled();
-
-        // Cleanup
-        // consoleErrorSpy.mockRestore();
+        expect(consoleErrorSpy).toHaveBeenCalled();
     });
 });
-
-// import { consoleThis } from "../TestingFolder/TestingFunction";
-
-// describe('Simple Jest Test', () => {
-//     let consoleSpy;
-
-//     beforeEach(() => {
-//         consoleSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
-//     });
-
-//     afterEach(() => {
-//         consoleSpy.mockRestore();
-//     });
-
-//     it('should spy on console.log', () => {
-//         consoleThis();
-//         expect(consoleSpy).toHaveBeenCalledWith('Hello, world!');
-//     });
-// });
 

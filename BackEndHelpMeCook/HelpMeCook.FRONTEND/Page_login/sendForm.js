@@ -1,66 +1,50 @@
+export async function sendForm(url, method, register_data) {
+    try {
+        const response = await fetch(url, {
+            method: method,
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+                'Access-Control-Allow-Methods': '*',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(register_data),
+        });
 
-export function sendForm(url, method, register_data) {
-    fetch(url, {
-        method: method,
-        headers: {
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-            'Access-Control-Allow-Methods': '*',
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(register_data),
-    })
-    .then(async res => {
-        if (!res.ok) {
-            const reader = res.body.getReader();
-            const decoder = new TextDecoder("utf-8");
-            let data = "";
-            while (true) {
-                const { done, value } = await reader.read();
-                if (done) {
-                    break;
-                }
-                data += decoder.decode(value, { stream: true });
-            }
-            if(data.length>0 && Array.isArray(data)){
-                resJson = JSON.parse(data);
-                var dataAlert = "";
-                for (i in resJson) {
-                    dataAlert += resJson[i]['description'] +"\n";
-                }
-                if(dataAlert.length>0)
-                    alert(dataAlert);
-            }else{
-                alert("Incorrect email/password."); // data['title']
-            }
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder("utf-8");
+        let data = "";
+
+        while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+            data += decoder.decode(value, { stream: true });
         }
-        return res;
-    })
-    .then(async res => {
-        if(res['status']==200 && res['statusText']=="OK"){
-            const reader = res.body.getReader();
-            const decoder = new TextDecoder("utf-8");
-            let data = "";
-            while (true) {
-                const { done, value } = await reader.read();
-    
-                if (done) {
-                    break;
-                }
-    
-                data += decoder.decode(value, { stream: true });
-            }
 
-            // Put the object into storage
+        if (!response.ok) {
+            let dataAlert = "";
+            try {
+                const resJson = JSON.parse(data);
+                resJson.forEach(item => {
+                    dataAlert += item['description'] + "\n";
+                });
+            } catch (e) {
+                dataAlert = "Incorrect email/password."; // Default error message if parsing fails
+            }
+            
+            if (dataAlert.length > 0) {
+                alert(dataAlert);
+            }
+        } else if (response.status === 200 && response.statusText === "OK") {
+            // Store the object in local storage
             localStorage.setItem('userObject', data);
-
-            // Redirect
+            
+            // Redirect to home page
             window.location.href = "../Page_home/home.html";
-           
         }
-    })
-    .catch(error => {
+
+    } catch (error) {
         console.error(error);
-    });
+    }
 }
 
