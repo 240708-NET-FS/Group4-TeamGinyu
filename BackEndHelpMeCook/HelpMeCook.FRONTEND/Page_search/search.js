@@ -22,9 +22,8 @@ const type_ingredient_container = document.querySelector('.type-ingredient-conta
 const type_name_container = document.querySelector('.type-name-container')
 const type_ingredient_submenu = document.querySelector('.type-ingredient-submenu')
 const modal_button = document.querySelector('.modal-button-done')
-
-
 const recipe_container = document.querySelector('.recipe-container')
+let token = JSON.parse(localStorage.getItem('userObject')).accessToken;
 
 document.addEventListener('DOMContentLoaded', (event) => {
     updateType(seach_type_selector.value)
@@ -43,7 +42,7 @@ seach_type_selector.addEventListener('change', (event) => {
 function updateType(val) {
     let searchType = val
 
-    if(searchType === 'By Ingredient') {
+    if (searchType === 'By Ingredient') {
         type_name_container.classList.add('is-hidden')
         type_ingredient_container.classList.remove('is-hidden')
         type_ingredient_submenu.classList.remove('is-hidden')
@@ -68,14 +67,14 @@ modal_button.addEventListener('click', () => {
         let alreadyIncluded = false
 
         // if the element is not selected, return
-        if(!element.classList.contains('is-selected')) return
+        if (!element.classList.contains('is-selected')) return
 
         // check if that ingredient is already added to the list
-        for(let i = 0; i < ingredientTags.length; i++) {
+        for (let i = 0; i < ingredientTags.length; i++) {
 
             console.log(element.textContent)
 
-            if(ingredientTags[i].querySelector('span').textContent === element.textContent) {
+            if (ingredientTags[i].querySelector('span').textContent === element.textContent) {
 
                 alreadyIncluded = true
                 break
@@ -83,7 +82,7 @@ modal_button.addEventListener('click', () => {
         }
 
         // if not added, add to the ingredientTags
-        if(alreadyIncluded === false)
+        if (alreadyIncluded === false)
             addIngredientTag(element.textContent)
     });
 })
@@ -116,7 +115,7 @@ function closeModal() {
     modal.classList.remove('is-active')
 
     // clear modal contents
-    while(modal_container_ingredients.firstChild) {
+    while (modal_container_ingredients.firstChild) {
         modal_container_ingredients.removeChild(modal_container_ingredients.firstChild)
     }
 }
@@ -126,7 +125,7 @@ function closeModal() {
 search_ingredient_button.addEventListener('click', () => {
     searchIngredient(search_ingredient_input.value)
 })
-search_name_button.addEventListener('click', () =>{
+search_name_button.addEventListener('click', () => {
     searchName(search_name_input.value)
 })
 
@@ -182,8 +181,8 @@ function addIngredientSelection(name) {
     modal_container_ingredients.appendChild(newIngredientSelection)
 
     // set up event listener for its close button
-    newIngredientSelection.addEventListener('click', ()=> {
-        if(newIngredientSelection.classList.contains('is-light')) {
+    newIngredientSelection.addEventListener('click', () => {
+        if (newIngredientSelection.classList.contains('is-light')) {
             newIngredientSelection.classList.remove('is-light')
             newIngredientSelection.classList.add('is-selected')
         }
@@ -226,7 +225,7 @@ search_recipes_ingredients_button.addEventListener('click', async () => {
 })
 
 function UpdateRecipeResults(recipes) {
-    while(recipe_container.firstChild) {
+    while (recipe_container.firstChild) {
         recipe_container.removeChild(recipe_container.firstChild)
     }
 
@@ -244,8 +243,8 @@ function UpdateRecipeResults(recipes) {
         });
 
         const recipeBox = makeRecipeBox(r.title, ingredientNames, r.id)
-        recipeBox.querySelector('.button-checkout').addEventListener('click', () => {recipeBoxCheckout(recipeBox.id)})
-        recipeBox.querySelector('.button-save').addEventListener('click', () => {recipeBoxSave(recipeBox)})
+        recipeBox.querySelector('.button-checkout').addEventListener('click', () => { recipeBoxCheckout(recipeBox.id) })
+        recipeBox.querySelector('.button-save').addEventListener('click', () => { recipeBoxSave(recipeBox) })
 
         recipe_container.appendChild(recipeBox)
     });
@@ -267,19 +266,27 @@ function recipeBoxSave(recipeBox) {
     // run fetch
     fetch(fetchString, {
         method: 'POST',
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+            'Access-Control-Allow-Methods': '*',
+            'Content-Type': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}` 
+        },
         body: JSON.stringify(body)
     })
-    .then(response => {
-        // if response OK, color the button accordingly
-        console.log('response: ' + response.ok)
-        if(response.ok) {
-            recipeBox.querySelector('button-save').classList.add('is-success')
-        }
-    })
-    .catch(err => {
-        // else, un-disable the button
-        recipeBox.querySelector('.button-save').removeAttribute('disabled')
-    })
+        .then(response => {
+            // if response OK, color the button accordingly
+            console.log('response: ' + response.ok)
+            if (response.ok) {
+                recipeBox.querySelector('button-save').classList.add('is-success')
+            }
+        })
+        .catch(err => {
+            // else, un-disable the button
+            recipeBox.querySelector('.button-save').removeAttribute('disabled')
+        })
 }
 
 function recipeBoxCheckout(recipeId) {

@@ -1,5 +1,5 @@
 import { sendForm } from "../Page_login/sendForm.js";
-import { TextEncoder, TextDecoder } from 'util';
+import { TextEncoder } from 'util';
 
 describe('Login Test', () => {
     let localStorageSpy;
@@ -7,7 +7,6 @@ describe('Login Test', () => {
     beforeEach(() => {
 
         localStorageSpy = jest.spyOn(Storage.prototype, 'setItem').mockImplementation(() => { });
-
         consoleErrorSpy = jest.spyOn(global.console, 'error').mockImplementation(() => { });
      
 
@@ -30,9 +29,6 @@ describe('Login Test', () => {
                 }
             })
         );
-
-        // Reset all mocks before each test
-        //    jest.resetAllMocks();
 
     });
 
