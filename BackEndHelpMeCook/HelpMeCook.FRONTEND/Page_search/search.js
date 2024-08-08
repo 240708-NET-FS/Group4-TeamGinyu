@@ -1,5 +1,8 @@
 import { makeIngredientTag, makeIngredientSelection, makeRecipeBox } from "../Utils/elements.js"
 import { api } from "../apisettings.js";
+import { fetchRecipesByName } from "./fetchRecipesByName.js";
+import { fetchIngredientByName } from "./fetchIngredientByName.js";
+import { fetchRecipesByIngredients } from "./fetchRecipesByIngredient.js";
 
 // contains ingredient tag elements
 let ingredientTags = []
@@ -23,10 +26,6 @@ const modal_button = document.querySelector('.modal-button-done')
 
 const recipe_container = document.querySelector('.recipe-container')
 
-// test
-const test = document.querySelector('.recipe-tags')
-
-
 document.addEventListener('DOMContentLoaded', (event) => {
     updateType(seach_type_selector.value)
 
@@ -34,8 +33,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
     //const params = new URLSearchParams(url.search)
     //console.log(params)
 })
-
-
 
 // change TYPE event.
 // updates the UI to show the by ingredient or by name search options
@@ -66,8 +63,6 @@ modal_button.addEventListener('click', () => {
     // close modal
     closeModal()
 
-
-    
     // for each selected ingredient, add it to tags if not included already
     ingredientSelection.forEach(element => {
         let alreadyIncluded = false
@@ -126,50 +121,42 @@ function closeModal() {
     }
 }
 
-
 // search ingredient BUTTON event
 // triggers an ingredient search to the spoonacular API
-search_ingredient_button.addEventListener('click', searchIngredient)
-search_name_button.addEventListener('click', searchName)
+search_ingredient_button.addEventListener('click', () => {
+    searchIngredient(search_ingredient_input.value)
+})
+search_name_button.addEventListener('click', () =>{
+    searchName(search_name_input.value)
+})
 
-async function searchName() {
-    const query = search_name_input.value
-    let recipes = []
-
-    let fetchString = `https://api.spoonacular.com/recipes/complexSearch?query=${query.replace(/ /g, '%20')}&maxFat=25&number=2&apiKey=bb8c79c0e34d4dca8fd0ef169d1426a4`
-
-    await fetch(fetchString, {method: "GET"})
-    .then(result => {
-        if(result.ok) return result.json()
-    })
-    .then(data => {
-        recipes = data.results;
-        console.log(data)
-    })
-
+async function searchName(query) {
+    const recipes = await fetchRecipesByName(query)
     UpdateRecipeResults(recipes)
 }
 
 // fetch spoonacular API for ingredients that match the input and return best X matches
-async function searchIngredient() {
+async function searchIngredient(ingredient) {
 
-    const ingredient = search_ingredient_input.value;
-    let fetchString = `https://api.spoonacular.com/food/ingredients/search?query=${ingredient}&number=5&sort=calories&sortDirection=desc&apiKey=bb8c79c0e34d4dca8fd0ef169d1426a4`;
+    //const ingredient = search_ingredient_input.value;
+    //let fetchString = `https://api.spoonacular.com/food/ingredients/search?query=${ingredient}&number=5&sort=calories&sortDirection=desc&apiKey=bb8c79c0e34d4dca8fd0ef169d1426a4`
     let ingredientsFoundData
 
     // open the modal
     openModal()
 
-    // fetch the ingredients
-    await fetch(fetchString, {method:"GET"})
-    .then(response => {
+    ingredientsFoundData = await fetchIngredientByName(ingredient)
 
-        if(response.ok)
-            return response.json()
-    })
-    .then(data => {
-        ingredientsFoundData = data.results;
-    })
+    // fetch the ingredients
+    //await fetch(fetchString, {method:"GET"})
+    //.then(response => {
+    //
+    //    if(response.ok)
+    //        return response.json()
+    //})
+    //.then(data => {
+    //    ingredientsFoundData = data.results
+    //})
 
     // clear the ingredientSelection array
     ingredientSelection = []
@@ -223,16 +210,17 @@ search_recipes_ingredients_button.addEventListener('click', async () => {
         ingredients.push(parsedString)
     });
 
-    let fetchString = `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredients.join(',+')}&apiKey=bb8c79c0e34d4dca8fd0ef169d1426a4`
+    //let fetchString = `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredients.join(',+')}&apiKey=bb8c79c0e34d4dca8fd0ef169d1426a4`
+    //
+    //await fetch(fetchString, {method: "GET"})
+    //.then(result => {
+    //    if(result.ok) return result.json()
+    //})
+    //.then(data => {
+    //    recipes = data;
+    //})
 
-    await fetch(fetchString, {method: "GET"})
-    .then(result => {
-        if(result.ok) return result.json()
-    })
-    .then(data => {
-        recipes = data;
-        console.log(data)
-    })
+    recipes = await fetchRecipesByIngredients(ingredients)
 
     UpdateRecipeResults(recipes)
 })
@@ -265,18 +253,32 @@ function UpdateRecipeResults(recipes) {
 
 function recipeBoxSave(recipeBox) {
 
+    // prepare fetch
     const fetchString = `${api.url}/api/Recipe`
+    //const fetchString = 'http://localhost:5224/api/Recipe'
     const body = {
         recipeName: recipeBox.querySelector('.recipe-title').textContent,
         recipeNumber: recipeBox.id
     }
 
-    console.log('Sending a POST with:' + body)
-    return
+    // disable button
+    recipeBox.querySelector('.button-save').setAttribute('disabled', 'disabled')
 
+    // run fetch
     fetch(fetchString, {
         method: 'POST',
         body: JSON.stringify(body)
+    })
+    .then(response => {
+        // if response OK, color the button accordingly
+        console.log('response: ' + response.ok)
+        if(response.ok) {
+            recipeBox.querySelector('button-save').classList.add('is-success')
+        }
+    })
+    .catch(err => {
+        // else, un-disable the button
+        recipeBox.querySelector('.button-save').removeAttribute('disabled')
     })
 }
 
