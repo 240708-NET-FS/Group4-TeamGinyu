@@ -10,7 +10,7 @@ global.fetch = jest.fn(() =>
     Promise.resolve({
         ok: true,
         status: 200,
-        statusText: 'OK',
+        statusText: 'ok',
         body: {
             getReader: () => ({
                 read: () => Promise.resolve({

@@ -16,11 +16,9 @@
   },
   "jest": {
     "testEnvironment": "jsdom",
+    "setupFiles": ["<rootDir>/jest.setup.js"],
     "transform": {
       "^.+\\.jsx?$": "babel-jest"
     }
-  },
-  "dependencies": {
-    "util": "^0.12.5"
-  }
+  }  
 }

@@ -22,7 +22,6 @@ export function sendForm(url, method, register_data) {
                 }
                 data += decoder.decode(value, { stream: true });
             }
-            
             if(data.length>0 && Array.isArray(data)){
                 resJson = JSON.parse(data);
                 var dataAlert = "";
@@ -34,13 +33,10 @@ export function sendForm(url, method, register_data) {
             }else{
                 alert("Incorrect email/password."); // data['title']
             }
-
-            // throw new Error('Network response was not ok');
         }
         return res;
     })
     .then(async res => {
-        console.log(res);
         if(res['status']==200 && res['statusText']=="OK"){
             console.log(res['body']);
             const reader = res.body.getReader();
