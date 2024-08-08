@@ -38,7 +38,6 @@ export function sendForm(url, method, register_data) {
     })
     .then(async res => {
         if(res['status']==200 && res['statusText']=="OK"){
-            console.log(res['body']);
             const reader = res.body.getReader();
             const decoder = new TextDecoder("utf-8");
             let data = "";
@@ -55,21 +54,13 @@ export function sendForm(url, method, register_data) {
             // Put the object into storage
             localStorage.setItem('userObject', data);
 
-            // Retrieve the object from storage
-            // var retrievedObject = localStorage.getItem('testObject');
-            // console.log('retrievedObject: ', JSON.parse(retrievedObject));
-    
-            // At this point, data contains the complete response
-            console.log(JSON.parse(data));
-
             // Redirect
             window.location.href = "../Page_home/home.html";
-            //alert(JSON.parse(data));
+           
         }
-        // console.log(JSON.stringify(data, null, 2));
     })
     .catch(error => {
-        console.log('Error:');
-        console.log(error);
+        console.error(error);
     });
 }
+
