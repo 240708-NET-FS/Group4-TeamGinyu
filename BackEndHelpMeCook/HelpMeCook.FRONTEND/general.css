@@ -116,3 +116,10 @@ I want to preserve all on the same line */
     flex-shrink: 1;
     min-height: min-content;
 }
+
+.custom-breadcrumb{
+    background-color: #fbfbfb;
+    margin: 15px auto;
+    border-top: 10px solid #f3f3f3;
+    border-bottom: 10px solid #f3f3f3;
+}

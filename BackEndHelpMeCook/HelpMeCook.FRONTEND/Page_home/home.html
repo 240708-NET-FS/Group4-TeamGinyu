@@ -6,7 +6,7 @@
 
     <!-- css -->
     <link rel="stylesheet" href="./../general.css">
-    <link rel="stylesheet" href="search.css">
+    <link rel="stylesheet" href="home.css">
 
     <!-- js -->
     <script defer type="module" src="./../Utils/elements.js"></script>
@@ -32,7 +32,7 @@
                 <div class="navbar-start"> 
                     <a class="navbar-item is-active" href="../Page_home/home.html">Home</a> 
                     <a class="navbar-item" >Recipe</a>
-                    <a class="navbar-item is-active" href="../Page_search/search.html">Search</a>
+                    <a class="navbar-item" href="../Page_search/search.html">Search</a>
                 </div> 
                 <div class="navbar-end">
                     <div class="navbar-item">
@@ -51,7 +51,7 @@
             </div> 
         </nav> 
 
-        <section class="hero is-hero-bar">
+        <section class="hero is-hero-bar custom-breadcrumb">
             <div class="hero-body">
               <div class="level">
                 <div class="level-left">
@@ -69,6 +69,7 @@
         <!-- ///////////////////////////////////////////// -->
         <!-- Dashboard content -->
         <!-- ///////////////////////////////////////////// -->
+         <!-- ROW 1 -->
         <section class="section is-main-section">
             <div class="tile is-ancestor">
               <div class="tile is-parent">
@@ -136,6 +137,83 @@
               </div>
             </div>
         </section>
+        <!-- END Row 1 -->
+
+        <!-- Row 2 -->
+        <section class="section is-main-section">
+          <div class="tile is-ancestor">
+            <div class="tile is-parent">
+              <div class="card tile is-child">
+                <div class="card-content">
+                  <div class="level is-mobile">
+                    <div class="level-item">
+                      <div class="is-widget-label">
+                        <h3 class="subtitle is-spaced">
+                        Title 1
+                        </h3>
+                        <figure class="image is-3by5">
+                          <!--
+                          Menu Item Nutrition by ID Image
+                          Visualize a menu item's nutritional information as HTML including CSS.
+                          GET https://api.spoonacular.com/food/menuItems/{id}/nutritionWidget.png
+                          -->
+                          <img src="https://spoonacular.com/application/frontend/images/food-api/spoonacular-nutrition-widget.png" alt="" />
+                        </figure>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tile is-parent">
+              <div class="card tile is-child">
+                <div class="card-content">
+                  <div class="level is-mobile">
+                    <div class="level-item">
+                      <div class="is-widget-label">
+                        <h3 class="subtitle is-spaced">
+                        Sales
+                        </h3>
+                        <figure class="image is-3by5">
+                          <!--
+                          Recipe Taste by ID Image
+                          Get a recipe's taste as an image. The tastes supported are sweet, salty, sour, bitter, savory, and fatty.
+                          GET https://api.spoonacular.com/recipes/{id}/tasteWidget.png
+                          -->
+                          <img src="https://spoonacular.com/application/frontend/images/food-api/spoonacular-taste-widget.png" alt="" />
+                        </figure>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tile is-parent">
+              <div class="card tile is-child">
+                <div class="card-content">
+                  <div class="level is-mobile">
+                    <div class="level-item">
+                      <div class="is-widget-label">
+                        <h3 class="subtitle is-spaced">
+                        Performance
+                        </h3>
+                        <figure class="image is-3by5">
+                          <!--
+                          Recipe Taste by ID Image
+                          Get a recipe's taste as an image. The tastes supported are sweet, salty, sour, bitter, savory, and fatty.
+                          GET https://api.spoonacular.com/recipes/{id}/tasteWidget.png
+                          -->
+                          <img src="https://spoonacular.com/application/frontend/images/food-api/spoonacular-taste-widget.png" alt="" />
+                        </figure>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </section>
+        <!-- END Row 2 -->
     </div>
     
     <!-- ///////////////////////////////////////////// -->
