@@ -45,6 +45,7 @@ export async function sendForm(url, method, register_data) {
             if (response['status'] == 200 && response['statusText'] == 'OK') {
                 window.location.href = '../Page_login/login.html';
             }
+            return response;
         }
 
         }
