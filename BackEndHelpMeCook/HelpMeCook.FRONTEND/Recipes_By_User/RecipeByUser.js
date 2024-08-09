@@ -13,7 +13,6 @@ async function getRecipesByUser() {
                 'Access-Control-Allow-Headers': 'Content-Type, Authorization',
                 'Access-Control-Allow-Methods': '*',
                 'Content-Type': 'application/json',
-                'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
             }
         });
