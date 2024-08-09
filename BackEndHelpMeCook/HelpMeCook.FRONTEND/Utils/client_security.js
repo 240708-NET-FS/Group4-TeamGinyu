@@ -11,4 +11,19 @@ document.addEventListener('DOMContentLoaded', (event) => {
         console.log(error);
         window.location.href = "../Page_login/login.html";
     }
-})
+
+    //
+    console.log('Fn');
+    document.getElementById('logout').addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent default link behavior
+        logOut(); // Call your logout function
+    });
+    function logOut(){
+        // Delete userObject Local storage
+        localStorage.removeItem('userObject');
+        console.log('LocalStorage userObject destroyed...');
+        window.location.href='../Page_login/login.html';
+        // Clear all items
+        // localStorage.clear();
+    }
+});
