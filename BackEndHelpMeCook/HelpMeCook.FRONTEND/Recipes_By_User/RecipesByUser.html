@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- css -->
+    <link rel="stylesheet" href="./../general.css">
+    <link rel="stylesheet" href="RecipeByUser.css">
+
+    <!-- js -->
+    <script defer type="module" src="./../Utils/elements.js"></script>
+    <script defer type="module" src="RecipeByUser.js"></script>
+
+
+    <title>User Recipes</title>
+</head>
+<body>
+    <div class="main">
+
+        <nav class="navbar" role="navigation" aria-label="main navigation"> 
+            <div class="navbar-brand"> 
+                <!-- navbar items and navbar burger... -->
+                <a class="navbar-item" href="../Home_page/home.html"> 
+                    <img src="../image/team_ginyu.png" width="112" height="28" alt="Team Ginyu Force"> 
+                </a>           
+            </div> 
+            <!--  show content in mobile devices using is-active class-->
+            <div class="navbar-menu is-active">   
+                <!-- navbar start, navbar end -->
+                <div class="navbar-start"> 
+                    <a class="navbar-item" href="../Page_home/home.html">Home</a> 
+                    <a class="navbar-item is-active" href="../Recipes_By_User/RecipesByUser.html" >Recipe</a>
+                    <a class="navbar-item" href="../Page_search/search.html">Search</a>
+                </div> 
+            </div> 
+        </nav> 
+
+        <div class="outer-margin" style="display: flex; justify-content: center;">
+            <h3>Recipes Storage</h3>
+        </div>
+
+        <div class="table-style">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th><abbr title="">#</abbr></th>
+                        <th><abbr title="Recipe Name">Recipe Name</abbr></th>
+                        <th><abbr title="CreatedDate">Created On</abbr></th>
+                        <th><abbr title="Action">Action</abbr></th>
+                    </tr>
+                </thead>
+                <tbody id="recipeTableBody">
+                    <!-- Rows will be dynamically inserted here -->
+                </tbody>
+            </table>
+        
+        </div>
+    </div>
+
+    <footer>
+        <p class="footer-text">Made by <a href="https://github.com/240708-NET-FS/Group4-TeamGinyu">Team Ginyu </a></p>
+        <img class="footer-logo" src="https://static.wikia.nocookie.net/villains/images/f/f5/Ginyu_Force.png" alt=".">
+    </footer>
+</body>
+</html>
