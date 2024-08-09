@@ -31,12 +31,12 @@ public class UserRepo : IUserRepo {
 
     public async Task<ICollection<User>>? GetAll()
     {
-       return  await _context.Users.ToListAsync();
+       return  await _context.Users.Include(u => u.Recipes).ToListAsync();
     }
 
     public async Task<User?> GetByID(string ID)
     {
-        return await _context.Users.FirstOrDefaultAsync(p => p.Id == ID);
+        return await _context.Users.Include(u => u.Recipes).FirstOrDefaultAsync(p => p.Id == ID);
     }
 
     public async Task<bool> Update(string ID, User newItem)
