@@ -126,6 +126,26 @@ async function fetchRecipeTaste(id) {
     });
 }
 
+// Get all users
+async function getAllUsers() {
+    let fetchString = `${api.url}/api/User/users`;
+    await fetch(fetchString)  // Replace with the actual API endpoint
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();  // Parse the response as JSON
+        })
+        .then(data => {
+            console.log('Fetched data:', data);  // Handle the JSON data
+            // data.length;
+            document.getElementById('card-users-count').innerHTML = data.length;
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+}
+
 
 document.addEventListener('DOMContentLoaded', async (event) => {
     console.log('Loading data from spoonacular API');
@@ -137,4 +157,7 @@ document.addEventListener('DOMContentLoaded', async (event) => {
     fetchGetRecipeCard();
     console.log('');
     // fetchRecipeTaste('');
+    console.log();
+    // Get all users
+    getAllUsers();
 });
