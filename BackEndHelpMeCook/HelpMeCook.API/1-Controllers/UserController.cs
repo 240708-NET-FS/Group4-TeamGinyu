@@ -1,6 +1,8 @@
+using System.Security.Claims;
 using HelpMeCook.API.Exceptions;
 using HelpMeCook.API.Models;
 using HelpMeCook.API.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 
@@ -43,6 +45,19 @@ public class UserController : ControllerBase
           return Unauthorized("Invalid credentials.");
      }
 
+     [HttpPost("userInfo"), Authorize]
+     public IActionResult GetUserInfo()
+     {
+          var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+          if (userID.IsNullOrEmpty())
+          {
+               return Unauthorized();
+          }
+
+          return Ok(new { UserID = userID });
+     }
+
      [HttpPost("logout")]
      public async Task<IActionResult> Logout()
      {
@@ -51,7 +66,7 @@ public class UserController : ControllerBase
          return Ok("User logged out succesfully");
      }
 
-     [HttpGet("user/{id}")]
+     [HttpGet("user/{id}"), Authorize]
      public async Task<IActionResult> GetUserByID(string id)
      {
           var user = await _userService.GetUserByID(id);
@@ -60,7 +75,7 @@ public class UserController : ControllerBase
           return Ok(user);
      }
 
-     [HttpGet("users")]
+     [HttpGet("users"), Authorize]
      public async Task<IActionResult> GetAllUsers()
      {
           ICollection<User> users = await _userService.GetAllUsers();
@@ -74,7 +89,7 @@ public class UserController : ControllerBase
           return Ok(userList);
      }
 
-     [HttpPut("user/{id}")]
+     [HttpPut("user/{id}"), Authorize]
      public async Task<IActionResult> UpdateUser(string id, [FromBody] UserDTO updatedUser)
      {
           bool isUpdated = await _userService.UpdateUser(id, updatedUser);
@@ -84,7 +99,7 @@ public class UserController : ControllerBase
           return Ok("User succesfully updated");
      }
 
-     [HttpDelete("user/{id}")]
+     [HttpDelete("user/{id}"), Authorize]
      public async Task<IActionResult> DeleteUser(string id)
      {
           try

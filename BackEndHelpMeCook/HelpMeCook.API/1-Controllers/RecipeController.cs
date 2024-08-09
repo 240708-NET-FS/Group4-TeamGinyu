@@ -70,12 +70,14 @@ public class RecipeController : ControllerBase
         }
     }
 
-    [HttpGet("recipe/user/{ID}"), Authorize]
-    public async Task<IActionResult> GetRecipeByUserID(string ID)
+    [HttpGet("recipe/user"), Authorize]
+    public async Task<IActionResult> GetRecipeByUserID()
     {
         try
         {
-            ICollection<Recipe> recipes = await _recipeService.GetByUser(ID);
+            var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            ICollection<Recipe> recipes = await _recipeService.GetByUser(userID!);
 
             return Ok(recipes.ToList());
 

@@ -61,7 +61,6 @@ public class RecipeRepo : IRecipeRepo
 
         return await _context.Recipe
                 .Where(r => r.UserID == ID)
-                .Include(r => r.User)
                 .ToListAsync();
 
     }
