@@ -11,6 +11,7 @@
     <!-- js -->
     <script defer type="module" src="./../Utils/elements.js"></script>
     <script defer type="module" src="DiscoverRecipes.js"></script>
+    <script defer type="module" src="./../Utils/client_security.js"></script>
 
 
     <title>Discover</title>
@@ -34,6 +35,20 @@
                     <a class="navbar-item is-active" href="../Discover_recipes/DiscoverRecipes.html">Discover</a>
                     <a class="navbar-item" href="../Page_search/search.html">Search</a>
                 </div> 
+                <div class="navbar-end">
+                    <div class="navbar-item">
+                        <div class="field is-grouped">
+                        <p class="control">
+                          <button id="logout" class="button is-danger">
+                            <span class="icon is-small">
+                              <i class="fab fa-sign-out" aria-hidden="true"></i>
+                            </span>
+                            <span>Log Out</span>
+                          </button>
+                        </p>
+                        </div>
+                    </div>
+                </div>
             </div> 
         </nav> 
 
