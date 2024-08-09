@@ -1,48 +1,54 @@
-export async function sendForm(url, method) {
+export async function sendForm(url, method, register_data) {
     try {
-        const requestOptions2 = {
-            method: 'POST',
+        const response = await fetch(url, {
+            method: method,
             headers: {
                 'Access-Control-Allow-Origin': '*',
                 'Access-Control-Allow-Headers': 'Content-Type, Authorization',
                 'Access-Control-Allow-Methods': '*',
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(register_data2),
-        };
+            body: JSON.stringify(register_data),
+        });
+        
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder('utf-8');
+        let data = '';
 
-        const res = await fetch(api.url + '/api/User/register', requestOptions2);
-        if (!res.ok) {
-            console.log(res);
-            console.log(res['status'] + ' == ' + res['statusText']);
-            const reader = res.body.getReader();
-            const decoder = new TextDecoder('utf-8');
-            let data = '';
-            while (true) {
-                const { done, value } = await reader.read();
+        while (true) {
+            const { done, value } = await reader.read();
 
-                if (done) {
-                    break;
-                }
-
-                data += decoder.decode(value, { stream: true });
+            if (done) {
+                break;
             }
+            data += decoder.decode(value, { stream: true });
+        }
 
-            const resJson = JSON.parse(data);
+        if (!response.ok) {
             let dataAlert = '';
-            for (const i in resJson) {
-                dataAlert += resJson[i]['description'] + '\n';
+            try {
+                    const resJson = JSON.parse(data);
+                    for (const i in resJson) {
+                        dataAlert += resJson[i]['description'] + '\n';
+                    }
+                } 
+            catch (error) {
+                dataAlert = 'Invalid email/password.';
             }
+            console.log(response);
+            console.log(response['status'] + ' == ' + response['statusText']);
             if (dataAlert.length > 0) {
                 alert(dataAlert);
             }
-        } else {
-            console.log(res);
-            if (res['status'] == 200 && res['statusText'] == 'OK') {
+        } else if (response['status'] == 200 && response['statusText'] == 'OK') {
+            console.log(response);
+            if (response['status'] == 200 && response['statusText'] == 'OK') {
                 window.location.href = '../Page_login/login.html';
             }
         }
-    } catch (error) {
+
+        }
+        catch (error) {
         console.error(error);
-    }
+    } 
 }
