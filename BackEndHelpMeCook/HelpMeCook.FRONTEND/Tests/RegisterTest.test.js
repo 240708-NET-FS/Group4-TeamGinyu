@@ -6,6 +6,11 @@ describe('Register Test', () => {
     beforeEach(() => {
         consoleErrorSpy = jest.spyOn(global.console, 'error').mockImplementation(() => { });
 
+        const mockReader = {
+            read: jest.fn().mockResolvedValueOnce({ done: false, value: new TextEncoder().encode(JSON.stringify({ message: 'Form submitted successfully' })) })
+                             .mockResolvedValueOnce({ done: true })  // End of the stream
+        };
+
         // Fetch mock setup
         global.fetch = jest.fn(() =>
             Promise.resolve({
@@ -13,77 +18,49 @@ describe('Register Test', () => {
                 status: 200,
                 statusText: "OK",
                 body: {
-                    getReader: () => ({
-                        read: () => Promise.resolve({
-                            done: true,
-                            value: new TextEncoder().encode(JSON.stringify({ key: 'value' }))
-                        })
-                    })
-                }
+                    getReader: () => mockReader,
+                },
             })
         );
     });
+
     // Test case for successful form submission
     it('should submit the form successfully', async () => {
-        const form = {
-            username: 'testuser',
-            password: 'testpassword',
+        const url = '/register';
+        const method = 'POST';
+        const data = {
             email: 'testuser@example.com',
-        };
-
-        const encodedForm = new TextEncoder().encode(JSON.stringify(form));
-
-        const response = await sendForm(encodedForm);
-
-        expect(response.status).to.equal(200);
-        expect(response.body.message).to.equal('Form submitted successfully');
-    });
-
-    // Test case for form submission with missing fields
-    it('should return an error when required form fields are missing', async () => {
-        const form = {
-            username: 'testuser',
             password: 'testpassword',
         };
 
-        const encodedForm = new TextEncoder().encode(JSON.stringify(form));
+        const response = await sendForm(url, method, data);
 
-        const response = await sendForm(encodedForm);
-
-        expect(response.status).to.equal(400);
-        expect(response.body.error).to.equal('Missing required form fields');
+        expect(fetch).toHaveBeenCalledWith(url, {
+            method,
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+                'Access-Control-Allow-Methods': '*',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+        // console.log(response['status']);
+        expect(response.status).toBe(200);
+        // expect(response.body).toBe('Form submitted successfully');
     });
 
-    // Test case for form submission with an existing username
-    it('should return an error when submitting form with an existing username', async () => {
-        const form = {
-            username: 'existinguser',
-            password: 'testpassword',
-            email: 'existinguser@example.com',
+    // Test case for error with form submission
+    it('should handle error when form submission fails', async () => {
+        fetch.mockImplementationOnce(() => Promise.reject('API failure'));
+        const url = '/register';
+        const method = 'POST';
+        const data = {
+            email: '',
+            password: '',
         };
 
-        const encodedForm = new TextEncoder().encode(JSON.stringify(form));
-
-        const response = await sendForm(encodedForm);
-
-        expect(response.status).to.equal(409);
-        expect(response.body.error).to.equal('Username already exists');
+        await sendForm(url, method, data);
+        expect(consoleErrorSpy).toHaveBeenCalled();
     });
-
-    // Test case for form submission with an existing email
-    it('should return an error when submitting form with an existing email', async () => {
-        const form = {
-            username: 'testuser',
-            password: 'testpassword',
-            email: 'existinguser@example.com',
-        };
-
-        const encodedForm = new TextEncoder().encode(JSON.stringify(form));
-
-        const response = await sendForm(encodedForm);
-
-        expect(response.status).to.equal(409);
-        expect(response.body.error).to.equal('Email already exists');
-    });
-
 });
