@@ -32,7 +32,8 @@ async function getRecipesByUser() {
             return []
         }
 
-        return result;
+
+        return JSON.parse(result);
 
     } catch (error) {
         console.error("Fetch error: " + error);
@@ -94,9 +95,8 @@ function populateTable(recipes) {
 
 document.addEventListener('DOMContentLoaded', async () => {
     const recipes = await getRecipesByUser();
-    let recipesArray = JSON.parse(recipes);
-    console.log(recipesArray);
-    populateTable(recipesArray);
+    
+    populateTable(recipes);
 });
 
 window.deleteRecipe = deleteRecipe;

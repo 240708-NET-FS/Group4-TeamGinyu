@@ -33,7 +33,7 @@ export async function sendForm(url, method, register_data) {
                     }
                 } 
             catch (error) {
-                dataAlert = 'Invalid email/password.';
+                dataAlert = 'Email already exists.';
             }
             console.log(response);
             console.log(response['status'] + ' == ' + response['statusText']);

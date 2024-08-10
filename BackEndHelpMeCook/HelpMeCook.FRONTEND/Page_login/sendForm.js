@@ -10,7 +10,7 @@ export async function sendForm(url, method, register_data) {
             },
             body: JSON.stringify(register_data),
         });
-
+         console.log("logginggg");
         const reader = response.body.getReader();
         const decoder = new TextDecoder("utf-8");
         let data = "";

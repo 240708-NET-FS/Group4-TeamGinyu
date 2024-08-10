@@ -26,21 +26,22 @@ btn_register.addEventListener('click', (event) => {
 
     var email_form = document.getElementById("email_form").value;
     var password_form = document.getElementById("password_form").value;
-    //var firstname_form = document.getElementById("firstname_form").value;
-    //var lastname_form = document.getElementById("lastname_form").value;
+    var firstname_form = document.getElementById("firstname_form").value;
+    var lastname_form = document.getElementById("lastname_form").value;
 
-    const register_data1 = {
-        email: email_form,
-        password: password_form
-    };
-    // const register_data2 = {
-    //     "username": email_form,
-    //     "password": password_form,
-    //     "firstName": firstname_form,
-    //     "lastName": lastname_form
+    // const register_data1 = {
+    //     email: email_form,
+    //     password: password_form
     // };
 
-    sendForm(api.url +'/register', 'POST', register_data1);
+    const register_data2 = {
+        username : email_form,
+        password : password_form,
+        firstName : firstname_form,
+        lastName : lastname_form
+    };
+
+    sendForm(api.url +'/api/User/register', 'POST', register_data2);
 })
 // const register_data2 = {
 //     "username": email_form,
