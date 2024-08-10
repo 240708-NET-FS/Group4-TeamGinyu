@@ -66,8 +66,8 @@ function populateTable(userRecipes) {
 
 document.addEventListener('DOMContentLoaded', async () => {
     const recipes = await getAllRecipes();
-    let recipesArray = recipes;
-    populateTable(recipesArray);
+    
+    populateTable(recipes);
 });
 
 async function addRecipe(name, recipeNumber, elementId) {
@@ -84,13 +84,13 @@ async function addRecipe(name, recipeNumber, elementId) {
             'Access-Control-Allow-Headers': 'Content-Type, Authorization',
             'Access-Control-Allow-Methods': '*',
             'Content-Type': 'application/json',
-            'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(body)
     })
         .then(response => {
-            console.log('response: ' + response.ok)
+            console.log('response: ', response)
+            console.log(JSON.stringify(body));
             if (response.ok) {
                 const button = document.getElementById(elementId);
                 button.disabled = true;

@@ -29,10 +29,6 @@ btn_register.addEventListener('click', (event) => {
     var firstname_form = document.getElementById("firstname_form").value;
     var lastname_form = document.getElementById("lastname_form").value;
 
-    // const register_data1 = {
-    //     email: email_form,
-    //     password: password_form
-    // };
 
     const register_data2 = {
         username : email_form,

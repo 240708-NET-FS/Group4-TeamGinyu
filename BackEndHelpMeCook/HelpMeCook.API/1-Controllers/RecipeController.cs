@@ -22,20 +22,22 @@ public class RecipeController : ControllerBase
     [Authorize]
     public async Task<IActionResult> CreateRecipe(RecipeDTO recipeDTO)
     {
-        try 
+        try
         {
             var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
             recipeDTO.UserID = userID!;
+            recipeDTO.CreatedDate = DateTime.Now;
             Recipe recipe = await _recipeService.CreateRecipe(recipeDTO);
             return Ok(recipe);
 
-        } catch (InvalidRecipeException e)
+        }
+        catch (InvalidRecipeException e)
         {
             return NotFound(e.Message);
         }
-       
 
-        
+
+
     }
 
     [HttpGet("recipe/{ID}"), Authorize]
@@ -123,21 +125,22 @@ public class RecipeController : ControllerBase
     [HttpGet("recipes/recipe"), Authorize]
     public async Task<IActionResult> GetByRecipeNameAndUserID([FromQuery] string recipeName, [FromQuery] string UserID)
     {
-        try 
+        try
         {
             Recipe? recipe = await _recipeService.GetByRecipeNameAndUserID(recipeName, UserID);
-            
+
             return Ok(recipe);
 
-        } catch(InvalidRecipeException e)
+        }
+        catch (InvalidRecipeException e)
         {
             return NotFound(e.Message);
         }
-        
+
     }
 
     [HttpPut("recipe/{ID}"), Authorize]
-    public async Task<IActionResult> UpdateRecipe(int ID,  [FromBody] RecipeDTO recipeDTO)
+    public async Task<IActionResult> UpdateRecipe(int ID, [FromBody] RecipeDTO recipeDTO)
     {
         bool updatedRecipe = await _recipeService.Update(ID, recipeDTO);
 
@@ -152,12 +155,13 @@ public class RecipeController : ControllerBase
             Recipe? recipeToDelete = await _recipeService.Delete(ID);
 
             return Ok(recipeToDelete);
-        
-        }catch (InvalidRecipeException e)
+
+        }
+        catch (InvalidRecipeException e)
         {
             return NotFound(e.Message);
         }
-        
+
 
     }
 

@@ -56,7 +56,7 @@ public class RecipeTest
         Recipe recipe = new Recipe { UserID = "1", RecipeID = 1, RecipeName = "MyRecipe", RecipeNumber = 1, CreatedDate = DateTime.Parse("07-06-1998") };
         RecipeDTO recipeDTO = new RecipeDTO { UserID = "1", RecipeName = "MyRecipe222", RecipeNumber = 1, CreatedDate = DateTime.Parse("07-06-1998") };
 
-        recipeRepo.Setup(r => r.GetByRecipeNumber(It.IsAny<int>())).ReturnsAsync(recipe);
+        recipeRepo.Setup(r => r.GetByRecipeNumberAndUserID(It.IsAny<int>())).ReturnsAsync(recipe);
 
         // Act & Assert
         await Assert.ThrowsAsync<InvalidRecipeException>(async () => await _recipeService.CreateRecipe(recipeDTO));
@@ -191,7 +191,7 @@ public class RecipeTest
         Mock<IRecipeRepo> recipeRepo = new();
         RecipeService _recipeService = new RecipeService(recipeRepo.Object);
 
-        recipeRepo.Setup(r => r.GetByRecipeNumber(recipe.RecipeNumber)).ReturnsAsync(recipe);
+        recipeRepo.Setup(r => r.GetByRecipeNumberAndUserID(recipe.RecipeNumber)).ReturnsAsync(recipe);
 
         // Act
         Recipe? res = await _recipeService.GetByRecipeNumber(recipe.RecipeNumber);

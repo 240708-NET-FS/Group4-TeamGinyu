@@ -21,12 +21,12 @@ public class RecipeService : IRecipeService
     {
         Recipe newRecipe = rUtil.DTOToRecipe(recipe);
 
-        if(await RecipeNameTaken(newRecipe))
+        if(await RecipeExistsByUser(newRecipe, recipe.UserID!))
         {
             throw new InvalidRecipeException($"Recipe Name {recipe.RecipeName} already taken");
         }
 
-        if(await RecipeNumberRegistered(newRecipe))
+        if(await RecipeNumberRegistered(recipe.RecipeNumber, recipe.UserID!))
         {
             throw new InvalidRecipeException($"Recipe Number {recipe.RecipeNumber} already registered.");
         }
@@ -74,13 +74,13 @@ public class RecipeService : IRecipeService
         return recipesList;
     }
 
-    public async Task<Recipe?> GetByRecipeNumber(int RecipeID)
+    public async Task<Recipe?> GetByRecipeNumberAndUserID(int RecipeID, string userId)
     {
-        Recipe? recipe = await _recipeRepo.GetByRecipeNumber(RecipeID);
+        Recipe? recipe = await _recipeRepo.GetByRecipeNumberAndUserID(RecipeID, userId);
 
         if (recipe == null)
         {
-            throw new InvalidRecipeException($"Recipe with ID {RecipeID} could not be found");
+            throw new InvalidRecipeException($"Recipe with ID {RecipeID} for user {userId} could not be found");
         }
 
         return recipe;
@@ -131,17 +131,29 @@ public class RecipeService : IRecipeService
         return await _recipeRepo.Delete(ID);
     }
 
-    private async Task<bool> RecipeNameTaken(Recipe recipe) 
+    private async Task<bool> RecipeExistsByUser(Recipe recipe, string userId) 
     {
-        Recipe? dbRecipe =  await _recipeRepo.GetByRecipeName(recipe.RecipeName!);
+        Recipe? dbRecipe =  await _recipeRepo.GetByRecipeNameAndUserID(recipe.RecipeName!, userId);
         
         return dbRecipe != null;
     }
 
-     private async Task<bool> RecipeNumberRegistered(Recipe recipe) 
+     private async Task<bool> RecipeNumberRegistered(int recipeNumber, string userId) 
     {
-        Recipe? dbRecipe =  await _recipeRepo.GetByRecipeNumber(recipe.RecipeNumber!);
+        Recipe? dbRecipe =  await _recipeRepo.GetByRecipeNumberAndUserID(recipeNumber, userId);
         
         return dbRecipe != null;
+    }
+
+    public async Task<Recipe?> GetByRecipeNumber(int recipeNumber)
+    {
+        Recipe? recipe = await _recipeRepo.GetByRecipeNumber(recipeNumber);
+
+        if (recipe == null)
+        {
+            throw new InvalidRecipeException($"Recipe with ID {recipeNumber} could not be found");
+        }
+
+        return recipe;
     }
 }
