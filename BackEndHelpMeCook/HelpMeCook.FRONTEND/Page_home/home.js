@@ -1,5 +1,7 @@
 import { api, spoonacular } from "../apisettings.js";
 
+let token = JSON.parse(localStorage.getItem('userObject')).accessToken;
+
 // Menu Item Nutrition by ID Image
 async function fetchImgMenuItemNutrition(id) {
     
@@ -147,6 +149,36 @@ async function getAllUsers() {
 }
 
 
+// Get all recipes.
+async function getAllRecipes() {
+    const fetchString = `${api.url}/api/Recipe/recipes`
+    await fetch(fetchString, {
+            method: 'GET',
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+                'Access-Control-Allow-Methods': '*',
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        })  // Replace with the actual API endpoint
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();  // Parse the response as JSON
+        })
+        .then(data => {
+            console.log('Fetched data AllRecipes:', data);  // Handle the JSON data
+            document.getElementById('card-recipes-count').innerHTML = data.length;
+            return data;
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+        //
+}
+
 document.addEventListener('DOMContentLoaded', async (event) => {
     console.log('Loading data from spoonacular API');
     var menuItem = await fetchMenuItem("");
@@ -160,4 +192,8 @@ document.addEventListener('DOMContentLoaded', async (event) => {
     console.log();
     // Get all users
     getAllUsers();
+    //
+    getAllRecipes();
+    
+
 });
