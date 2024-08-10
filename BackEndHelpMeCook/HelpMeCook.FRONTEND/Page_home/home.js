@@ -131,7 +131,17 @@ async function fetchRecipeTaste(id) {
 // Get all users
 async function getAllUsers() {
     let fetchString = `${api.url}/api/User/users`;
-    await fetch(fetchString)  // Replace with the actual API endpoint
+    
+    await fetch(fetchString, {
+            method: 'GET',
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+                'Access-Control-Allow-Methods': '*',
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        })  // Replace with the actual API endpoint
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
