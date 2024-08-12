@@ -55,7 +55,7 @@ function populateTable(userRecipes) {
             <td>${recipe.recipeName}</td>
             <td>${recipe.recipeNumber}</td>
             <td>
-            <button id="button-${recipe.recipeID}" onclick="addRecipe('${recipe.recipeName}', ${recipe.recipeNumber}, '${row.id}')">Add</button>
+            <button id="button-${recipe.recipeID}" class="button is-normal is-responsive is-success is-rounded" onclick="addRecipe('${recipe.recipeName}', ${recipe.recipeNumber}, '${row.id}')">Add</button>
             </td>
         `;
 

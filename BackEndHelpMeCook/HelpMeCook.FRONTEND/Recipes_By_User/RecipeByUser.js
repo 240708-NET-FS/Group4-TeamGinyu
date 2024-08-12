@@ -85,7 +85,7 @@ function populateTable(recipes) {
             <td>${recipe.createdDate}</td>
             <td>
             <!-- <button>Edit</button>  -->
-                <button onclick="deleteRecipe(${recipe.recipeID})">Delete</button>
+                <button class="button is-normal is-responsive is-danger is-rounded" onclick="deleteRecipe(${recipe.recipeID})">Delete</button>
             </td>
         `;
 
