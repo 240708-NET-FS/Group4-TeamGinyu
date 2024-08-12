@@ -34,9 +34,9 @@ function makeRecipeBox(recipeName, ingredientNames, recipeId) {
     const recipe_tags = document.createElement('div')
     recipe_tags.classList.add('recipe-tags')
     const buttons_div = document.createElement('div')
-    //const button_checkout = document.createElement('a')
-    //button_checkout.innerText = 'See recipe'
-    //button_checkout.classList.add('button', 'button-checkout')
+    const button_checkout = document.createElement('a')
+    button_checkout.innerText = 'See recipe'
+    button_checkout.classList.add('button', 'button-checkout')
     const button_save = document.createElement('btn')
     button_save.innerText = 'Save recipe'
     button_save.classList.add('button', 'button-save')
@@ -46,7 +46,7 @@ function makeRecipeBox(recipeName, ingredientNames, recipeId) {
     });
 
     recipe_title.textContent = recipeName
-    //buttons_div.appendChild(button_checkout)
+    buttons_div.appendChild(button_checkout)
     buttons_div.appendChild(button_save)
 
     recipe_box.appendChild(recipe_title)

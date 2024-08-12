@@ -243,7 +243,7 @@ function UpdateRecipeResults(recipes) {
         });
 
         const recipeBox = makeRecipeBox(r.title, ingredientNames, r.id)
-        //recipeBox.querySelector('.button-checkout').addEventListener('click', () => { recipeBoxCheckout(recipeBox.id) })
+        recipeBox.querySelector('.button-checkout').addEventListener('click', () => { recipeBoxCheckout(recipeBox.id, recipeBox.querySelector('.recipe-title').innerHTML) })
         recipeBox.querySelector('.button-save').addEventListener('click', () => { recipeBoxSave(recipeBox) })
 
         recipe_container.appendChild(recipeBox)
@@ -289,8 +289,7 @@ function recipeBoxSave(recipeBox) {
         })
 }
 
-function recipeBoxCheckout(recipeId) {
+function recipeBoxCheckout(recipeId, recipeName) {
     console.log('recking out recipe ' + recipeId)
-    return
-    window.location.href = `./../OnePage/recipe.html/?recipeId=${recipeId}`
+    window.location.href = `../Page_recipe/recipe.html?recipeId=${recipeId}&recipeName=${recipeName}`
 }
