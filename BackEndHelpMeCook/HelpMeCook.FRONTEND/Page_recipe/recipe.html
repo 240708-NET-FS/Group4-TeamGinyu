@@ -9,6 +9,38 @@
     <title>Recipe</title>
 </head>
 <body>
+    <nav class="navbar" role="navigation" aria-label="main navigation"> 
+        <div class="navbar-brand"> 
+            <!-- navbar items and navbar burger... -->
+            <a class="navbar-item" href="../Page_home/home.html"> 
+                <img src="../image/team_ginyu.png" width="112" height="28" alt="Team Ginyu Force"> 
+            </a>           
+        </div> 
+        <!--  show content in mobile devices using is-active class-->
+        <div class="navbar-menu is-active">   
+            <!-- navbar start, navbar end -->
+            <div class="navbar-start"> 
+                <a class="navbar-item is-active" href="../Page_home/home.html">Home</a> 
+                <a class="navbar-item" href="../Recipes_By_User/RecipesByUser.html" >Recipe</a>
+                <a class="navbar-item" href="../Discover_recipes/DiscoverRecipes.html">Discover</a>
+                <a class="navbar-item" href="../Page_search/search.html">Search</a>
+            </div> 
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <div class="field is-grouped">
+                    <p class="control">
+                      <button id="logout" class="button is-danger">
+                        <span class="icon is-small">
+                          <i class="fab fa-sign-out" aria-hidden="true"></i>
+                        </span>
+                        <span>Log Out</span>
+                      </button>
+                    </p>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </nav> 
 
     <div class="main-content">
 
