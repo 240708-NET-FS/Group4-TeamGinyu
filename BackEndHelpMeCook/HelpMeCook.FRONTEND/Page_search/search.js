@@ -243,7 +243,7 @@ function UpdateRecipeResults(recipes) {
         });
 
         const recipeBox = makeRecipeBox(r.title, ingredientNames, r.id)
-        recipeBox.querySelector('.button-checkout').addEventListener('click', () => { recipeBoxCheckout(recipeBox.id) })
+        //recipeBox.querySelector('.button-checkout').addEventListener('click', () => { recipeBoxCheckout(recipeBox.id) })
         recipeBox.querySelector('.button-save').addEventListener('click', () => { recipeBoxSave(recipeBox) })
 
         recipe_container.appendChild(recipeBox)
