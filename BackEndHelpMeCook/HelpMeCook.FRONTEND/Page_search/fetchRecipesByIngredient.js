@@ -1,8 +1,10 @@
+import { spoonacular } from "../apisettings.js";
+
 // given a list of ingredients, fetch for recipes that best match the ingredient
 export async function fetchRecipesByIngredients(ingredients) {
 
     let recipes
-    let fetchString = `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredients.join(',+')}&apiKey=bb8c79c0e34d4dca8fd0ef169d1426a4`
+    let fetchString = `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredients.join(',+')}&apiKey=${spoonacular.key}`
 
     await fetch(fetchString, {method: "GET"})
     .then(result => {

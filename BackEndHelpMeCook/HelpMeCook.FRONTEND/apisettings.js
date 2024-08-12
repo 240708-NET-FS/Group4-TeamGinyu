@@ -4,7 +4,7 @@ export const api = {
   };
 
 export const spoonacular = {
-  key: "5f14a9e2a224443da1d4179b097a125b",
+  key: "994ad984bc68418aa4ee2305fccde429",
   token: "",
   url: "https://api.spoonacular.com"
 };

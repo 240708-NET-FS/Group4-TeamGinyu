@@ -1,3 +1,5 @@
+import { spoonacular } from "../apisettings.js";
+
 const mainContent = document.querySelector('.main-content')
 
 document.addEventListener('DOMContentLoaded', async (event) => {
@@ -13,7 +15,7 @@ document.addEventListener('DOMContentLoaded', async (event) => {
     title.textContent = params.get('recipeName')
     mainContent.appendChild(title)
 
-    let fetchString = `https://api.spoonacular.com/recipes/${recipeId}/analyzedInstructions?apiKey=bb8c79c0e34d4dca8fd0ef169d1426a4`
+    let fetchString = `https://api.spoonacular.com/recipes/${recipeId}/analyzedInstructions?apiKey=${spoonacular.key}`
 
     let content = []
 
