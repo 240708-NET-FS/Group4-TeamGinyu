@@ -1,3 +1,6 @@
+
+import { api, spoonacular } from "../apisettings.js";
+
 document.addEventListener('DOMContentLoaded', (event) => {
     console.log('Check for token');
     var retrievedObject = localStorage.getItem('userObject');
@@ -19,11 +22,29 @@ document.addEventListener('DOMContentLoaded', (event) => {
         logOut(); // Call your logout function
     });
     function logOut(){
-        // Delete userObject Local storage
-        localStorage.removeItem('userObject');
-        console.log('LocalStorage userObject destroyed...');
-        window.location.href='../Page_login/login.html';
-        // Clear all items
-        // localStorage.clear();
+        let url = api.url +'/api/User/logout';
+        fetch(url, {method: 'POST'})
+            .then(response => {
+                // Check if the response status is OK (status code 200-299)
+                if (!response.ok) {
+                throw new Error('Network response was not ok');
+                }
+                // Parse the response as Text
+                return response.text();
+            })
+            .then(data => {
+                // Handle the data from the response
+                console.log('Data:', data);
+                // Delete userObject Local storage
+                localStorage.removeItem('userObject');
+                console.log('LocalStorage userObject destroyed...');
+                window.location.href='../Page_login/login.html';
+                // Clear all items
+                // localStorage.clear();
+            })
+            .catch(error => {
+                // Handle any errors that occurred during the fetch
+                console.error('There was a problem with the fetch operation:', error);
+            });
     }
 });
