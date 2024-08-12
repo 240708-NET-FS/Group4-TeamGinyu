@@ -1,0 +1,9 @@
+/* CSS file for recipe.heml */
+.main-content, .back-btn-container{
+    margin: 5px;
+    padding: 20px;
+}
+
+p{
+    margin-top: 20px;
+}

@@ -4,7 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <script type="module" src="./recipe.js"></script>
+    <!-- css -->
+    <link rel="stylesheet" href="./../general.css">
+    <link rel="stylesheet" href="recipe.css">
+
+    <!-- js -->
+    <script defer type="module" src="./../Utils/elements.js"></script>
+    <script defer type="module" src="recipe.js"></script>
+    <script defer type="module" src="./../Utils/client_security.js"></script>
 
     <title>Recipe</title>
 </head>
@@ -20,10 +27,10 @@
         <div class="navbar-menu is-active">   
             <!-- navbar start, navbar end -->
             <div class="navbar-start"> 
-                <a class="navbar-item is-active" href="../Page_home/home.html">Home</a> 
+                <a class="navbar-item" href="../Page_home/home.html">Home</a> 
                 <a class="navbar-item" href="../Recipes_By_User/RecipesByUser.html" >Recipe</a>
                 <a class="navbar-item" href="../Discover_recipes/DiscoverRecipes.html">Discover</a>
-                <a class="navbar-item" href="../Page_search/search.html">Search</a>
+                <a class="navbar-item is-active" href="../Page_search/search.html">Search</a>
             </div> 
             <div class="navbar-end">
                 <div class="navbar-item">
@@ -43,7 +50,23 @@
     </nav> 
 
     <div class="main-content">
-
+        <!-- Load dynamicly with JS -->
     </div>
+    <div class="back-btn-container">
+        <button class="button is-success" onclick="window.location.href='../Page_search/search.html';">
+            <span class="icon is-small">
+              <i class="fa fa-back" aria-hidden="true"></i>
+            </span>
+            <span>Back</span>
+          </button>
+    </div>
+
+    <!-- ///////////////////////////////////////////// -->
+    <!-- footer -->
+    <!-- ///////////////////////////////////////////// -->
+    <footer>
+        <p class="footer-text">Made by <a href="https://github.com/240708-NET-FS/Group4-TeamGinyu">Team Ginyu </a></p>
+        <img class="footer-logo" src="https://static.wikia.nocookie.net/villains/images/f/f5/Ginyu_Force.png" alt=".">
+    </footer>
 </body>
 </html>
